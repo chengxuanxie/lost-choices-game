@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "chapters": [
+    {
+      "id": "chapter_01",
+      "title": "觉醒",
+      "description": "在陌生的房间中醒来，一切才刚刚开始...",
+      "thumbnail": "res://assets/images/chapters/chapter_01.png",
+      "duration_minutes": 45,
+      "is_released": true
+    }
+  ]
+}

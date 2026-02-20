@@ -1,0 +1,215 @@
+{
+  "chapter_id": "chapter_01",
+  "title": "觉醒",
+  "description": "在陌生的房间中醒来，一切才刚刚开始...",
+  "start_node": "ch1_sc_001",
+  "endings": [
+    {
+      "id": "ending_01",
+      "name": "信任的开始",
+      "description": "你选择了相信",
+      "node": "ch1_ending_01"
+    },
+    {
+      "id": "ending_02",
+      "name": "独自探索",
+      "description": "你选择了独立行动",
+      "node": "ch1_ending_02"
+    }
+  ],
+  "stats": {
+    "total_nodes": 5,
+    "total_videos": 4,
+    "total_duration_minutes": 15,
+    "total_choices": 6
+  },
+  "nodes": {
+    "ch1_sc_001": {
+      "node_id": "ch1_sc_001",
+      "node_type": "choice",
+      "video": {
+        "id": "video_ch1_sc001",
+        "path": "res://assets/videos/ch1_sc001.ogv",
+        "duration": 30.0
+      },
+      "subtitles": [
+        {
+          "id": "sub_001",
+          "time_start": 0.0,
+          "time_end": 5.0,
+          "text": "你缓缓睁开眼睛，发现自己身处一个陌生的房间。",
+          "speaker": null
+        },
+        {
+          "id": "sub_002",
+          "time_start": 5.5,
+          "time_end": 10.0,
+          "text": "你是谁？这是哪里？",
+          "speaker": "主角"
+        },
+        {
+          "id": "sub_003",
+          "time_start": 12.0,
+          "time_end": 18.0,
+          "text": "一个声音从广播中传来...",
+          "speaker": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "choice_001",
+          "text": "我相信你，请告诉我该怎么做",
+          "hint": null,
+          "conditions": [],
+          "effects": [],
+          "next_node": "ch1_sc_002a"
+        },
+        {
+          "id": "choice_002",
+          "text": "我不相信你，我自己想办法",
+          "hint": null,
+          "conditions": [],
+          "effects": [
+            {
+              "type": "set_flag",
+              "key": "independent_path",
+              "value": true
+            }
+          ],
+          "next_node": "ch1_sc_002b"
+        },
+        {
+          "id": "choice_003",
+          "text": "在帮你之前，我想知道我是谁",
+          "hint": null,
+          "conditions": [],
+          "effects": [
+            {
+              "type": "modify_relationship",
+              "character": "mystery_voice",
+              "value": 10
+            }
+          ],
+          "next_node": "ch1_sc_002c"
+        }
+      ]
+    },
+    "ch1_sc_002a": {
+      "node_id": "ch1_sc_002a",
+      "node_type": "choice",
+      "video": {
+        "id": "video_ch1_sc002a",
+        "path": "res://assets/videos/ch1_sc002a.ogv",
+        "duration": 25.0
+      },
+      "subtitles": [
+        {
+          "id": "sub_001",
+          "time_start": 0.0,
+          "time_end": 5.0,
+          "text": "按照声音的指示，你找到了出口...",
+          "speaker": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "choice_004",
+          "text": "走出去，看看外面有什么",
+          "hint": null,
+          "conditions": [],
+          "effects": [],
+          "next_node": "ch1_sc_003"
+        }
+      ]
+    },
+    "ch1_sc_002b": {
+      "node_id": "ch1_sc_002b",
+      "node_type": "choice",
+      "video": {
+        "id": "video_ch1_sc002b",
+        "path": "res://assets/videos/ch1_sc002b.ogv",
+        "duration": 30.0
+      },
+      "subtitles": [
+        {
+          "id": "sub_001",
+          "time_start": 0.0,
+          "time_end": 5.0,
+          "text": "你决定依靠自己的力量...",
+          "speaker": null
+        }
+      ],
+      "choices": [
+        {
+          "id": "choice_005",
+          "text": "继续探索",
+          "hint": null,
+          "conditions": [],
+          "effects": [],
+          "next_node": "ch1_sc_003"
+        }
+      ]
+    },
+    "ch1_sc_002c": {
+      "node_id": "ch1_sc_002c",
+      "node_type": "choice",
+      "video": {
+        "id": "video_ch1_sc002c",
+        "path": "res://assets/videos/ch1_sc002c.ogv",
+        "duration": 35.0
+      },
+      "subtitles": [
+        {
+          "id": "sub_001",
+          "time_start": 0.0,
+          "time_end": 5.0,
+          "text": "关于你的过去...我只能说，你曾经做出过重要的选择。",
+          "speaker": "神秘人"
+        }
+      ],
+      "choices": [
+        {
+          "id": "choice_006",
+          "text": "继续追问",
+          "hint": null,
+          "conditions": [],
+          "effects": [
+            {
+              "type": "modify_relationship",
+              "character": "mystery_voice",
+              "value": 5
+            }
+          ],
+          "next_node": "ch1_sc_003"
+        }
+      ]
+    },
+    "ch1_sc_003": {
+      "node_id": "ch1_sc_003",
+      "node_type": "ending",
+      "ending_id": "ending_01",
+      "ending_name": "觉醒的开始",
+      "video": {
+        "id": "video_ch1_ending",
+        "path": "res://assets/videos/ch1_ending.ogv",
+        "duration": 20.0
+      },
+      "subtitles": [
+        {
+          "id": "sub_001",
+          "time_start": 0.0,
+          "time_end": 10.0,
+          "text": "你推开大门，走向未知的世界...",
+          "speaker": null
+        },
+        {
+          "id": "sub_002",
+          "time_start": 12.0,
+          "time_end": 18.0,
+          "text": "这只是开始。更多的选择在前方等待着你。",
+          "speaker": null
+        }
+      ]
+    }
+  }
+}
