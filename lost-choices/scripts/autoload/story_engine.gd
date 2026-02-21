@@ -159,11 +159,17 @@ func get_possible_next_nodes(node_id: String = "") -> Array:
 
 	return possible_nodes
 
-## 获取视频ID
-func get_video_id(node_id: String) -> String:
+## 获取视频路径
+func get_video_path(node_id: String) -> String:
 	var node_data = get_node_data(node_id)
 	var video_data = node_data.get("video", {})
-	return video_data.get("id", "")
+	return video_data.get("path", "")
+
+## 获取视频时长
+func get_video_duration(node_id: String) -> float:
+	var node_data = get_node_data(node_id)
+	var video_data = node_data.get("video", {})
+	return video_data.get("duration", 0.0)
 
 #endregion
 
@@ -172,14 +178,14 @@ func get_video_id(node_id: String) -> String:
 ## 处理视频节点
 func _handle_video_node(node_data: Dictionary) -> void:
 	var video_data = node_data.get("video", {})
-	var video_id = video_data.get("id", "")
+	var video_path = video_data.get("path", "")
 
-	if video_id.is_empty():
-		push_error("[StoryEngine] 视频节点缺少视频ID")
+	if video_path.is_empty():
+		push_error("[StoryEngine] 视频节点缺少视频路径")
 		return
 
-	# 请求播放视频
-	VideoManager.play_video(video_id)
+	# 请求播放视频（直接使用路径）
+	VideoManager.play_video_by_path(video_path)
 
 	# 预加载下一个视频
 	VideoManager.preload_next_videos(_current_node)
@@ -187,11 +193,11 @@ func _handle_video_node(node_data: Dictionary) -> void:
 ## 处理选择节点
 func _handle_choice_node(node_data: Dictionary) -> void:
 	var video_data = node_data.get("video", {})
-	var video_id = video_data.get("id", "")
+	var video_path = video_data.get("path", "")
 
 	# 先播放视频
-	if not video_id.is_empty():
-		VideoManager.play_video(video_id)
+	if not video_path.is_empty():
+		VideoManager.play_video_by_path(video_path)
 
 	# 获取可用选择
 	var available_choices = _get_available_choices(node_data)

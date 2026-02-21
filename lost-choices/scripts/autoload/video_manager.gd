@@ -123,7 +123,50 @@ func _detect_browser() -> String:
 
 #region 视频播放
 
-## 播放视频
+## 播放视频（通过路径）
+func play_video_by_path(video_path: String) -> void:
+	if _video_player == null:
+		push_error("[VideoManager] 视频播放器未设置")
+		return
+
+	# 检查视频文件是否存在
+	if not ResourceLoader.exists(video_path):
+		var error_msg = "视频文件不存在: %s" % video_path
+		push_error("[VideoManager] " + error_msg)
+		video_error.emit(video_path, error_msg)
+		return
+
+	# 检查缓存
+	if not _video_pool.has(video_path):
+		if _video_pool.size() >= MAX_CACHE_SIZE:
+			_clear_oldest_cache()
+
+		# 加载视频资源
+		var video_stream = load(video_path)
+		if video_stream == null:
+			var error_msg = "视频加载失败: %s" % video_path
+			push_error("[VideoManager] " + error_msg)
+			video_error.emit(video_path, error_msg)
+			return
+
+		_video_pool[video_path] = {
+			"stream": video_stream,
+			"path": video_path,
+			"loaded_time": Time.get_unix_time_from_system()
+		}
+		print("[VideoManager] 视频加载成功: %s" % video_path)
+
+	var video_data = _video_pool[video_path]
+	_video_player.stream = video_data["stream"]
+	_video_player.play()
+
+	_current_video_id = video_path
+	_is_playing = true
+
+	print("[VideoManager] 开始播放视频: %s" % video_path)
+	video_started.emit(video_path)
+
+## 播放视频（通过ID，兼容旧接口）
 func play_video(video_id: String) -> void:
 	if _video_player == null:
 		push_error("[VideoManager] 视频播放器未设置")
@@ -241,15 +284,53 @@ func preload_next_videos(current_node_id: String) -> void:
 	var videos_to_preload = []
 
 	for node_id in possible_nodes:
-		var video_id = StoryEngine.get_video_id(node_id)
-		if video_id and not _video_pool.has(video_id):
-			videos_to_preload.append(video_id)
+		var video_path = StoryEngine.get_video_path(node_id)
+		if not video_path.is_empty() and not _video_pool.has(video_path):
+			videos_to_preload.append(video_path)
 
 		if videos_to_preload.size() >= PRELOAD_COUNT:
 			break
 
 	if videos_to_preload.size() > 0:
-		preload_videos(videos_to_preload)
+		preload_videos_by_path(videos_to_preload)
+
+## 预加载视频（通过路径）
+func preload_videos_by_path(video_paths: Array) -> void:
+	for video_path in video_paths:
+		if not _video_pool.has(video_path) and video_path not in _preload_queue:
+			_preload_queue.append(video_path)
+
+	_process_preload_queue_by_path()
+
+## 处理预加载队列（通过路径）
+func _process_preload_queue_by_path() -> void:
+	while _preload_queue.size() > 0 and _video_pool.size() < MAX_CACHE_SIZE:
+		var video_path = _preload_queue.pop_front()
+		_load_video_by_path(video_path)
+
+## 加载视频（通过路径）
+func _load_video_by_path(video_path: String) -> void:
+	if _video_pool.has(video_path):
+		video_loaded.emit(video_path)
+		return
+
+	if not ResourceLoader.exists(video_path):
+		push_warning("[VideoManager] 预加载视频不存在: %s" % video_path)
+		return
+
+	var video_stream = load(video_path)
+	if video_stream == null:
+		push_warning("[VideoManager] 预加载视频失败: %s" % video_path)
+		return
+
+	_video_pool[video_path] = {
+		"stream": video_stream,
+		"path": video_path,
+		"loaded_time": Time.get_unix_time_from_system()
+	}
+
+	print("[VideoManager] 预加载视频成功: %s" % video_path)
+	video_loaded.emit(video_path)
 
 #endregion
 

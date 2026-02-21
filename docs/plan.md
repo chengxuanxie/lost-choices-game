@@ -239,6 +239,10 @@
 | 2026-02-22 | plan.md | 重构文档结构：简化为全局汇总层，详细进度移至各阶段README | Claude Code |
 | 2026-02-22 | 设计文档同步 | 更新03_首章剧情大纲.md和04_分支流程图设计.md，与JSON数据保持同步 | Claude Code |
 | 2026-02-22 | 开发工作规范 | 新增"剧情内容更新流程"规范，确保设计→实现单向流程 | Claude Code |
+| 2026-02-22 | chapter_01.json | 重构为方案A格式（视频路径模式），移除详细字幕字段 | Claude Code |
+| 2026-02-22 | story_engine.gd | 新增get_video_path()，改用路径方式加载视频 | Claude Code |
+| 2026-02-22 | video_manager.gd | 新增play_video_by_path()等路径加载方法 | Claude Code |
+| 2026-02-22 | 开发日志 | 记录JSON结构重构变更 | Claude Code |
 
 ---
 

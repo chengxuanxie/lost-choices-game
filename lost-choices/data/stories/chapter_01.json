@@ -4,1573 +4,568 @@
     "剧情大纲": "docs/02_design/03_首章剧情大纲.md",
     "分支流程图": "docs/02_design/04_分支流程图设计.md"
   },
-  "_version": "v1.0 (2026-02-22)",
+  "_version": "v2.0 (2026-02-22)",
+  "_note": "方案A：JSON只存储视频路径和选择，subtitles作为可选辅助字幕",
 
   "chapter_id": "chapter_01",
   "title": "觉醒",
   "description": "在陌生的房间中醒来，一切才刚刚开始...",
   "start_node": "ch1_sc_001",
+
   "endings": [
     {
       "id": "ending_01",
       "name": "信任的开始",
-      "description": "你选择相信林晓薇，一起踏上寻找真相的道路",
-      "node": "ch1_ending_01"
+      "description": "你选择相信林晓薇，一起踏上寻找真相的道路"
     },
     {
       "id": "ending_02",
       "name": "独自前行",
-      "description": "你决定独自面对一切，独自寻找真相",
-      "node": "ch1_ending_02"
+      "description": "你决定独自面对一切，独自寻找真相"
     },
     {
       "id": "ending_03",
       "name": "治愈之路",
-      "description": "在白芷瑶的帮助下，你开始面对内心的创伤",
-      "node": "ch1_ending_03"
+      "description": "在白芷瑶的帮助下，你开始面对内心的创伤"
     },
     {
       "id": "ending_04",
       "name": "艺术共鸣",
-      "description": "沈墨染的画作唤醒了你深处的记忆",
-      "node": "ch1_ending_04"
+      "description": "沈墨染的画作唤醒了你深处的记忆"
     },
     {
       "id": "ending_05",
       "name": "危险联盟",
-      "description": "你选择与叶清寒合作，踏上一条危险的道路",
-      "node": "ch1_ending_05"
+      "description": "你选择与叶清寒合作，踏上一条危险的道路"
     }
   ],
+
   "stats": {
-    "total_nodes": 35,
-    "total_videos": 30,
+    "total_nodes": 18,
+    "total_videos": 16,
     "total_duration_minutes": 90,
-    "total_choices": 25
+    "total_choices": 33
   },
+
   "nodes": {
     "ch1_sc_001": {
       "node_id": "ch1_sc_001",
-      "node_type": "choice",
+      "scene": "SC-001 神秘房间",
+      "description": "主角在陌生房间醒来，探索环境，神秘人通过广播出现",
       "video": {
-        "id": "video_ch1_sc001",
-        "path": "res://assets/videos/ch1_sc001.ogv",
-        "duration": 480.0
+        "path": "res://assets/videos/ch1/sc001_main.ogv",
+        "duration": 480
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 5.0,
-          "text": "你缓缓睁开眼睛，发现自己身处一个陌生的房间。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 6.0,
-          "time_end": 10.0,
-          "text": "你是谁？这是哪里？",
-          "speaker": "主角"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 15.0,
-          "time_end": 25.0,
-          "text": "房间很简陋，窗户被遮住，门被反锁。你发现桌上有一张纸条。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 30.0,
-          "time_end": 40.0,
-          "text": "纸条上写着一串数字和一个地址：云海市，老张书店...",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 50.0,
-          "time_end": 60.0,
-          "text": "突然，房间里的广播响起...",
-          "speaker": null
-        },
-        {
-          "id": "sub_006",
-          "time_start": 65.0,
-          "time_end": 80.0,
-          "text": "你终于醒了。我没有太多时间解释，但你需要相信我——有人在追杀你。",
-          "speaker": "神秘人"
-        },
-        {
-          "id": "sub_007",
-          "time_start": 85.0,
-          "time_end": 100.0,
-          "text": "门的密码是4927。出去后往东走，会有人接应你。这是你唯一的机会。",
-          "speaker": "神秘人"
-        }
-      ],
       "choices": [
         {
           "id": "choice_001",
           "text": "我相信你，请告诉我该怎么做",
-          "hint": "相信神秘人的指示",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "mystery_voice",
-              "value": 5
-            },
-            {
-              "type": "set_flag",
-              "key": "trust_mystery",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "mystery_voice", "value": 5},
+            {"type": "set_flag", "key": "trust_mystery", "value": true}
           ],
           "next_node": "ch1_sc_002a"
         },
         {
           "id": "choice_002",
           "text": "我不相信你，我自己想办法",
-          "hint": "独立探索",
-          "conditions": [],
           "effects": [
-            {
-              "type": "set_flag",
-              "key": "independent_path",
-              "value": true
-            },
-            {
-              "type": "set_variable",
-              "key": "independent_count",
-              "value": 1
-            }
+            {"type": "set_flag", "key": "independent_path", "value": true},
+            {"type": "set_variable", "key": "independent_count", "value": 1}
           ],
           "next_node": "ch1_sc_002b"
         },
         {
           "id": "choice_003",
           "text": "在帮你之前，我想知道我是谁",
-          "hint": "询问自己的身份",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "mystery_voice",
-              "value": 10
-            },
-            {
-              "type": "set_flag",
-              "key": "asked_identity",
-              "value": true
-            },
-            {
-              "type": "set_variable",
-              "key": "memory_fragments",
-              "value": 1
-            }
+            {"type": "modify_relationship", "character": "mystery_voice", "value": 10},
+            {"type": "set_flag", "key": "asked_identity", "value": true},
+            {"type": "set_variable", "key": "memory_fragments", "value": 1}
           ],
           "next_node": "ch1_sc_002c"
         }
       ]
     },
+
     "ch1_sc_002a": {
       "node_id": "ch1_sc_002a",
-      "node_type": "choice",
+      "scene": "SC-002 废弃仓库",
+      "description": "按神秘人指示离开，在废弃仓库遇到林晓薇",
       "video": {
-        "id": "video_ch1_sc002a",
-        "path": "res://assets/videos/ch1_sc002a.ogv",
-        "duration": 360.0
+        "path": "res://assets/videos/ch1/sc002a_meet_lin.ogv",
+        "duration": 360
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 10.0,
-          "text": "你按照神秘人的指示，输入密码4927，门应声而开。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 15.0,
-          "time_end": 25.0,
-          "text": "你小心翼翼地走出去，发现这是一个废弃的工业区。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 30.0,
-          "time_end": 45.0,
-          "text": "有人从阴影中走出来...",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 50.0,
-          "time_end": 60.0,
-          "text": "你就是那个刚醒过来的人？我叫林晓薇，是个调查记者。",
-          "speaker": "林晓薇"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 65.0,
-          "time_end": 75.0,
-          "text": "这里不安全，我们必须马上离开。有人已经发现你了。",
-          "speaker": "林晓薇"
-        }
-      ],
       "choices": [
         {
           "id": "choice_004",
           "text": "我相信你，请带我离开这里",
-          "hint": "完全信任林晓薇",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 15
-            },
-            {
-              "type": "set_flag",
-              "key": "trust_lin_xiaowei",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 15},
+            {"type": "set_flag", "key": "trust_lin_xiaowei", "value": true}
           ],
           "next_node": "ch1_sc_003"
         },
         {
           "id": "choice_005",
           "text": "我需要保持距离，但我们先离开这里",
-          "hint": "保持中立态度",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_003"
         },
         {
           "id": "choice_006",
           "text": "你认识我？告诉我你知道什么",
-          "hint": "询问关于自己的信息",
-          "conditions": [
-            {
-              "type": "flag",
-              "key": "asked_identity",
-              "value": true
-            }
-          ],
+          "conditions": [{"type": "flag", "key": "asked_identity", "value": true}],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 5
-            },
-            {
-              "type": "set_flag",
-              "key": "know_past_connection",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 5},
+            {"type": "set_flag", "key": "know_past_connection", "value": true}
           ],
           "next_node": "ch1_sc_003"
         }
       ]
     },
+
     "ch1_sc_002b": {
       "node_id": "ch1_sc_002b",
-      "node_type": "choice",
+      "scene": "SC-002 废弃仓库",
+      "description": "独自探索离开，在废弃仓库遇到林晓薇",
       "video": {
-        "id": "video_ch1_sc002b",
-        "path": "res://assets/videos/ch1_sc002b.ogv",
-        "duration": 400.0
+        "path": "res://assets/videos/ch1/sc002b_explore.ogv",
+        "duration": 400
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 10.0,
-          "text": "你决定不相信那个声音，开始自己寻找出路。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 15.0,
-          "time_end": 30.0,
-          "text": "你在房间里仔细搜索，发现一个隐藏的通风口。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 35.0,
-          "time_end": 50.0,
-          "text": "你爬过通风管道，最终来到了建筑外面。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 55.0,
-          "time_end": 70.0,
-          "text": "这里是一个废弃的仓库区。远处似乎有人影在移动...",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 75.0,
-          "time_end": 85.0,
-          "text": "一个年轻女子从角落出现，她看起来很紧张。",
-          "speaker": null
-        },
-        {
-          "id": "sub_006",
-          "time_start": 90.0,
-          "time_end": 100.0,
-          "text": "我叫林晓薇。你不应该自己出来的，他们已经在找你了。",
-          "speaker": "林晓薇"
-        }
-      ],
       "choices": [
         {
           "id": "choice_007",
           "text": "他们是谁？你为什么知道这些？",
-          "hint": "询问更多信息",
-          "conditions": [],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 5
-            }
-          ],
+          "effects": [{"type": "modify_relationship", "character": "lin_xiaowei", "value": 5}],
           "next_node": "ch1_sc_003"
         },
         {
           "id": "choice_008",
           "text": "我不需要你的帮助",
-          "hint": "继续独立行动",
-          "conditions": [],
-          "effects": [
-            {
-              "type": "set_variable",
-              "key": "independent_count",
-              "value": 2
-            }
-          ],
+          "effects": [{"type": "set_variable", "key": "independent_count", "value": 2}],
           "next_node": "ch1_sc_003"
         }
       ]
     },
+
     "ch1_sc_002c": {
       "node_id": "ch1_sc_002c",
-      "node_type": "choice",
+      "scene": "SC-002 废弃仓库",
+      "description": "获得记忆碎片后，在废弃仓库遇到林晓薇",
       "video": {
-        "id": "video_ch1_sc002c",
-        "path": "res://assets/videos/ch1_sc002c.ogv",
-        "duration": 420.0
+        "path": "res://assets/videos/ch1/sc002c_memory.ogv",
+        "duration": 420
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "你曾经...做出过重要的选择。但现在不是回忆的时候。",
-          "speaker": "神秘人"
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "你的记忆被人为封锁了。如果一切顺利，你会慢慢想起来的。",
-          "speaker": "神秘人"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 50.0,
-          "text": "脑海中闪过一些模糊的画面...一个女孩的笑脸，一场雨，一次离别...",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 55.0,
-          "time_end": 70.0,
-          "text": "门的密码是4927。出去后会有人接应你，她叫林晓薇，可以信任她。",
-          "speaker": "神秘人"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 75.0,
-          "time_end": 85.0,
-          "text": "你按照指示走出房间，在废弃仓库遇到了那个叫林晓薇的女人。",
-          "speaker": null
-        }
-      ],
       "choices": [
         {
           "id": "choice_009",
           "text": "我相信你说的，请带我离开",
-          "hint": "带着记忆碎片前行",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 10
-            },
-            {
-              "type": "set_flag",
-              "key": "trust_lin_xiaowei",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 10},
+            {"type": "set_flag", "key": "trust_lin_xiaowei", "value": true}
           ],
           "next_node": "ch1_sc_003"
         },
         {
           "id": "choice_010",
           "text": "那个人提到的记忆...你知道什么？",
-          "hint": "追问林晓薇",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 5
-            },
-            {
-              "type": "set_flag",
-              "key": "know_past_connection",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 5},
+            {"type": "set_flag", "key": "know_past_connection", "value": true}
           ],
           "next_node": "ch1_sc_003"
         }
       ]
     },
+
     "ch1_sc_003": {
       "node_id": "ch1_sc_003",
-      "node_type": "choice",
+      "scene": "SC-003 城市街道",
+      "description": "黑衣人追来，林晓薇带领主角逃亡",
       "video": {
-        "id": "video_ch1_sc003",
-        "path": "res://assets/videos/ch1_sc003.ogv",
-        "duration": 600.0
+        "path": "res://assets/videos/ch1/sc003_chase.ogv",
+        "duration": 600
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 10.0,
-          "text": "快跑！他们来了！",
-          "speaker": "林晓薇"
-        },
-        {
-          "id": "sub_002",
-          "time_start": 15.0,
-          "time_end": 30.0,
-          "text": "你跟着林晓薇在城市街道上奔跑，霓虹灯在夜色中闪烁。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 35.0,
-          "time_end": 50.0,
-          "text": "身后传来脚步声和喊叫声，黑衣人正在追逐你们。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 55.0,
-          "time_end": 70.0,
-          "text": "林晓薇突然停下，示意你躲进一个小巷。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 75.0,
-          "time_end": 90.0,
-          "text": "追兵越来越近了。林晓薇示意你先走，她来拖住他们。",
-          "speaker": null
-        }
-      ],
       "choices": [
         {
           "id": "choice_011",
           "text": "不，我们一起走！我来帮你",
-          "hint": "帮助林晓薇",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 10
-            },
-            {
-              "type": "set_flag",
-              "key": "helped_lin",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 10},
+            {"type": "set_flag", "key": "helped_lin", "value": true}
           ],
           "next_node": "ch1_sc_004"
         },
         {
           "id": "choice_012",
           "text": "好，我会记住你的帮助",
-          "hint": "独自逃跑",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": -5
-            },
-            {
-              "type": "set_variable",
-              "key": "independent_count",
-              "value": 3
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": -5},
+            {"type": "set_variable", "key": "independent_count", "value": 3}
           ],
           "next_node": "ch1_sc_004"
         },
         {
           "id": "choice_013",
           "text": "等等，让我看看追兵是谁",
-          "hint": "获取追兵线索",
-          "conditions": [],
           "effects": [
-            {
-              "type": "set_flag",
-              "key": "saw_pursuers",
-              "value": true
-            },
-            {
-              "type": "add_item",
-              "key": "pursuer_clue"
-            }
+            {"type": "set_flag", "key": "saw_pursuers", "value": true},
+            {"type": "add_item", "key": "pursuer_clue"}
           ],
           "next_node": "ch1_sc_004"
         }
       ]
     },
+
     "ch1_sc_004": {
       "node_id": "ch1_sc_004",
-      "node_type": "choice",
+      "scene": "SC-004 咖啡馆",
+      "description": "来到咖啡馆，陈远航出现，提出不同建议",
       "video": {
-        "id": "video_ch1_sc004",
-        "path": "res://assets/videos/ch1_sc004.ogv",
-        "duration": 720.0
+        "path": "res://assets/videos/ch1/sc004_cafe.ogv",
+        "duration": 720
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "你们成功甩掉了追兵，来到一家安静的咖啡馆。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "我是调查记者，正在调查一个叫'黄昏'的神秘组织。",
-          "speaker": "林晓薇"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "你可能被卷入了什么大事。我建议继续调查，找出真相。",
-          "speaker": "林晓薇"
-        },
-        {
-          "id": "sub_004",
-          "time_start": 60.0,
-          "time_end": 75.0,
-          "text": "这时，一个男人走进咖啡馆，径直走向你们。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 80.0,
-          "time_end": 95.0,
-          "text": "林晓薇，你不应该把他带到这里。太危险了。",
-          "speaker": "陈远航"
-        },
-        {
-          "id": "sub_006",
-          "time_start": 100.0,
-          "time_end": 115.0,
-          "text": "我叫陈远航。如果你想安全，最好先隐藏起来，等事情平息。",
-          "speaker": "陈远航"
-        }
-      ],
       "choices": [
         {
           "id": "choice_014",
           "text": "我同意林晓薇，我要弄清楚真相",
-          "hint": "继续调查路线",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 10
-            },
-            {
-              "type": "modify_relationship",
-              "character": "chen_yuanhang",
-              "value": -5
-            },
-            {
-              "type": "set_flag",
-              "key": "investigation_route",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 10},
+            {"type": "modify_relationship", "character": "chen_yuanhang", "value": -5},
+            {"type": "set_flag", "key": "investigation_route", "value": true}
           ],
           "next_node": "ch1_sc_005"
         },
         {
           "id": "choice_015",
           "text": "我同意陈远航，安全第一",
-          "hint": "安全路线",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "chen_yuanhang",
-              "value": 10
-            },
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": -5
-            },
-            {
-              "type": "set_flag",
-              "key": "safety_route",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "chen_yuanhang", "value": 10},
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": -5},
+            {"type": "set_flag", "key": "safety_route", "value": true}
           ],
           "next_node": "ch1_sc_007"
         },
         {
           "id": "choice_016",
           "text": "我需要更多信息才能决定",
-          "hint": "中立路线",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 5
-            },
-            {
-              "type": "modify_relationship",
-              "character": "chen_yuanhang",
-              "value": 5
-            },
-            {
-              "type": "set_flag",
-              "key": "neutral_route",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "lin_xiaowei", "value": 5},
+            {"type": "modify_relationship", "character": "chen_yuanhang", "value": 5},
+            {"type": "set_flag", "key": "neutral_route", "value": true}
           ],
           "next_node": "ch1_sc_005"
         },
         {
           "id": "choice_017",
           "text": "我想先独自思考一下",
-          "hint": "独立探索",
-          "conditions": [],
           "effects": [
-            {
-              "type": "set_variable",
-              "key": "independent_count",
-              "value": 4
-            },
-            {
-              "type": "set_flag",
-              "key": "solo_explore",
-              "value": true
-            }
+            {"type": "set_variable", "key": "independent_count", "value": 4},
+            {"type": "set_flag", "key": "solo_explore", "value": true}
           ],
           "next_node": "ch1_sc_006"
         }
       ]
     },
+
     "ch1_sc_005": {
       "node_id": "ch1_sc_005",
-      "node_type": "choice",
+      "scene": "SC-005 书店",
+      "description": "来到老张的书店，遇到白芷瑶",
       "video": {
-        "id": "video_ch1_sc005",
-        "path": "res://assets/videos/ch1_sc005.ogv",
-        "duration": 480.0
+        "path": "res://assets/videos/ch1/sc005_bookstore.ogv",
+        "duration": 480
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "按照纸条上的地址，你来到了一家老式书店。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "书店里弥漫着书香气息，一位老人正在整理书架。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "你来了...我等你很久了。",
-          "speaker": "老张"
-        },
-        {
-          "id": "sub_004",
-          "time_start": 60.0,
-          "time_end": 75.0,
-          "text": "这个给你，这是你上次留下的东西。也许能帮你想起什么。",
-          "speaker": "老张"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 80.0,
-          "time_end": 95.0,
-          "text": "这时，一个年轻女子走进书店，她的目光落在你身上。",
-          "speaker": null
-        },
-        {
-          "id": "sub_006",
-          "time_start": 100.0,
-          "time_end": 115.0,
-          "text": "你...你没事就好。我是白芷瑶，是一名心理咨询师。",
-          "speaker": "白芷瑶"
-        }
-      ],
       "choices": [
         {
           "id": "choice_018",
           "text": "老张，你认识我？告诉我关于我的过去",
-          "hint": "询问过去",
-          "conditions": [],
           "effects": [
-            {
-              "type": "set_variable",
-              "key": "memory_fragments",
-              "value": 2
-            },
-            {
-              "type": "add_item",
-              "key": "old_photo"
-            }
+            {"type": "set_variable", "key": "memory_fragments", "value": 2},
+            {"type": "add_item", "key": "old_photo"}
           ],
           "next_node": "ch1_sc_005b"
         },
         {
           "id": "choice_019",
           "text": "白芷瑶，你好像认识我？",
-          "hint": "与白芷瑶搭话",
-          "conditions": [],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "bai_zhiyao",
-              "value": 10
-            }
-          ],
+          "effects": [{"type": "modify_relationship", "character": "bai_zhiyao", "value": 10}],
           "next_node": "ch1_sc_005b"
         },
         {
           "id": "choice_020",
           "text": "我假装普通顾客，先观察一下",
-          "hint": "保持低调",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_005b"
         }
       ]
     },
+
     "ch1_sc_005b": {
       "node_id": "ch1_sc_005b",
-      "node_type": "choice",
+      "scene": "SC-005 书店",
+      "description": "白芷瑶提出可以帮助主角",
       "video": {
-        "id": "video_ch1_sc005b",
-        "path": "res://assets/videos/ch1_sc005b.ogv",
-        "duration": 300.0
+        "path": "res://assets/videos/ch1/sc005b_bai_offer.ogv",
+        "duration": 300
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "白芷瑶走近你，眼神中带着关切。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "我知道你经历了很多。如果需要帮助，我可以帮你...",
-          "speaker": "白芷瑶"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "帮助处理那些...你不想面对的记忆。",
-          "speaker": "白芷瑶"
-        }
-      ],
       "choices": [
         {
           "id": "choice_021",
           "text": "好，我愿意接受你的帮助",
-          "hint": "接受白芷瑶的帮助",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "bai_zhiyao",
-              "value": 15
-            },
-            {
-              "type": "set_flag",
-              "key": "accept_bai_help",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "bai_zhiyao", "value": 15},
+            {"type": "set_flag", "key": "accept_bai_help", "value": true}
           ],
           "next_node": "ch1_sc_008"
         },
         {
           "id": "choice_022",
           "text": "谢谢，但我还有事要处理",
-          "hint": "婉拒帮助",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_008"
         }
       ]
     },
+
     "ch1_sc_006": {
       "node_id": "ch1_sc_006",
-      "node_type": "choice",
+      "scene": "SC-006 艺术画廊",
+      "description": "独自来到艺术画廊，遇到沈墨染",
       "video": {
-        "id": "video_ch1_sc006",
-        "path": "res://assets/videos/ch1_sc006.ogv",
-        "duration": 360.0
+        "path": "res://assets/videos/ch1/sc006_gallery.ogv",
+        "duration": 360
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "你独自走在街上，被一个艺术画廊的展览吸引。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "展览主题是'迷失与寻找'，一幅画让你感到莫名熟悉。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "画中是一个人站在十字路口，四周是浓雾...",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 60.0,
-          "time_end": 75.0,
-          "text": "你似乎在寻找什么。这幅画...是我画的。",
-          "speaker": "沈墨染"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 80.0,
-          "time_end": 95.0,
-          "text": "我叫沈墨染。你...你给我的感觉很特别，就像画中的人。",
-          "speaker": "沈墨染"
-        }
-      ],
       "choices": [
         {
           "id": "choice_023",
           "text": "这幅画有什么故事？",
-          "hint": "询问画作故事",
-          "conditions": [],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "shen_moran",
-              "value": 10
-            }
-          ],
+          "effects": [{"type": "modify_relationship", "character": "shen_moran", "value": 10}],
           "next_node": "ch1_sc_006b"
         },
         {
           "id": "choice_024",
           "text": "你能帮我解读这幅画吗？",
-          "hint": "请她解读画作",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "shen_moran",
-              "value": 15
-            },
-            {
-              "type": "set_variable",
-              "key": "memory_fragments",
-              "value": 2
-            }
+            {"type": "modify_relationship", "character": "shen_moran", "value": 15},
+            {"type": "set_variable", "key": "memory_fragments", "value": 2}
           ],
           "next_node": "ch1_sc_006b"
         },
         {
           "id": "choice_025",
           "text": "只是欣赏，不过多询问",
-          "hint": "保持距离",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_008"
         }
       ]
     },
+
     "ch1_sc_006b": {
       "node_id": "ch1_sc_006b",
-      "node_type": "choice",
+      "scene": "SC-006 艺术画廊",
+      "description": "沈墨染解读画作含义",
       "video": {
-        "id": "video_ch1_sc006b",
-        "path": "res://assets/videos/ch1_sc006b.ogv",
-        "duration": 300.0
+        "path": "res://assets/videos/ch1/sc006b_shen_explain.ogv",
+        "duration": 300
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "沈墨染看着你，眼中闪烁着某种光芒。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "画中的雾代表迷茫，十字路口代表选择。每个人都在寻找自己的方向。",
-          "speaker": "沈墨染"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 45.0,
-          "time_end": 60.0,
-          "text": "但有时候，答案就在迷雾之中。你只需要相信自己。",
-          "speaker": "沈墨染"
-        }
-      ],
       "choices": [
         {
           "id": "choice_026",
           "text": "谢谢你，我想我找到了一些方向",
-          "hint": "感谢并告别",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "shen_moran",
-              "value": 5
-            },
-            {
-              "type": "set_flag",
-              "key": "art_resonance",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "shen_moran", "value": 5},
+            {"type": "set_flag", "key": "art_resonance", "value": true}
           ],
           "next_node": "ch1_sc_008"
         },
         {
           "id": "choice_027",
           "text": "我需要赶去别的地方",
-          "hint": "离开",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_008"
         }
       ]
     },
+
     "ch1_sc_007": {
       "node_id": "ch1_sc_007",
-      "node_type": "choice",
+      "scene": "SC-007 安全屋",
+      "description": "来到安全屋，叶清寒出现",
       "video": {
-        "id": "video_ch1_sc007",
-        "path": "res://assets/videos/ch1_sc007.ogv",
-        "duration": 480.0
+        "path": "res://assets/videos/ch1/sc007_safehouse.ogv",
+        "duration": 480
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "陈远航带你来到一个隐蔽的安全屋。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "你在这里暂时休息，这里应该很安全。",
-          "speaker": "陈远航"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "但是当你醒来时，发现屋里已经有另一个人了。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 60.0,
-          "time_end": 75.0,
-          "text": "别紧张。我不是来伤害你的。",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 80.0,
-          "time_end": 95.0,
-          "text": "我叫叶清寒。我原本是派来...追杀你的人。但我背叛了组织。",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_006",
-          "time_start": 100.0,
-          "time_end": 115.0,
-          "text": "我有你需要的信息。如果你愿意，我们可以合作。",
-          "speaker": "叶清寒"
-        }
-      ],
       "choices": [
         {
           "id": "choice_028",
           "text": "我相信你，我们可以合作",
-          "hint": "接受叶清寒的合作",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": 20
-            },
-            {
-              "type": "set_flag",
-              "key": "ye_qinghan_ally",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "ye_qinghan", "value": 20},
+            {"type": "set_flag", "key": "ye_qinghan_ally", "value": true}
           ],
           "next_node": "ch1_sc_008"
         },
         {
           "id": "choice_029",
           "text": "对不起，我不能相信你",
-          "hint": "拒绝合作",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": -10
-            },
-            {
-              "type": "set_flag",
-              "key": "reject_ye",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "ye_qinghan", "value": -10},
+            {"type": "set_flag", "key": "reject_ye", "value": true}
           ],
           "next_node": "ch1_sc_008"
         },
         {
           "id": "choice_030",
           "text": "告诉我更多，我再决定",
-          "hint": "了解更多",
-          "conditions": [],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": 5
-            }
-          ],
+          "effects": [{"type": "modify_relationship", "character": "ye_qinghan", "value": 5}],
           "next_node": "ch1_sc_007b"
         },
         {
           "id": "choice_031",
           "text": "你为什么背叛他们？",
-          "hint": "询问她的过去",
-          "conditions": [
-            {
-              "type": "relationship",
-              "character": "ye_qinghan",
-              "operator": ">=",
-              "value": 0
-            }
-          ],
+          "conditions": [{"type": "relationship", "character": "ye_qinghan", "operator": ">=", "value": 0}],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": 15
-            },
-            {
-              "type": "set_flag",
-              "key": "know_ye_past",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "ye_qinghan", "value": 15},
+            {"type": "set_flag", "key": "know_ye_past", "value": true}
           ],
           "next_node": "ch1_sc_008"
         }
       ]
     },
+
     "ch1_sc_007b": {
       "node_id": "ch1_sc_007b",
-      "node_type": "choice",
+      "scene": "SC-007 安全屋",
+      "description": "叶清寒透露更多关于组织的信息",
       "video": {
-        "id": "video_ch1_sc007b",
-        "path": "res://assets/videos/ch1_sc007b.ogv",
-        "duration": 240.0
+        "path": "res://assets/videos/ch1/sc007b_ye_reveal.ogv",
+        "duration": 240
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 20.0,
-          "text": "组织叫'黄昏'。他们控制着这个城市的很多秘密。",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_002",
-          "time_start": 25.0,
-          "time_end": 45.0,
-          "text": "你曾经是他们的一员，但后来你选择了离开，并带走了重要的东西。",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "那个东西...可能就是你现在失忆的原因。",
-          "speaker": "叶清寒"
-        }
-      ],
       "choices": [
         {
           "id": "choice_032",
           "text": "好，我愿意和你合作",
-          "hint": "最终接受合作",
-          "conditions": [],
           "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": 15
-            },
-            {
-              "type": "set_flag",
-              "key": "ye_qinghan_ally",
-              "value": true
-            }
+            {"type": "modify_relationship", "character": "ye_qinghan", "value": 15},
+            {"type": "set_flag", "key": "ye_qinghan_ally", "value": true}
           ],
           "next_node": "ch1_sc_008"
         },
         {
           "id": "choice_033",
           "text": "我需要时间考虑",
-          "hint": "暂不决定",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_sc_008"
         }
       ]
     },
+
     "ch1_sc_008": {
       "node_id": "ch1_sc_008",
-      "node_type": "choice",
+      "scene": "SC-008 天台",
+      "description": "黎明时分，主角需要做出最终选择",
       "video": {
-        "id": "video_ch1_sc008",
-        "path": "res://assets/videos/ch1_sc008.ogv",
-        "duration": 420.0
+        "path": "res://assets/videos/ch1/sc008_rooftop.ogv",
+        "duration": 420
       },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "黎明时分，你站在城市高楼的屋顶上。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 35.0,
-          "text": "这一夜发生的事情太多，你需要做出选择。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 40.0,
-          "time_end": 55.0,
-          "text": "神秘人的声音再次响起...",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 60.0,
-          "time_end": 80.0,
-          "text": "你做出了很多选择。现在是时候决定你要走的道路了。",
-          "speaker": "神秘人"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 85.0,
-          "time_end": 100.0,
-          "text": "记住，无论你选择什么，都将影响你的未来。",
-          "speaker": "神秘人"
-        }
-      ],
       "choices": [
         {
           "id": "choice_034",
           "text": "我想和林晓薇一起寻找真相",
-          "hint": "林晓薇路线",
-          "conditions": [
-            {
-              "type": "relationship",
-              "character": "lin_xiaowei",
-              "operator": ">=",
-              "value": 40
-            }
-          ],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "lin_xiaowei",
-              "value": 15
-            }
-          ],
+          "conditions": [{"type": "relationship", "character": "lin_xiaowei", "operator": ">=", "value": 40}],
+          "effects": [{"type": "modify_relationship", "character": "lin_xiaowei", "value": 15}],
           "next_node": "ch1_ending_01"
         },
         {
           "id": "choice_035",
           "text": "我要独自寻找答案",
-          "hint": "独立路线",
-          "conditions": [],
           "effects": [],
           "next_node": "ch1_ending_02"
         },
         {
           "id": "choice_036",
           "text": "我想接受白芷瑶的帮助",
-          "hint": "白芷瑶路线",
-          "conditions": [
-            {
-              "type": "relationship",
-              "character": "bai_zhiyao",
-              "operator": ">=",
-              "value": 40
-            }
-          ],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "bai_zhiyao",
-              "value": 15
-            }
-          ],
+          "conditions": [{"type": "relationship", "character": "bai_zhiyao", "operator": ">=", "value": 40}],
+          "effects": [{"type": "modify_relationship", "character": "bai_zhiyao", "value": 15}],
           "next_node": "ch1_ending_03"
         },
         {
           "id": "choice_037",
           "text": "沈墨染的画让我找到了方向",
-          "hint": "沈墨染路线",
-          "conditions": [
-            {
-              "type": "relationship",
-              "character": "shen_moran",
-              "operator": ">=",
-              "value": 40
-            }
-          ],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "shen_moran",
-              "value": 15
-            }
-          ],
+          "conditions": [{"type": "relationship", "character": "shen_moran", "operator": ">=", "value": 40}],
+          "effects": [{"type": "modify_relationship", "character": "shen_moran", "value": 15}],
           "next_node": "ch1_ending_04"
         },
         {
           "id": "choice_038",
           "text": "我选择与叶清寒合作",
-          "hint": "叶清寒路线",
-          "conditions": [
-            {
-              "type": "relationship",
-              "character": "ye_qinghan",
-              "operator": ">=",
-              "value": 40
-            }
-          ],
-          "effects": [
-            {
-              "type": "modify_relationship",
-              "character": "ye_qinghan",
-              "value": 15
-            }
-          ],
+          "conditions": [{"type": "relationship", "character": "ye_qinghan", "operator": ">=", "value": 40}],
+          "effects": [{"type": "modify_relationship", "character": "ye_qinghan", "value": 15}],
           "next_node": "ch1_ending_05"
         }
       ]
     },
+
     "ch1_ending_01": {
       "node_id": "ch1_ending_01",
       "node_type": "ending",
       "ending_id": "ending_01",
       "ending_name": "信任的开始",
+      "description": "与林晓薇建立信任，一起调查真相",
       "video": {
-        "id": "video_ch1_ending_01",
-        "path": "res://assets/videos/ch1_ending_01.ogv",
-        "duration": 300.0
-      },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "林晓薇出现在你身边，阳光洒在她的脸上。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "谢谢你选择相信我。我们一起面对这一切。",
-          "speaker": "林晓薇"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "你握住她伸出的手，一起走向新的一天。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 80.0,
-          "time_end": 100.0,
-          "text": "这只是开始。真相就在前方等待着你。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 110.0,
-          "time_end": 130.0,
-          "text": "【第一章完 - 信任的开始】",
-          "speaker": null
-        }
-      ]
+        "path": "res://assets/videos/ch1/ending_01_trust.ogv",
+        "duration": 300
+      }
     },
+
     "ch1_ending_02": {
       "node_id": "ch1_ending_02",
       "node_type": "ending",
       "ending_id": "ending_02",
       "ending_name": "独自前行",
+      "description": "主角决定独自寻找真相",
       "video": {
-        "id": "video_ch1_ending_02",
-        "path": "res://assets/videos/ch1_ending_02.ogv",
-        "duration": 300.0
-      },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "你独自站在天台上，看着城市苏醒。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "有些路，只能一个人走。你必须自己找到答案。",
-          "speaker": null
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "转身离开，你开始自己的探索之旅。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 80.0,
-          "time_end": 100.0,
-          "text": "无论前方有多少困难，你都不会停下脚步。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 110.0,
-          "time_end": 130.0,
-          "text": "【第一章完 - 独自前行】",
-          "speaker": null
-        }
-      ]
+        "path": "res://assets/videos/ch1/ending_02_alone.ogv",
+        "duration": 300
+      }
     },
+
     "ch1_ending_03": {
       "node_id": "ch1_ending_03",
       "node_type": "ending",
       "ending_id": "ending_03",
       "ending_name": "治愈之路",
+      "description": "在白芷瑶的帮助下开始恢复记忆",
       "video": {
-        "id": "video_ch1_ending_03",
-        "path": "res://assets/videos/ch1_ending_03.ogv",
-        "duration": 300.0
-      },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "白芷瑶微笑着向你走来。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "面对过去并不容易，但我会陪着你。",
-          "speaker": "白芷瑶"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "治愈需要时间，但最重要的是开始。",
-          "speaker": "白芷瑶"
-        },
-        {
-          "id": "sub_004",
-          "time_start": 80.0,
-          "time_end": 100.0,
-          "text": "你决定先治愈自己，再面对外面的世界。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 110.0,
-          "time_end": 130.0,
-          "text": "【第一章完 - 治愈之路】",
-          "speaker": null
-        }
-      ]
+        "path": "res://assets/videos/ch1/ending_03_healing.ogv",
+        "duration": 300
+      }
     },
+
     "ch1_ending_04": {
       "node_id": "ch1_ending_04",
       "node_type": "ending",
       "ending_id": "ending_04",
       "ending_name": "艺术共鸣",
+      "description": "沈墨染的画作唤醒了深处的记忆",
       "video": {
-        "id": "video_ch1_ending_04",
-        "path": "res://assets/videos/ch1_ending_04.ogv",
-        "duration": 300.0
-      },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "沈墨染站在画廊中，晨光透过窗户照在她的画上。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "有时候，艺术能说出语言无法表达的东西。",
-          "speaker": "沈墨染"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "那幅画唤醒了你内心深处的某些东西...",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 80.0,
-          "time_end": 100.0,
-          "text": "你决定留在她身边，也许艺术能帮你找到真正的自己。",
-          "speaker": null
-        },
-        {
-          "id": "sub_005",
-          "time_start": 110.0,
-          "time_end": 130.0,
-          "text": "【第一章完 - 艺术共鸣】",
-          "speaker": null
-        }
-      ]
+        "path": "res://assets/videos/ch1/ending_04_art.ogv",
+        "duration": 300
+      }
     },
+
     "ch1_ending_05": {
       "node_id": "ch1_ending_05",
       "node_type": "ending",
       "ending_id": "ending_05",
       "ending_name": "危险联盟",
+      "description": "与叶清寒合作，踏上危险的道路",
       "video": {
-        "id": "video_ch1_ending_05",
-        "path": "res://assets/videos/ch1_ending_05.ogv",
-        "duration": 300.0
-      },
-      "subtitles": [
-        {
-          "id": "sub_001",
-          "time_start": 0.0,
-          "time_end": 15.0,
-          "text": "叶清寒从阴影中走出，她的眼中闪烁着复杂的情绪。",
-          "speaker": null
-        },
-        {
-          "id": "sub_002",
-          "time_start": 20.0,
-          "time_end": 40.0,
-          "text": "选择和我合作意味着踏入危险。你确定吗？",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_003",
-          "time_start": 50.0,
-          "time_end": 70.0,
-          "text": "你点了点头。有些真相需要冒险才能获得。",
-          "speaker": null
-        },
-        {
-          "id": "sub_004",
-          "time_start": 80.0,
-          "time_end": 100.0,
-          "text": "那就走吧，我们有很多事要做。",
-          "speaker": "叶清寒"
-        },
-        {
-          "id": "sub_005",
-          "time_start": 110.0,
-          "time_end": 130.0,
-          "text": "【第一章完 - 危险联盟】",
-          "speaker": null
-        }
-      ]
+        "path": "res://assets/videos/ch1/ending_05_alliance.ogv",
+        "duration": 300
+      }
     }
   }
 }
