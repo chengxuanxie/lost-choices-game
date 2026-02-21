@@ -243,6 +243,10 @@
 | 2026-02-22 | story_engine.gd | 新增get_video_path()，改用路径方式加载视频 | Claude Code |
 | 2026-02-22 | video_manager.gd | 新增play_video_by_path()等路径加载方法 | Claude Code |
 | 2026-02-22 | 开发日志 | 记录JSON结构重构变更 | Claude Code |
+| 2026-02-22 | game.gd | 移除字幕显示逻辑，适配新JSON结构 | Claude Code |
+| 2026-02-22 | demo_scene.gd | 显示场景描述替代字幕 | Claude Code |
+| 2026-02-22 | test_runner.gd | 新增视频路径测试用例 | Claude Code |
+| 2026-02-22 | video_manager.gd | 新增进度信号发送功能 | Claude Code |
 
 ---
 

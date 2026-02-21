@@ -27,6 +27,12 @@ var _preload_queue: Array = []          ## 预加载队列
 func _ready() -> void:
 	print("[VideoManager] 视频管理器初始化完成")
 
+func _process(_delta: float) -> void:
+	# 定期发送视频进度信号
+	if _is_playing and _video_player and not _video_player.paused:
+		var progress = get_playback_progress()
+		video_progress.emit(_current_video_id, progress)
+
 ## 设置视频播放器引用
 func set_video_player(player: VideoStreamPlayer) -> void:
 	_video_player = player

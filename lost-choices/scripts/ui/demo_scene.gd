@@ -1,4 +1,5 @@
 ## 演示场景 - 模拟游戏流程（无需视频文件）
+## 用于测试剧情流程和分支选择逻辑
 extends Control
 
 # UI节点
@@ -89,16 +90,14 @@ func _on_node_changed(node_id: String, node_data: Dictionary) -> void:
 	_log("\n[节点: %s]" % node_id)
 	_update_status_display()
 
-	# 显示字幕文本
-	var subtitles = node_data.get("subtitles", [])
-	for subtitle in subtitles:
-		var speaker = subtitle.get("speaker", "")
-		var text = subtitle.get("text", "")
+	# 显示场景描述（代替字幕）
+	var scene = node_data.get("scene", "")
+	var description = node_data.get("description", "")
 
-		if speaker and not speaker.is_empty():
-			_log("[b]%s:[/b] %s" % [speaker, text])
-		else:
-			_log(text)
+	if not scene.is_empty():
+		_log("[b]场景:[/b] %s" % scene)
+	if not description.is_empty():
+		_log("[i]%s[/i]" % description)
 
 	# 检查节点类型
 	var node_type = node_data.get("node_type", "video")

@@ -1,12 +1,12 @@
 ## 游戏主场景脚本
+## 负责视频播放和选择界面的显示
 extends Control
 
 # 节点引用
 @onready var video_player: VideoStreamPlayer = $VideoContainer/VideoPlayer
-@onready var subtitle_label: Label = $SubtitlePanel/SubtitleLabel
-@onready var subtitle_panel: PanelContainer = $SubtitlePanel
 @onready var choice_container: VBoxContainer = $ChoiceContainer
 @onready var pause_button: Button = $PauseButton
+@onready var video_progress: ProgressBar = $VideoContainer/VideoProgress
 
 func _ready() -> void:
 	# 设置视频播放器
@@ -17,22 +17,16 @@ func _ready() -> void:
 	StoryEngine.choices_available.connect(_on_choices_available)
 	StoryEngine.story_ended.connect(_on_story_ended)
 	VideoManager.video_completed.connect(_on_video_completed)
+	VideoManager.video_progress.connect(_on_video_progress)
 
 	pause_button.pressed.connect(_on_pause_pressed)
-
-	# 隐藏字幕面板
-	subtitle_panel.visible = false
 
 	# 开始第一章
 	StoryEngine.start_chapter("chapter_01")
 
 func _on_node_changed(node_id: String, node_data: Dictionary) -> void:
 	print("[Game] 节点变更: %s" % node_id)
-
-	# 更新字幕
-	var subtitles = node_data.get("subtitles", [])
-	if subtitles.size() > 0:
-		_setup_subtitles(subtitles)
+	# 视频播放由StoryEngine自动调用VideoManager处理
 
 func _on_choices_available(choices: Array) -> void:
 	# 显示选择按钮
@@ -81,6 +75,11 @@ func _on_video_completed(video_id: String) -> void:
 	if not auto_next.is_empty():
 		StoryEngine.jump_to_node(auto_next)
 
+func _on_video_progress(video_id: String, progress: float) -> void:
+	# 更新视频进度条
+	if video_progress:
+		video_progress.value = progress * 100
+
 func _on_story_ended(ending_id: String) -> void:
 	print("[Game] 故事结束: %s" % ending_id)
 	# TODO: 显示结局界面
@@ -88,29 +87,6 @@ func _on_story_ended(ending_id: String) -> void:
 func _on_pause_pressed() -> void:
 	GameManager.pause_game()
 	# TODO: 显示暂停菜单
-
-func _setup_subtitles(subtitles: Array) -> void:
-	if subtitles.is_empty():
-		subtitle_panel.visible = false
-		return
-
-	subtitle_panel.visible = true
-
-	# 根据视频时间显示字幕
-	for subtitle in subtitles:
-		var start_time = subtitle.get("time_start", 0.0)
-		var end_time = subtitle.get("time_end", 0.0)
-		var text = subtitle.get("text", "")
-
-		# 使用await等待到字幕开始时间
-		await get_tree().create_timer(start_time).timeout
-
-		subtitle_label.text = text
-
-		# 等待字幕结束
-		await get_tree().create_timer(end_time - start_time).timeout
-
-		subtitle_label.text = ""
 
 func _check_all_conditions(conditions: Array) -> bool:
 	for condition in conditions:

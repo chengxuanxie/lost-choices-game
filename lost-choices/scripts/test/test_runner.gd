@@ -295,6 +295,20 @@ func _test_video_manager() -> void:
 	else:
 		_log_error("视频管理器初始状态错误")
 
+	# 测试视频路径获取功能
+	var test_node_id = "ch1_sc_001"
+	var video_path = StoryEngine.get_video_path(test_node_id)
+	if not video_path.is_empty():
+		_log_success("视频路径获取正常: %s" % video_path)
+	else:
+		_log_error("视频路径获取失败")
+
+	# 测试路径格式正确性
+	if video_path.begins_with("res://") and (video_path.ends_with(".ogv") or video_path.ends_with(".webm")):
+		_log_success("视频路径格式正确")
+	else:
+		_log_error("视频路径格式错误: %s" % video_path)
+
 func _test_audio_manager() -> void:
 	_log("\n--- 测试 AudioManager ---")
 
