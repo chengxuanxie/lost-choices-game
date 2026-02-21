@@ -1,6 +1,7 @@
 ## 视频管理器 - 负责视频加载、播放、缓存（单机版）
 ## 管理所有视频资源的加载、预加载和播放控制
-class_name VideoManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号定义
 signal video_loaded(video_id: String)

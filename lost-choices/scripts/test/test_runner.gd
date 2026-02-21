@@ -120,18 +120,18 @@ func _test_game_state_manager() -> void:
 		_log_error("物品系统失败")
 
 	# 测试好感度系统
-	GameStateManager.set_relationship("test_character", 60)
-	if GameStateManager.get_relationship("test_character") == 60:
+	GameStateManager.set_relationship("test_character", 65)
+	if GameStateManager.get_relationship("test_character") == 65:
 		_log_success("好感度系统工作正常")
 	else:
 		_log_error("好感度系统失败")
 
-	# 测试好感度等级
+	# 测试好感度等级（65 >= 61 应该是"亲密"）
 	var level_name = GameStateManager.get_relationship_level_name("test_character")
 	if level_name == "亲密":
 		_log_success("好感度等级计算正确: %s" % level_name)
 	else:
-		_log_error("好感度等级计算错误: %s" % level_name)
+		_log_error("好感度等级计算错误: %s (期望: 亲密)" % level_name)
 
 	# 清理测试数据
 	GameStateManager.reset_state()
@@ -212,7 +212,7 @@ func _test_audio_manager() -> void:
 
 	# 测试静音功能
 	AudioManager.set_mute(true)
-	if AudioManager._is_muted:
+	if AudioManager.is_muted():
 		_log_success("静音功能工作正常")
 	else:
 		_log_error("静音功能失败")
@@ -222,14 +222,14 @@ func _test_audio_manager() -> void:
 func _test_event_manager() -> void:
 	_log("\n--- 测试 EventManager ---")
 
-	# 测试事件注册
-	var test_called = false
-	EventManager.register("test_event", func(data): test_called = true)
+	# 测试事件注册 - 使用字典来避免闭包变量捕获问题
+	var test_result = {"called": false}
+	EventManager.register("test_event", func(data): test_result["called"] = true)
 
 	EventManager.trigger("test_event", {})
 	await get_tree().process_frame
 
-	if test_called:
+	if test_result["called"]:
 		_log_success("事件系统工作正常")
 	else:
 		_log_error("事件系统失败")

@@ -1,5 +1,6 @@
 ## 资源管理器 - 负责本地资源的加载和管理
-class_name ResourceManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 资源路径配置
 const PATHS: Dictionary = {

@@ -1,5 +1,6 @@
 ## 音频管理器 - 负责音频播放管理
-class_name AudioManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号
 signal volume_changed(bus: String, value: float)
@@ -12,6 +13,7 @@ const BUS_SFX: String = "SFX"
 ## 状态
 var _current_bgm: String = ""
 var _bgm_player: AudioStreamPlayer
+var _is_muted: bool = false
 
 #region 初始化
 
@@ -50,6 +52,25 @@ func set_volume(bus: String, value: float) -> void:
 	if bus_index >= 0:
 		AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 		volume_changed.emit(bus, value)
+
+## 设置BGM音量
+func set_bgm_volume(value: float) -> void:
+	set_volume(BUS_BGM, value)
+
+## 设置SFX音量
+func set_sfx_volume(value: float) -> void:
+	set_volume(BUS_SFX, value)
+
+## 设置静音
+func set_mute(muted: bool) -> void:
+	_is_muted = muted
+	var bus_index = AudioServer.get_bus_index(BUS_MASTER)
+	if bus_index >= 0:
+		AudioServer.set_bus_mute(bus_index, muted)
+
+## 是否静音
+func is_muted() -> bool:
+	return _is_muted
 
 #endregion
 

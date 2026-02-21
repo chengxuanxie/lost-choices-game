@@ -1,5 +1,6 @@
 ## 事件管理器 - 负责全局事件系统
-class_name EventManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号
 signal event_triggered(event_id: String, data: Dictionary)

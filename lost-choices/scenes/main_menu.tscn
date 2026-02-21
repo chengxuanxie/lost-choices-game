@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://main_menu_scene"]
+[gd_scene load_steps=2 format=3 uid="uid://dokri86bfcsn"]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_main"]
 
@@ -85,10 +85,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100
-offset_top = -30
-offset_right = -10
-offset_bottom = -10
+offset_left = -100.0
+offset_top = -30.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)

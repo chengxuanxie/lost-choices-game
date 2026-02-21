@@ -143,7 +143,7 @@ func _on_choices_available(choices: Array) -> void:
 		if hint and not hint.is_empty():
 			_log("  %d. %s [提示: %s]" % [i + 1, choice.get("text"), hint])
 		else:
-			_log("  %d. %s" % [i + 1, choice.get("text")]))
+			_log("  %d. %s" % [i + 1, choice.get("text")])
 
 func _on_choice_button_pressed(index: int) -> void:
 	_clear_choices()

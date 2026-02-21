@@ -1,6 +1,7 @@
 ## 剧情引擎 - 负责剧情流程控制
 ## 管理剧情节点、分支选择、条件判断和状态影响
-class_name StoryEngine extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号定义
 signal story_started(chapter_id: String)

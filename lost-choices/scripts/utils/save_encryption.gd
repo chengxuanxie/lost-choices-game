@@ -45,3 +45,19 @@ static func calculate_hash(data: String) -> String:
 ## 验证数据完整性
 static func verify_integrity(data: String, hash_value: String) -> bool:
 	return calculate_hash(data) == hash_value
+
+## 加密字典数据（用于存档）
+static func encrypt_data(data: Dictionary) -> String:
+	var json_string = JSON.stringify(data)
+	return encrypt(json_string)
+
+## 解密字典数据（用于存档）
+static func decrypt_data(encrypted_data: String) -> Dictionary:
+	var json_string = decrypt(encrypted_data)
+	if json_string.is_empty():
+		return {}
+
+	var json = JSON.new()
+	if json.parse(json_string) == OK:
+		return json.data
+	return {}

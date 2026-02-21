@@ -8,9 +8,6 @@ extends Control
 @onready var choice_container: VBoxContainer = $ChoiceContainer
 @onready var pause_button: Button = $PauseButton
 
-# 预加载资源
-const CHOICE_BUTTON_SCENE = preload("res://scenes/ui/choice_button.tscn")
-
 func _ready() -> void:
 	# 设置视频播放器
 	VideoManager.set_video_player(video_player)

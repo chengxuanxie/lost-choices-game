@@ -1,6 +1,7 @@
 ## 存档管理器 - 负责存档读写（单机版）
 ## 支持Web端IndexedDB和桌面端文件系统
-class_name SaveManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号定义
 signal save_completed(slot: int, success: bool)

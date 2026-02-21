@@ -1,6 +1,7 @@
 ## 游戏管理器 - 全局游戏状态和控制
 ## 负责游戏生命周期管理、场景切换、全局设置
-class_name GameManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号定义
 signal game_started

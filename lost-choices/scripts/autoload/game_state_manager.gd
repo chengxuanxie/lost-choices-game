@@ -1,6 +1,7 @@
 ## 游戏状态管理器 - 负责游戏全局状态
 ## 管理标记、变量、物品、好感度、选择历史等
-class_name GameStateManager extends Node
+@warning_ignore("static_called_on_instance")
+extends Node
 
 ## 信号定义
 signal state_changed(key: String, value: Variant)
