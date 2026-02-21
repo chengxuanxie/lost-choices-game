@@ -247,6 +247,12 @@
 | 2026-02-22 | demo_scene.gd | 显示场景描述替代字幕 | Claude Code |
 | 2026-02-22 | test_runner.gd | 新增视频路径测试用例 | Claude Code |
 | 2026-02-22 | video_manager.gd | 新增进度信号发送功能 | Claude Code |
+| 2026-02-22 | AI视频制作指南 | 新增AI视频制作流程和规范文档 | Claude Code |
+| 2026-02-22 | 场景视觉设定 | 创建4个第一章场景设定文档 | Claude Code |
+| 2026-02-22 | 角色视觉设定 | 创建5个角色视觉参考文档 | Claude Code |
+| 2026-02-22 | 03_art README | 更新美术阶段文档结构 | Claude Code |
+| 2026-02-22 | 场景设定文档 | 补充SC-002/004/007场景文档 | Claude Code |
+| 2026-02-22 | 角色设定文档 | 补充江念/陈远航/苏雅琳文档 | Claude Code |
 
 ---
 
