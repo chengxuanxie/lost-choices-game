@@ -1,4 +1,11 @@
 {
+  "_comment": "数据文件说明",
+  "_design_docs": {
+    "剧情大纲": "docs/02_design/03_首章剧情大纲.md",
+    "分支流程图": "docs/02_design/04_分支流程图设计.md"
+  },
+  "_version": "v1.0 (2026-02-22)",
+
   "chapter_id": "chapter_01",
   "title": "觉醒",
   "description": "在陌生的房间中醒来，一切才刚刚开始...",
