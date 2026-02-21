@@ -186,6 +186,99 @@ func _test_save_manager() -> void:
 	else:
 		_log_error("存档加密/解密系统失败")
 
+	# ===== 桌面端文件存档测试 =====
+	_log("\n--- 桌面端存档测试 ---")
+
+	# 准备测试数据
+	GameStateManager.set_flag("save_test_flag", true)
+	GameStateManager.set_variable("save_test_var", 999)
+	GameStateManager.add_item("save_test_item")
+	GameStateManager.set_relationship("save_test_char", 75)
+
+	# 测试保存游戏
+	var save_success = SaveManager.save_game(1)  # 使用槽位1测试
+	if save_success:
+		_log_success("存档保存成功（槽位1）")
+	else:
+		_log_error("存档保存失败")
+
+	# 测试存档是否存在
+	if SaveManager.save_exists(1):
+		_log_success("存档存在检测正常")
+	else:
+		_log_error("存档存在检测失败")
+
+	# 测试读取存档信息
+	var save_info = SaveManager.get_save_info(1)
+	if not save_info.is_empty() and save_info.has("timestamp"):
+		_log_success("存档信息读取正常，时间戳: %d" % save_info.get("timestamp", 0))
+	else:
+		_log_error("存档信息读取失败")
+
+	# 记录当前状态用于对比
+	var saved_flag = GameStateManager.get_flag("save_test_flag")
+	var saved_var = GameStateManager.get_variable("save_test_var")
+	var saved_relationship = GameStateManager.get_relationship("save_test_char")
+
+	# 清除状态
+	GameStateManager.reset_state()
+
+	# 验证状态已清除
+	if not GameStateManager.get_flag("save_test_flag", false):
+		_log_success("状态重置正常")
+	else:
+		_log_error("状态重置失败")
+
+	# 测试加载游戏
+	var load_success = await SaveManager.load_game(1)
+	if load_success:
+		_log_success("存档加载成功")
+	else:
+		_log_error("存档加载失败")
+
+	# 验证恢复的数据
+	var restored_flag = GameStateManager.get_flag("save_test_flag")
+	var restored_var = GameStateManager.get_variable("save_test_var")
+	var restored_item = GameStateManager.has_item("save_test_item")
+	var restored_relationship = GameStateManager.get_relationship("save_test_char")
+
+	if restored_flag == saved_flag:
+		_log_success("标记恢复正确: %s" % str(restored_flag))
+	else:
+		_log_error("标记恢复错误: 期望 %s, 实际 %s" % [str(saved_flag), str(restored_flag)])
+
+	if restored_var == saved_var:
+		_log_success("变量恢复正确: %d" % restored_var)
+	else:
+		_log_error("变量恢复错误: 期望 %d, 实际 %d" % [saved_var, restored_var])
+
+	if restored_item:
+		_log_success("物品恢复正确")
+	else:
+		_log_error("物品恢复失败")
+
+	if restored_relationship == saved_relationship:
+		_log_success("好感度恢复正确: %d" % restored_relationship)
+	else:
+		_log_error("好感度恢复错误: 期望 %d, 实际 %d" % [saved_relationship, restored_relationship])
+
+	# 测试删除存档
+	var delete_success = SaveManager.delete_save(1)
+	if delete_success:
+		_log_success("存档删除成功")
+	else:
+		_log_error("存档删除失败")
+
+	# 验证存档已删除
+	await get_tree().process_frame
+	if not SaveManager.save_exists(1):
+		_log_success("存档删除验证通过")
+	else:
+		_log_error("存档删除后仍存在")
+
+	# 清理测试数据
+	GameStateManager.reset_state()
+
 func _test_video_manager() -> void:
 	_log("\n--- 测试 VideoManager ---")
 
