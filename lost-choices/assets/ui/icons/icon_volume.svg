@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 音量图标: 喇叭 -->
+    <path d="M12 22 L12 42 L22 42 L36 52 L36 12 L22 22 Z" fill="none"/>
+    <path d="M42 26 Q48 32 42 38" fill="none"/>
+    <path d="M46 20 Q56 32 46 44" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 返回图标: 左箭头 -->
+    <path d="M40 12 L20 32 L40 52" fill="none" stroke-width="4"/>
+  </g>
+</svg>

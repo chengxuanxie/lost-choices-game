@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <g fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- 设置图标: 齿轮 -->
+    <circle cx="32" cy="32" r="8" fill="none"/>
+    <path d="M32 4 L35 12 L40 10 L42 16 L50 18 L48 24 L54 28 L50 32 L54 36 L48 40 L50 46 L42 48 L40 54 L35 52 L32 60 L29 52 L24 54 L22 48 L14 46 L16 40 L10 36 L14 32 L10 28 L16 24 L14 18 L22 16 L24 10 L29 12 Z" fill="none"/>
+  </g>
+</svg>

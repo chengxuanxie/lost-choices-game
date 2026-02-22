@@ -581,7 +581,8 @@ python jimeng4_generator.py \
 
 ## 技术支持
 
-- 火山引擎文档: https://www.volcengine.com/docs/6791/1347773
+- 即梦AI-图片生成4.0-接口文档: https://www.volcengine.com/docs/85621/1817045?lang=zh
+- SDK使用说明：https://www.volcengine.com/docs/6444/1340578?lang=zh
 - GitHub Issues: https://github.com/volcengine/volc-sdk-python/issues
 
 ---
