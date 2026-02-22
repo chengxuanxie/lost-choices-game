@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "mcp__ide__getDiagnostics",
-      "Bash(dir /s /b \"E:\\\\workSpace\\\\ai\\\\demo\\\\lost-choices\\\\scripts\\\\*.gd\")"
+      "Bash(dir /s /b \"E:\\\\workSpace\\\\ai\\\\demo\\\\lost-choices\\\\scripts\\\\*.gd\")",
+      "Bash(cd:*)",
+      "Bash(dir E:\\\\workSpace\\\\ai\\\\demo\\\\docs\\\\03_art\\\\assets\\\\scenes\\\\ch1\\\\sc_001:*)",
+      "Bash(cd \"E:\\\\workSpace\\\\ai\\\\demo\\\\.claude\\\\skills\\\\img_gen\" && python jimeng4_generator.py --prompt \"cinematic interior, mysterious minimalist room, view from bed position, looking up at ceiling with skylight, dim lighting, warm lamp glow nearby, modern furniture visible, first person POV, suspenseful atmosphere, film noir style, 4K\" --width 2560 --height 1440 --output \"E:\\\\workSpace\\\\ai\\\\demo\\\\docs\\\\03_art\\\\assets\\\\scenes\\\\ch1\\\\sc_001\" --prefix \"sc_001_env_02\" 2>&1)",
+      "Bash(python:*)",
+      "Bash(head:*)"
     ]
   }
 }
