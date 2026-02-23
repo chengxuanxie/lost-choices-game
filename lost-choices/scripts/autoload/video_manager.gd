@@ -1,5 +1,6 @@
 ## 视频管理器 - 负责视频加载、播放、缓存（单机版）
 ## 管理所有视频资源的加载、预加载和播放控制
+## 注意: Godot 4.x 的 Theora/OGV 格式无法通过API获取时长，需要预设
 @warning_ignore("static_called_on_instance")
 extends Node
 
@@ -17,10 +18,13 @@ const VIDEO_BASE_PATH: String = "res://assets/videos/"  ## 视频资源路径
 
 ## 状态变量
 var _video_pool: Dictionary = {}        ## 视频缓存池
+var _video_durations: Dictionary = {}   ## 视频时长缓存 (预设)
 var _current_video_id: String = ""      ## 当前播放视频ID
+var _current_video_duration: float = 0.0 ## 当前视频时长
 var _is_playing: bool = false           ## 播放状态
 var _video_player: VideoStreamPlayer    ## 视频播放器引用
 var _preload_queue: Array = []          ## 预加载队列
+var _play_start_time: float = 0.0       ## 播放开始时间
 
 #region 初始化
 
@@ -39,6 +43,26 @@ func set_video_player(player: VideoStreamPlayer) -> void:
 	if _video_player:
 		_video_player.finished.connect(_on_video_finished)
 		print("[VideoManager] 视频播放器已绑定")
+
+#endregion
+
+#region 视频时长管理
+
+## 设置视频时长 (需要外部预设)
+func set_video_duration(video_id: String, duration: float) -> void:
+	_video_durations[video_id] = duration
+
+## 批量设置视频时长
+func set_video_durations(durations: Dictionary) -> void:
+	for key in durations:
+		_video_durations[key] = durations[key]
+
+## 获取视频时长
+func get_video_duration(video_id: String = "") -> float:
+	var target_id = video_id if not video_id.is_empty() else _current_video_id
+	if _video_durations.has(target_id):
+		return _video_durations[target_id]
+	return 0.0
 
 #endregion
 
@@ -130,7 +154,7 @@ func _detect_browser() -> String:
 #region 视频播放
 
 ## 播放视频（通过路径）
-func play_video_by_path(video_path: String) -> void:
+func play_video_by_path(video_path: String, duration: float = 0.0) -> void:
 	if _video_player == null:
 		push_error("[VideoManager] 视频播放器未设置")
 		return
@@ -167,9 +191,11 @@ func play_video_by_path(video_path: String) -> void:
 	_video_player.play()
 
 	_current_video_id = video_path
+	_current_video_duration = duration if duration > 0 else _video_durations.get(video_path, 0.0)
+	_play_start_time = Time.get_ticks_msec() / 1000.0
 	_is_playing = true
 
-	print("[VideoManager] 开始播放视频: %s" % video_path)
+	print("[VideoManager] 开始播放视频: %s (时长: %.1fs)" % [video_path, _current_video_duration])
 	video_started.emit(video_path)
 
 ## 播放视频（通过ID，兼容旧接口）
@@ -188,6 +214,8 @@ func play_video(video_id: String) -> void:
 	_video_player.play()
 
 	_current_video_id = video_id
+	_current_video_duration = _video_durations.get(video_id, 0.0)
+	_play_start_time = Time.get_ticks_msec() / 1000.0
 	_is_playing = true
 
 	print("[VideoManager] 开始播放视频: %s" % video_id)
@@ -199,6 +227,7 @@ func stop_video() -> void:
 		_video_player.stop()
 	_is_playing = false
 	_current_video_id = ""
+	_current_video_duration = 0.0
 
 	print("[VideoManager] 视频播放停止")
 
@@ -215,7 +244,7 @@ func resume_video() -> void:
 ## 跳转到指定时间
 func seek_to(time: float) -> void:
 	if _video_player:
-		_video_player.seek(time)
+		_video_player.stream_position = time
 
 ## 获取当前播放时间
 func get_current_time() -> float:
@@ -223,17 +252,13 @@ func get_current_time() -> float:
 		return _video_player.stream_position
 	return 0.0
 
-## 获取视频总时长
-func get_video_duration() -> float:
-	if _video_player and _video_player.stream:
-		return _video_player.stream.get_duration()
-	return 0.0
-
 ## 获取播放进度（0-1）
+## 注意: 由于 Theora/OGV 无法获取时长，使用预设时长或时间差计算
 func get_playback_progress() -> float:
-	var duration = get_video_duration()
-	if duration > 0:
-		return get_current_time() / duration
+	if _current_video_duration > 0:
+		# 使用预设时长计算进度
+		var elapsed = Time.get_ticks_msec() / 1000.0 - _play_start_time
+		return clamp(elapsed / _current_video_duration, 0.0, 1.0)
 	return 0.0
 
 ## 视频播放完成回调
@@ -241,6 +266,7 @@ func _on_video_finished() -> void:
 	var completed_id = _current_video_id
 	_is_playing = false
 	_current_video_id = ""
+	_current_video_duration = 0.0
 
 	print("[VideoManager] 视频播放完成: %s" % completed_id)
 	video_completed.emit(completed_id)

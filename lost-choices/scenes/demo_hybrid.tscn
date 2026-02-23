@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://dckh5o6tteqd2"]
+
+[ext_resource type="Script" path="res://scripts/test/hybrid_demo.gd" id="1_demo"]
+[ext_resource type="Script" path="res://scripts/components/hybrid_scene_player.gd" id="2_player"]
+
+[node name="HybridDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_demo")
+
+[node name="HybridPlayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_player")
+
+[node name="UIOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="UIOverlay"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 180.0
+
+[node name="VBox" type="VBoxContainer" parent="UIOverlay/InfoPanel"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="UIOverlay/InfoPanel/VBox"]
+layout_mode = 2
+text = "混合视觉方案演示
+加载中..."
+autowrap_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UIOverlay/InfoPanel/VBox"]
+layout_mode = 2
+value = 50.0
+show_percentage = false
+
+[node name="SegmentLabel" type="Label" parent="UIOverlay/InfoPanel/VBox"]
+layout_mode = 2
+
+[node name="WarningLabel" type="Label" parent="UIOverlay"]
+visible = false
+modulate = Color(1, 0.6, 0.2, 1)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 200.0
+offset_right = 400.0
+offset_bottom = 230.0
+text = "警告: 部分资产缺失"
+
+[node name="ControlPanel" type="HBoxContainer" parent="UIOverlay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -80.0
+offset_right = 250.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "播放"
+
+[node name="PauseBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+disabled = true
+text = "暂停"
+
+[node name="StopBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+disabled = true
+text = "停止"
+
+[node name="SkipBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "跳过片段"
+
+[node name="TitleLabel" type="Label" parent="UIOverlay"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "Lost Choices - 混合视觉演示"
+horizontal_alignment = 2

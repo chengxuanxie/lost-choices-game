@@ -1,0 +1,78 @@
+{
+	"scene_id": "ch1_sc_001_demo",
+	"name": "神秘房间醒来",
+	"description": "第一章场景001演示 - 混合视觉方案测试",
+	"total_duration": 45.0,
+	"segments": [
+		{
+			"id": "seg_001",
+			"type": "keyframe",
+			"name": "醒来-闭眼模糊",
+			"duration": 5.0,
+			"frames": [
+				"res://assets/keyframes/ch1/sc_001/frame_001.png"
+			],
+			"durations": [5.0],
+			"effects": {
+				"parallax": true,
+				"zoom": false,
+				"flicker": true,
+				"vignette": true
+			}
+		},
+		{
+			"id": "seg_002",
+			"type": "video",
+			"name": "醒来过程",
+			"path": "res://assets/videos/ch1/sc_001/key_001.ogv",
+			"duration": 10.0
+		},
+		{
+			"id": "seg_003",
+			"type": "keyframe",
+			"name": "观察房间",
+			"duration": 8.0,
+			"frames": [
+				"res://assets/keyframes/ch1/sc_001/frame_002.png",
+				"res://assets/keyframes/ch1/sc_001/frame_003.png"
+			],
+			"durations": [4.0, 4.0],
+			"effects": {
+				"parallax": true,
+				"zoom": true,
+				"flicker": false,
+				"vignette": true
+			}
+		},
+		{
+			"id": "seg_004",
+			"type": "video",
+			"name": "发现物品",
+			"path": "res://assets/videos/ch1/sc_001/key_002.ogv",
+			"duration": 10.0
+		},
+		{
+			"id": "seg_005",
+			"type": "keyframe",
+			"name": "纸条特写",
+			"duration": 7.0,
+			"frames": [
+				"res://assets/keyframes/ch1/sc_001/frame_004.png"
+			],
+			"durations": [7.0],
+			"effects": {
+				"parallax": false,
+				"zoom": true,
+				"flicker": false,
+				"vignette": false
+			}
+		},
+		{
+			"id": "seg_006",
+			"type": "video",
+			"name": "查看纸条内容",
+			"path": "res://assets/videos/ch1/sc_001/key_003.ogv",
+			"duration": 10.0
+		}
+	]
+}

@@ -1,0 +1,114 @@
+[gd_scene load_steps=3 format=3 uid="uid://befecowqnbh0t"]
+
+[ext_resource type="Script" path="res://scripts/test/hybrid_game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/components/hybrid_scene_player.gd" id="2_player"]
+
+[node name="HybridGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_game")
+
+[node name="HybridPlayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_player")
+
+[node name="SubtitlePanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SubtitleLabel" type="Label" parent="SubtitlePanel"]
+layout_mode = 2
+text = "字幕显示区域"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -350.0
+offset_right = 280.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="HUD" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 500.0
+offset_bottom = 60.0
+
+[node name="ChapterLabel" type="Label" parent="HUD"]
+layout_mode = 2
+text = "第一章：觉醒"
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 25.0
+show_percentage = false
+
+[node name="PauseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "| |"
+
+[node name="DebugPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -150.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBox" type="VBoxContainer" parent="DebugPanel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="DebugPanel/VBox"]
+layout_mode = 2
+text = "调试信息"
+
+[node name="StateLabel" type="Label" parent="DebugPanel/VBox"]
+layout_mode = 2
+text = "状态: 等待"
+
+[node name="FlagsLabel" type="Label" parent="DebugPanel/VBox"]
+layout_mode = 2
+text = "标志: 无"

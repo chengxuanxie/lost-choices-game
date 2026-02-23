@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbdfijwog51tu"]
+
+[ext_resource type="Script" path="res://scripts/test/video_test.gd" id="1_test"]
+
+[node name="VideoTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_test")
+
+[node name="VideoContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoPlayer" type="VideoStreamPlayer" parent="VideoContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoProgress" type="ProgressBar" parent="VideoContainer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+
+[node name="UIOverlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InfoLabel" type="Label" parent="UIOverlay"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 500.0
+offset_bottom = 100.0
+text = "视频播放测试
+选择视频后点击播放"
+
+[node name="VideoList" type="VBoxContainer" parent="UIOverlay"]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 220.0
+offset_bottom = 280.0
+
+[node name="Label" type="Label" parent="UIOverlay/VideoList"]
+layout_mode = 2
+text = "测试视频列表:"
+
+[node name="Video1Btn" type="Button" parent="UIOverlay/VideoList"]
+layout_mode = 2
+text = "key_001 - 醒来"
+
+[node name="Video2Btn" type="Button" parent="UIOverlay/VideoList"]
+layout_mode = 2
+text = "key_002 - 观察房间"
+
+[node name="Video3Btn" type="Button" parent="UIOverlay/VideoList"]
+layout_mode = 2
+text = "key_003 - 发现物品"
+
+[node name="ControlPanel" type="HBoxContainer" parent="UIOverlay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "播放"
+
+[node name="PauseBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "暂停"
+
+[node name="StopBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "停止"
+
+[node name="ReplayBtn" type="Button" parent="UIOverlay/ControlPanel"]
+layout_mode = 2
+text = "重播"
