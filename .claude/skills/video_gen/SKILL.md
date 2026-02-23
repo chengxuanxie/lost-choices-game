@@ -1,8 +1,8 @@
 ---
 name: video_gen
-description: 即梦AI视频生成3.0 Pro工具，支持文生视频和图生视频。文生视频根据文本描述生成高质量1080P视频；图生视频基于输入图片生成动态视频内容，支持单图或多图（最多4张）输入。触发示例:`请生成一个视频：一只可爱的猫咪在花园里玩耍` 或 `请将这张图片生成为视频 https://example.com/cat.jpg` 或 `请用这几张图片生成一个视频 https://a.jpg https://b.jpg`
+description: 即梦AI视频生成3.0 Pro工具，支持文生视频和图生视频。每次使用这个skill前都必须询问是否要使用。文生视频根据文本描述生成高质量1080P视频；图生视频基于输入图片生成动态视频内容，支持单图或多图（最多4张）输入。触发示例:`请生成一个视频：一只可爱的猫咪在花园里玩耍` 或 `请将这张图片生成为视频 https://example.com/cat.jpg` 或 `请用这几张图片生成一个视频 https://a.jpg https://b.jpg`
 ---
-
+注意事项：API费用较高，每次使用这个skill前都必须询问是否要使用。
 按照如下指导完成视频生成：
 1. 使用python命令调用`./jimeng_video_generator.py`，可以默认环境已经具备，不要传递ak和sk字段，由脚本自身从环境变量或config.json获取
 2. `./jimeng_video_generator.py`脚本支持的参数可以查阅`./jimeng_video_generator_使用文档.md`

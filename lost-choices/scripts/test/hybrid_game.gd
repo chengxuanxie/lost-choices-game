@@ -3,6 +3,14 @@
 ## 提供完整的游戏游玩体验
 extends Control
 
+## UI资源路径
+const CHOICE_CARD_NORMAL := "res://assets/ui/buttons/choice_card_normal.png"
+const CHOICE_CARD_HOVER := "res://assets/ui/buttons/choice_card_hover.png"
+const CHOICE_CARD_LOCKED := "res://assets/ui/buttons/choice_card_locked.png"
+const CHOICE_CARD_SELECTED := "res://assets/ui/buttons/choice_card_selected.png"
+const BTN_PAUSE := "res://assets/ui/buttons/btn_pause.png"
+const BTN_PLAY := "res://assets/ui/buttons/btn_play.png"
+
 ## 节点引用
 @onready var hybrid_player: HybridScenePlayer = $HybridPlayer
 @onready var subtitle_panel: PanelContainer = $SubtitlePanel
@@ -10,16 +18,47 @@ extends Control
 @onready var choice_container: VBoxContainer = $ChoiceContainer
 @onready var progress_bar: ProgressBar = $HUD/ProgressBar
 @onready var chapter_label: Label = $HUD/ChapterLabel
-@onready var pause_button: Button = $PauseButton
+@onready var pause_button: TextureButton = $PauseButton
 
 ## 当前节点数据
 var _current_node_data: Dictionary = {}
 var _is_waiting_choice: bool = false
 
+## UI纹理缓存
+var _tex_choice_normal: Texture2D
+var _tex_choice_hover: Texture2D
+var _tex_choice_locked: Texture2D
+var _tex_choice_selected: Texture2D
+var _tex_pause: Texture2D
+var _tex_play: Texture2D
+
 func _ready() -> void:
+	_load_ui_resources()
 	_setup_signals()
 	_setup_hybrid_player()
 	_start_demo_chapter()
+
+func _load_ui_resources() -> void:
+	"""加载UI纹理资源"""
+	_tex_choice_normal = _load_texture(CHOICE_CARD_NORMAL)
+	_tex_choice_hover = _load_texture(CHOICE_CARD_HOVER)
+	_tex_choice_locked = _load_texture(CHOICE_CARD_LOCKED)
+	_tex_choice_selected = _load_texture(CHOICE_CARD_SELECTED)
+	_tex_pause = _load_texture(BTN_PAUSE)
+	_tex_play = _load_texture(BTN_PLAY)
+
+	# 设置暂停按钮纹理
+	if _tex_pause:
+		pause_button.texture_normal = _tex_pause
+		if _tex_play:
+			pause_button.texture_pressed = _tex_play
+
+func _load_texture(path: String) -> Texture2D:
+	"""安全加载纹理"""
+	if ResourceLoader.exists(path):
+		return load(path)
+	push_warning("[HybridGame] 无法加载纹理: %s" % path)
+	return null
 
 func _setup_signals() -> void:
 	# 连接故事引擎信号
@@ -148,20 +187,40 @@ func _show_choices(choices: Array) -> void:
 		var button = _create_choice_button(choice, i)
 		choice_container.add_child(button)
 
-func _create_choice_button(choice: Dictionary, index: int) -> Button:
-	var button = Button.new()
+func _create_choice_button(choice: Dictionary, index: int) -> TextureButton:
+	"""创建选择按钮，使用自定义UI资源"""
+	var button = TextureButton.new()
 	button.text = choice.get("text", "选项")
-
-	# 设置按钮样式
-	button.custom_minimum_size = Vector2(500, 50)
+	button.custom_minimum_size = Vector2(560, 70)
+	button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 
 	# 检查条件
 	var conditions = choice.get("conditions", [])
 	var is_locked = not _check_conditions(conditions)
 
 	if is_locked:
+		button.texture_normal = _tex_choice_locked
+		button.texture_disabled = _tex_choice_locked
 		button.disabled = true
-		button.text = "[锁定] " + button.text
+	else:
+		button.texture_normal = _tex_choice_normal
+		button.texture_hover = _tex_choice_hover
+		button.texture_pressed = _tex_choice_selected
+
+	# 由于TextureButton不直接支持文本，使用标签叠加
+	var label = Label.new()
+	label.text = button.text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 18)
+	label.add_theme_color_override("font_color", Color(0.04, 0.04, 0.04))  # 深色文字
+	label.add_theme_color_override("font_outline_color", Color(0.9, 0.9, 0.9))
+	label.add_theme_constant_override("outline_size", 2)
+	label.set_anchors_preset(Control.PRESET_FULL_RECT)
+	label.offset_left = 20
+	label.offset_right = -20
+
+	button.add_child(label)
 
 	button.pressed.connect(func(): _on_choice_button_pressed(index))
 
