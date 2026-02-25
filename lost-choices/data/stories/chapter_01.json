@@ -53,9 +53,28 @@
       "scene": "SC-001 神秘房间",
       "description": "主角在陌生房间醒来，探索环境，神秘人通过广播出现",
       "video": {
-        "path": "res://assets/videos/ch1/sc001_main.ogv",
-        "duration": 480
+        "path": "res://assets/videos/ch1/sc_001/key_001.mp4",
+        "duration": 90
       },
+      "subtitles": [
+        {"time": 5, "text": "（内心）头好痛...这里是哪里？我...为什么会在这里？"},
+        {"time": 30, "text": "（内心）这个房间...我从来没来过。一切都那么陌生...窗帘紧闭，看不到外面...我被困住了吗？"},
+        {"time": 50, "text": "（内心）我...是谁？为什么我什么都想不起来？脑子里...只有一些碎片...一个人影...一串数字...然后...就是无尽的黑暗..."},
+        {"time": 120, "text": "（内心）这是什么...一张纸条？上面写着数字...749...2851...这是密码？还有一个地址...云海路32号...老地方见..."},
+        {"time": 150, "text": "（内心）一个钱包...没有身份证...这张照片...模糊得看不清..."},
+        {"time": 180, "text": "（内心）门被锁住了...电子锁...\"访问被拒绝，等待授权\"...我被困在这里了..."},
+        {"time": 300, "text": "（神秘人）终于醒了，旅人。你一定有很多问题。我是谁？这里是哪？我为什么会在这里？但我只能告诉你最必要的事。"},
+        {"time": 330, "text": "（内心）\"旅人\"...？这是在叫我吗？他为什么知道我醒了？"},
+        {"time": 335, "text": "（神秘人）听着，时间不多。你现在所在的地方，是\"黄昏\"组织的一个安全屋。你已经昏迷了72个小时。在你昏迷之前，你做了很多人不想让你做的事。现在，有人在找你。他们很快就会找到这里。"},
+        {"time": 370, "text": "（内心）72小时？\"黄昏\"组织？我做了什么？这个人到底是谁？"},
+        {"time": 380, "text": "（神秘人）你可以不相信我。但如果你选择相信，我可以帮你离开这里。门外有一条通道，通往废弃仓库区域。在那里，有人会接应你。当然，你也可以选择自己找出路。或者...你可以问问你自己——在失去记忆之前，你到底是谁？"},
+        {"time": 420, "text": "（神秘人）门已经打开了。选择权在你。记住，无论你选择什么...每个选择都有代价。"}
+      ],
+      "items": [
+        {"id": "paper_note", "name": "神秘纸条", "description": "写着数字749-2851和地址\"云海路32号，老地方见\"", "obtained_at": 120},
+        {"id": "wallet", "name": "钱包", "description": "没有身份证，内有一张模糊的照片", "obtained_at": 150}
+      ],
+      "memory_fragments_available": false,
       "choices": [
         {
           "id": "choice_001",
@@ -93,7 +112,7 @@
       "scene": "SC-002 废弃仓库",
       "description": "按神秘人指示离开，在废弃仓库遇到林晓薇",
       "video": {
-        "path": "res://assets/videos/ch1/sc002a_meet_lin.ogv",
+        "path": "res://assets/videos/ch1/sc_002/key_001.ogv",
         "duration": 360
       },
       "choices": [
@@ -130,7 +149,7 @@
       "scene": "SC-002 废弃仓库",
       "description": "独自探索离开，在废弃仓库遇到林晓薇",
       "video": {
-        "path": "res://assets/videos/ch1/sc002b_explore.ogv",
+        "path": "res://assets/videos/ch1/sc_002/key_002.ogv",
         "duration": 400
       },
       "choices": [
@@ -154,7 +173,7 @@
       "scene": "SC-002 废弃仓库",
       "description": "获得记忆碎片后，在废弃仓库遇到林晓薇",
       "video": {
-        "path": "res://assets/videos/ch1/sc002c_memory.ogv",
+        "path": "res://assets/videos/ch1/sc_002/key_003.ogv",
         "duration": 420
       },
       "choices": [
@@ -184,7 +203,7 @@
       "scene": "SC-003 城市街道",
       "description": "黑衣人追来，林晓薇带领主角逃亡",
       "video": {
-        "path": "res://assets/videos/ch1/sc003_chase.ogv",
+        "path": "res://assets/videos/ch1/sc_003/key_001.ogv",
         "duration": 600
       },
       "choices": [
@@ -223,7 +242,7 @@
       "scene": "SC-004 咖啡馆",
       "description": "来到咖啡馆，陈远航出现，提出不同建议",
       "video": {
-        "path": "res://assets/videos/ch1/sc004_cafe.ogv",
+        "path": "res://assets/videos/ch1/sc_004/key_001.ogv",
         "duration": 720
       },
       "choices": [
@@ -274,7 +293,7 @@
       "scene": "SC-005 书店",
       "description": "来到老张的书店，遇到白芷瑶",
       "video": {
-        "path": "res://assets/videos/ch1/sc005_bookstore.ogv",
+        "path": "res://assets/videos/ch1/sc_005/key_001.ogv",
         "duration": 480
       },
       "choices": [
@@ -307,7 +326,7 @@
       "scene": "SC-005 书店",
       "description": "白芷瑶提出可以帮助主角",
       "video": {
-        "path": "res://assets/videos/ch1/sc005b_bai_offer.ogv",
+        "path": "res://assets/videos/ch1/sc_005/key_002.ogv",
         "duration": 300
       },
       "choices": [
@@ -334,7 +353,7 @@
       "scene": "SC-006 艺术画廊",
       "description": "独自来到艺术画廊，遇到沈墨染",
       "video": {
-        "path": "res://assets/videos/ch1/sc006_gallery.ogv",
+        "path": "res://assets/videos/ch1/sc_006/key_001.ogv",
         "duration": 360
       },
       "choices": [
@@ -367,7 +386,7 @@
       "scene": "SC-006 艺术画廊",
       "description": "沈墨染解读画作含义",
       "video": {
-        "path": "res://assets/videos/ch1/sc006b_shen_explain.ogv",
+        "path": "res://assets/videos/ch1/sc_006/key_002.ogv",
         "duration": 300
       },
       "choices": [
@@ -394,7 +413,7 @@
       "scene": "SC-007 安全屋",
       "description": "来到安全屋，叶清寒出现",
       "video": {
-        "path": "res://assets/videos/ch1/sc007_safehouse.ogv",
+        "path": "res://assets/videos/ch1/sc_007/key_001.ogv",
         "duration": 480
       },
       "choices": [
@@ -440,7 +459,7 @@
       "scene": "SC-007 安全屋",
       "description": "叶清寒透露更多关于组织的信息",
       "video": {
-        "path": "res://assets/videos/ch1/sc007b_ye_reveal.ogv",
+        "path": "res://assets/videos/ch1/sc_007/key_002.ogv",
         "duration": 240
       },
       "choices": [
@@ -467,7 +486,7 @@
       "scene": "SC-008 天台",
       "description": "黎明时分，主角需要做出最终选择",
       "video": {
-        "path": "res://assets/videos/ch1/sc008_rooftop.ogv",
+        "path": "res://assets/videos/ch1/sc_008/key_001.ogv",
         "duration": 420
       },
       "choices": [
@@ -515,7 +534,7 @@
       "ending_name": "信任的开始",
       "description": "与林晓薇建立信任，一起调查真相",
       "video": {
-        "path": "res://assets/videos/ch1/ending_01_trust.ogv",
+        "path": "res://assets/videos/ch1/endings/ending_01.ogv",
         "duration": 300
       }
     },
@@ -527,7 +546,7 @@
       "ending_name": "独自前行",
       "description": "主角决定独自寻找真相",
       "video": {
-        "path": "res://assets/videos/ch1/ending_02_alone.ogv",
+        "path": "res://assets/videos/ch1/endings/ending_02.ogv",
         "duration": 300
       }
     },
@@ -539,7 +558,7 @@
       "ending_name": "治愈之路",
       "description": "在白芷瑶的帮助下开始恢复记忆",
       "video": {
-        "path": "res://assets/videos/ch1/ending_03_healing.ogv",
+        "path": "res://assets/videos/ch1/endings/ending_03.ogv",
         "duration": 300
       }
     },
@@ -551,7 +570,7 @@
       "ending_name": "艺术共鸣",
       "description": "沈墨染的画作唤醒了深处的记忆",
       "video": {
-        "path": "res://assets/videos/ch1/ending_04_art.ogv",
+        "path": "res://assets/videos/ch1/endings/ending_04.ogv",
         "duration": 300
       }
     },
@@ -563,7 +582,7 @@
       "ending_name": "危险联盟",
       "description": "与叶清寒合作，踏上危险的道路",
       "video": {
-        "path": "res://assets/videos/ch1/ending_05_alliance.ogv",
+        "path": "res://assets/videos/ch1/endings/ending_05.ogv",
         "duration": 300
       }
     }

@@ -21,7 +21,7 @@
 lost-choices/
 ├── project.godot              # Godot 项目配置
 ├── scripts/
-│   ├── autoload/              # 9个全局管理器
+│   ├── autoload/              # 11个全局管理器
 │   │   ├── game_manager.gd    # 游戏生命周期
 │   │   ├── video_manager.gd   # 视频播放
 │   │   ├── story_engine.gd    # 剧情引擎
@@ -30,7 +30,9 @@ lost-choices/
 │   │   ├── audio_manager.gd   # 音频管理
 │   │   ├── event_manager.gd   # 事件系统
 │   │   ├── resource_manager.gd # 资源加载
-│   │   └── stats_manager.gd   # 统计数据
+│   │   ├── stats_manager.gd   # 统计数据
+│   │   ├── settings_manager.gd # 游戏设置
+│   │   └── transition_manager.gd # 场景过渡
 │   ├── ui/                    # UI脚本
 │   ├── test/                  # 测试脚本
 │   └── utils/                 # 工具脚本
@@ -56,6 +58,8 @@ lost-choices/
 | EventManager | event_manager.gd | ✅ 完成 | 事件注册/触发 |
 | ResourceManager | resource_manager.gd | ✅ 完成 | 资源加载管理 |
 | StatsManager | stats_manager.gd | ✅ 完成 | 游戏统计 |
+| SettingsManager | settings_manager.gd | ✅ 完成 | 游戏设置管理 |
+| TransitionManager | transition_manager.gd | ✅ 完成 | 场景过渡效果 |
 
 ### 场景文件
 
@@ -81,6 +85,8 @@ lost-choices/
 | VideoManager | 2 | 2 | ✅ |
 | AudioManager | 2 | 2 | ✅ |
 | EventManager | 1 | 1 | ✅ |
+| SettingsManager | - | - | ✅ |
+| TransitionManager | - | - | ✅ |
 | **总计** | **30** | **30** | ✅ 全部通过 |
 
 ---
@@ -93,11 +99,13 @@ lost-choices/
 ┌─────────────────────────────────────────────┐
 │                   Godot 4.3                  │
 ├─────────────────────────────────────────────┤
-│  Autoload Singletons (9个全局管理器)          │
+│  Autoload Singletons (11个全局管理器)         │
 │  ├── GameManager (游戏生命周期)               │
 │  ├── StoryEngine (剧情引擎)                   │
 │  ├── GameStateManager (状态管理)              │
 │  ├── SaveManager (存档系统)                   │
+│  ├── SettingsManager (游戏设置)               │
+│  ├── TransitionManager (场景过渡)             │
 │  └── ...                                     │
 ├─────────────────────────────────────────────┤
 │  数据层                                      │

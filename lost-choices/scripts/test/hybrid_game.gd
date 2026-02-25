@@ -190,7 +190,7 @@ func _show_choices(choices: Array) -> void:
 func _create_choice_button(choice: Dictionary, index: int) -> TextureButton:
 	"""创建选择按钮，使用自定义UI资源"""
 	var button = TextureButton.new()
-	button.text = choice.get("text", "选项")
+	var choice_text = choice.get("text", "选项")  # 存储到局部变量
 	button.custom_minimum_size = Vector2(560, 70)
 	button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 
@@ -209,7 +209,7 @@ func _create_choice_button(choice: Dictionary, index: int) -> TextureButton:
 
 	# 由于TextureButton不直接支持文本，使用标签叠加
 	var label = Label.new()
-	label.text = button.text
+	label.text = choice_text  # 使用局部变量
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", 18)
@@ -390,7 +390,7 @@ func _show_ending(ending_id: String, ending_name: String) -> void:
 #region 内置演示数据
 
 func _get_demo_node_001() -> Dictionary:
-	"""演示节点001 - 神秘房间醒来"""
+	"""演示节点001 - 神秘房间醒来（使用完整20帧关键帧）"""
 	return {
 		"node_id": "demo_001",
 		"scene": "SC-001 神秘房间",
@@ -399,32 +399,58 @@ func _get_demo_node_001() -> Dictionary:
 			"frames": [
 				"res://assets/keyframes/ch1/sc_001/frame_001.png",
 				"res://assets/keyframes/ch1/sc_001/frame_002.png",
-				"res://assets/keyframes/ch1/sc_001/frame_003.png"
+				"res://assets/keyframes/ch1/sc_001/frame_003.png",
+				"res://assets/keyframes/ch1/sc_001/frame_004.png",
+				"res://assets/keyframes/ch1/sc_001/frame_005.png",
+				"res://assets/keyframes/ch1/sc_001/frame_006.png",
+				"res://assets/keyframes/ch1/sc_001/frame_007.png",
+				"res://assets/keyframes/ch1/sc_001/frame_008.png",
+				"res://assets/keyframes/ch1/sc_001/frame_009.png",
+				"res://assets/keyframes/ch1/sc_001/frame_010.png",
+				"res://assets/keyframes/ch1/sc_001/frame_011.png",
+				"res://assets/keyframes/ch1/sc_001/frame_012.png",
+				"res://assets/keyframes/ch1/sc_001/frame_013.png",
+				"res://assets/keyframes/ch1/sc_001/frame_014.png",
+				"res://assets/keyframes/ch1/sc_001/frame_015.png",
+				"res://assets/keyframes/ch1/sc_001/frame_016.png",
+				"res://assets/keyframes/ch1/sc_001/frame_017.png",
+				"res://assets/keyframes/ch1/sc_001/frame_018.png",
+				"res://assets/keyframes/ch1/sc_001/frame_019.png",
+				"res://assets/keyframes/ch1/sc_001/frame_020.png"
 			],
-			"durations": [4.0, 4.0, 4.0],
+			"durations": [5.0, 5.0, 5.0, 5.0, 4.0, 4.0, 3.0, 5.0, 4.0, 3.0, 4.0, 4.0, 3.0, 5.0, 3.0, 6.0, 4.0, 4.0, 4.0, 4.0],
 			"effects": {"parallax": true, "zoom": true, "flicker": true, "vignette": true}
 		},
 		"video": {
-			"path": "res://assets/videos/ch1/sc_001/key_001.ogv",
-			"duration": 10.0
+			"path": "res://assets/videos/ch1/sc_001/key_001.mp4",
+			"duration": 90.0
 		},
 		"choices": [
 			{
 				"id": "choice_trust",
-				"text": "冷静下来，观察周围环境",
+				"text": "我相信你，请告诉我该怎么做",
 				"effects": [
-					{"type": "set_flag", "key": "calm_response", "value": true}
+					{"type": "set_flag", "key": "trust_mystery", "value": true},
+					{"type": "modify_relationship", "character": "mystery_voice", "value": 10}
 				],
 				"next_node": "demo_002a"
 			},
 			{
-				"id": "choice_panic",
-				"text": "试图回忆自己是怎么到这里的",
+				"id": "choice_doubt",
+				"text": "我不相信你，我自己想办法",
 				"effects": [
-					{"type": "set_flag", "key": "panic_response", "value": true},
-					{"type": "modify_relationship", "character": "mystery_voice", "value": -5}
+					{"type": "set_flag", "key": "distrust_mystery", "value": true},
+					{"type": "modify_relationship", "character": "mystery_voice", "value": -10}
 				],
 				"next_node": "demo_002b"
+			},
+			{
+				"id": "choice_identity",
+				"text": "在帮你之前，我想知道我是谁",
+				"effects": [
+					{"type": "set_flag", "key": "ask_identity", "value": true}
+				],
+				"next_node": "demo_003"
 			}
 		]
 	}
@@ -437,14 +463,13 @@ func _get_demo_node_002a() -> Dictionary:
 		"subtitle": "你发现床头柜上有一张纸条...",
 		"keyframes": {
 			"frames": [
-				"res://assets/keyframes/ch1/sc_001/frame_004.png"
+				"res://assets/keyframes/ch1/sc_001/frame_005.png",
+				"res://assets/keyframes/ch1/sc_001/frame_006.png",
+				"res://assets/keyframes/ch1/sc_001/frame_007.png",
+				"res://assets/keyframes/ch1/sc_001/frame_008.png"
 			],
-			"durations": [6.0],
-			"effects": {"parallax": false, "zoom": true, "flicker": false, "vignette": false}
-		},
-		"video": {
-			"path": "res://assets/videos/ch1/sc_001/key_002.ogv",
-			"duration": 10.0
+			"durations": [4.0, 5.0, 3.0, 5.0],
+			"effects": {"parallax": true, "zoom": true, "flicker": false, "vignette": false}
 		},
 		"auto_next": "demo_003"
 	}
@@ -457,10 +482,10 @@ func _get_demo_node_002b() -> Dictionary:
 		"subtitle": "记忆碎片闪过脑海...但什么都抓不住",
 		"keyframes": {
 			"frames": [
-				"res://assets/keyframes/ch1/sc_001/frame_001.png",
-				"res://assets/keyframes/ch1/sc_001/frame_003.png"
+				"res://assets/keyframes/ch1/sc_001/frame_004.png",
+				"res://assets/keyframes/ch1/sc_001/frame_009.png"
 			],
-			"durations": [3.0, 5.0],
+			"durations": [5.0, 5.0],
 			"effects": {"parallax": true, "zoom": false, "flicker": true, "vignette": true}
 		},
 		"auto_next": "demo_003"
@@ -471,22 +496,20 @@ func _get_demo_node_003() -> Dictionary:
 	return {
 		"node_id": "demo_003",
 		"scene": "SC-003 发现线索",
-		"subtitle": "纸条上写着：'相信她，她会带你找到真相'",
+		"subtitle": "纸条上写着：'749-2851，云海路32号，老地方见'",
 		"keyframes": {
 			"frames": [
-				"res://assets/keyframes/ch1/sc_001/frame_004.png"
+				"res://assets/keyframes/ch1/sc_001/frame_010.png",
+				"res://assets/keyframes/ch1/sc_001/frame_011.png",
+				"res://assets/keyframes/ch1/sc_001/frame_012.png"
 			],
-			"durations": [5.0],
+			"durations": [3.0, 4.0, 5.0],
 			"effects": {"parallax": false, "zoom": true, "flicker": false, "vignette": false}
-		},
-		"video": {
-			"path": "res://assets/videos/ch1/sc_001/key_003.ogv",
-			"duration": 10.0
 		},
 		"choices": [
 			{
 				"id": "choice_trust_her",
-				"text": "相信纸条上的话",
+				"text": "相信纸条上的话，走出这个房间",
 				"effects": [
 					{"type": "set_flag", "key": "trust_note", "value": true}
 				],

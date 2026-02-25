@@ -1,6 +1,6 @@
 ## 游戏设置管理器
 ## 管理游戏的各项设置，包括音频、视频、语言等
-class_name SettingsManager
+## 注意：此脚本作为 Autoload 单例，不需要 class_name
 extends Node
 
 ## 设置变更信号

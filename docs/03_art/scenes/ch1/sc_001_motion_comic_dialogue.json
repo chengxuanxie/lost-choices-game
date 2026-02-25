@@ -1,0 +1,60 @@
+{
+  "title": "sc_001_神秘房间_对话版",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_002_天花板清晰.png",
+      "text": "头好痛...这里是哪里？我...为什么会在这里？",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_003_房间全景躺.png",
+      "text": "这个房间...我从来没来过。一切都那么陌生...窗帘紧闭，看不到外面...我被困住了吗？",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_004_记忆碎片.png",
+      "text": "我...是谁？为什么我什么都想不起来？脑子里...只有一些碎片...一个人影...一串数字...然后...就是无尽的黑暗...",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_008_纸条特写.png",
+      "text": "这是什么...一张纸条？上面写着数字...749...2851...这是密码？还是电话号码？还有一个地址...云海路32号...老地方见...老地方？什么老地方？",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_009_钱包照片.png",
+      "text": "一个钱包...没有身份证...这张照片...模糊得看不清...照片里的人是我吗？为什么我会在这里...为什么我什么都不记得...",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_011_电子锁红.png",
+      "text": "门被锁住了...电子锁...访问被拒绝，等待授权...我被困在这里了...749-2851...云海路32号...这些线索一定是留给我的...",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_014_环顾声源.png",
+      "text": "终于醒了，旅人。你一定有很多问题。我是谁？这里是哪？我为什么会在这里？但我只能告诉你最必要的事。",
+      "voice": "zh-CN-YunjianNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_015_震惊反应.png",
+      "text": "旅人...？这是在叫我吗？他为什么知道我醒了？",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_016_紧张聆听.png",
+      "text": "听着，时间不多。你现在所在的地方，是黄昏组织的一个安全屋。你已经昏迷了72个小时。在你昏迷之前，你做了很多人不想让你做的事。现在，有人在找你。他们很快就会找到这里。",
+      "voice": "zh-CN-YunjianNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_017_电子锁绿.png",
+      "text": "门已经打开了。选择权在你。",
+      "voice": "zh-CN-YunjianNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_001/frame_018_最后警告.png",
+      "text": "记住，无论你选择什么...每个选择都有代价。",
+      "voice": "zh-CN-YunjianNeural"
+    }
+  ]
+}

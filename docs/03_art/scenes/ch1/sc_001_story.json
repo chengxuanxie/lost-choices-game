@@ -1,0 +1,383 @@
+{
+  "title": "SC-001 神秘房间",
+  "chapter": "ch1",
+  "scene_id": "sc_001",
+  "total_duration": 480,
+  "reference_image": "https://lost-choices-art.tos-cn-beijing.volces.com/scenes/ch1/sc_001/sc_001_env_01_20260222_035652_1.png",
+  "output_dir": "assets/keyframes/ch1/sc_001/",
+
+  "voice_config": {
+    "protagonist_inner": {
+      "voice": "zh-CN-YunxiNeural",
+      "style": "gentle",
+      "note": "主角内心独白，带轻微回响效果"
+    },
+    "mystery_voice": {
+      "voice": "zh-CN-YunxiNeural",
+      "style": "calm",
+      "pitch": -15,
+      "rate": 0.9,
+      "note": "神秘人声音，需后期变声处理"
+    }
+  },
+
+  "scenes": [
+    {
+      "id": "frame_001",
+      "time": "0:00-0:05",
+      "background": "frame_001_天花板模糊.png",
+      "duration": 5,
+      "effect": "blur_transition",
+      "audio": ["ambient_room", "heartbeat_slow"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_002",
+      "time": "0:05-0:20",
+      "background": "frame_002_天花板清晰.png",
+      "duration": 15,
+      "effect": "slow_zoom",
+      "audio": ["breath_heavy"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "头好痛...这里是哪里？我...为什么会在这里？",
+        "voice": "protagonist_inner",
+        "emotion": "confused"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 15,
+        "text": "（内心）头好痛...这里是哪里？我...为什么会在这里？"
+      }
+    },
+    {
+      "id": "frame_003",
+      "time": "0:20-0:45",
+      "background": "frame_003_房间全景躺.png",
+      "duration": 25,
+      "effect": "parallax",
+      "audio": ["clothes_rustle"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "这个房间...我从来没来过。一切都那么陌生...窗帘紧闭，看不到外面...我被困住了吗？",
+        "voice": "protagonist_inner",
+        "emotion": "alert"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 25,
+        "text": "（内心）这个房间...我从来没来过。一切都那么陌生...窗帘紧闭，看不到外面...我被困住了吗？"
+      }
+    },
+    {
+      "id": "frame_004",
+      "time": "0:50-1:10",
+      "background": "frame_004_记忆碎片.png",
+      "duration": 20,
+      "effect": "vignette+flicker",
+      "audio": ["ambient_mystery"],
+      "note": "特殊帧：记忆碎片，不需要严格基于参考图",
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "我...是谁？为什么我什么都想不起来？脑子里...只有一些碎片...一个人影...一串数字...然后...就是无尽的黑暗...",
+        "voice": "protagonist_inner",
+        "emotion": "anxious"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 20,
+        "text": "（内心）我...是谁？为什么我什么都想不起来？脑子里...只有一些碎片...一个人影...一串数字...然后...就是无尽的黑暗..."
+      }
+    },
+    {
+      "id": "frame_005",
+      "time": "1:10-1:30",
+      "background": "frame_005_坐起身.png",
+      "duration": 20,
+      "effect": "slow_zoom",
+      "audio": ["clothes_rustle", "breath_calm"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_006",
+      "time": "1:30-2:00",
+      "background": "frame_006_环顾房间.png",
+      "duration": 30,
+      "effect": "parallax",
+      "audio": ["ambient_room"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_007",
+      "time": "2:00-2:15",
+      "background": "frame_007_打开抽屉.png",
+      "duration": 15,
+      "effect": "slow_zoom",
+      "audio": ["drawer_open"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_008",
+      "time": "2:15-2:40",
+      "background": "frame_008_纸条特写.png",
+      "duration": 25,
+      "effect": "slow_zoom",
+      "audio": ["paper_rustle"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "这是什么...一张纸条？上面写着数字...749...2851...这是密码？还是电话号码？还有一个地址...云海路32号...老地方见...老地方？什么老地方？",
+        "voice": "protagonist_inner",
+        "emotion": "surprised"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 25,
+        "text": "（内心）这是什么...一张纸条？上面写着数字...749...2851...这是密码？还是电话号码？还有一个地址...云海路32号...老地方见..."
+      }
+    },
+    {
+      "id": "frame_009",
+      "time": "2:40-3:00",
+      "background": "frame_009_钱包照片.png",
+      "duration": 20,
+      "effect": "slow_zoom+vignette",
+      "audio": ["wallet_open"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "一个钱包...没有身份证...这张照片...模糊得看不清...照片里的人是我吗？为什么我会在这里...为什么我什么都不记得...",
+        "voice": "protagonist_inner",
+        "emotion": "confused"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 20,
+        "text": "（内心）一个钱包...没有身份证...这张照片...模糊得看不清...照片里的人是我吗？"
+      }
+    },
+    {
+      "id": "frame_010",
+      "time": "3:00-3:10",
+      "background": "frame_010_站起身.png",
+      "duration": 10,
+      "effect": "slow_zoom",
+      "audio": ["footsteps_soft"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_011",
+      "time": "3:10-3:30",
+      "background": "frame_011_电子锁红.png",
+      "duration": 20,
+      "effect": "light_flicker",
+      "audio": ["electronic_deny"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "门被锁住了...电子锁...\"访问被拒绝，等待授权\"...我被困在这里了...749-2851...云海路32号...这些线索一定是留给我的...",
+        "voice": "protagonist_inner",
+        "emotion": "anxious"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 20,
+        "text": "（内心）门被锁住了...电子锁...\"访问被拒绝，等待授权\"...我被困在这里了..."
+      }
+    },
+    {
+      "id": "frame_012",
+      "time": "4:00-4:30",
+      "background": "frame_012_墙上符号.png",
+      "duration": 30,
+      "effect": "slow_zoom+flicker",
+      "audio": ["ambient_room"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_013",
+      "time": "5:00-5:05",
+      "background": "frame_013_扬声器.png",
+      "duration": 5,
+      "effect": "light_flicker",
+      "audio": ["speaker_static", "speaker_on"],
+      "dialogue": null
+    },
+    {
+      "id": "frame_014",
+      "time": "5:05-5:30",
+      "background": "frame_014_环顾声源.png",
+      "duration": 25,
+      "effect": "parallax+vignette",
+      "audio": [],
+      "dialogue": {
+        "speaker": "神秘人",
+        "speaker_type": "dialogue",
+        "text": "终于醒了，旅人。你一定有很多问题。我是谁？这里是哪？我为什么会在这里？但我只能告诉你最必要的事。",
+        "voice": "mystery_voice",
+        "emotion": "calm_mysterious"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 25,
+        "text": "（神秘人）终于醒了，旅人。你一定有很多问题。我是谁？这里是哪？我为什么会在这里？但我只能告诉你最必要的事。"
+      }
+    },
+    {
+      "id": "frame_015",
+      "time": "5:30-5:35",
+      "background": "frame_015_震惊反应.png",
+      "duration": 5,
+      "effect": "shake+vignette",
+      "audio": ["ambient_tension"],
+      "dialogue": {
+        "speaker": "主角",
+        "speaker_type": "inner_monologue",
+        "text": "\"旅人\"...？这是在叫我吗？他为什么知道我醒了？",
+        "voice": "protagonist_inner",
+        "emotion": "shocked"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 5,
+        "text": "（内心）\"旅人\"...？这是在叫我吗？他为什么知道我醒了？"
+      }
+    },
+    {
+      "id": "frame_016",
+      "time": "5:35-6:20",
+      "background": "frame_016_紧张聆听.png",
+      "duration": 45,
+      "effect": "slow_zoom+vignette",
+      "audio": [],
+      "dialogue": [
+        {
+          "speaker": "神秘人",
+          "speaker_type": "dialogue",
+          "text": "听着，时间不多。你现在所在的地方，是\"黄昏\"组织的一个安全屋。你已经昏迷了72个小时。在你昏迷之前，你做了很多人不想让你做的事。现在，有人在找你。他们很快就会找到这里。",
+          "voice": "mystery_voice",
+          "emotion": "serious"
+        },
+        {
+          "speaker": "主角",
+          "speaker_type": "inner_monologue",
+          "text": "72小时？\"黄昏\"组织？我做了什么？这个人到底是谁？他怎么知道这些？",
+          "voice": "protagonist_inner",
+          "emotion": "confused_fearful"
+        }
+      ],
+      "subtitles": [
+        {
+          "start": 0,
+          "end": 35,
+          "text": "（神秘人）听着，时间不多。你现在所在的地方，是\"黄昏\"组织的一个安全屋。你已经昏迷了72个小时。在你昏迷之前，你做了很多人不想让你做的事。现在，有人在找你。他们很快就会找到这里。"
+        },
+        {
+          "start": 35,
+          "end": 45,
+          "text": "（内心）72小时？\"黄昏\"组织？我做了什么？这个人到底是谁？他怎么知道这些？"
+        }
+      ]
+    },
+    {
+      "id": "frame_017",
+      "time": "7:00-7:10",
+      "background": "frame_017_电子锁绿.png",
+      "duration": 10,
+      "effect": "light_glow",
+      "audio": ["electronic_unlock"],
+      "dialogue": {
+        "speaker": "神秘人",
+        "speaker_type": "dialogue",
+        "text": "门已经打开了。选择权在你。",
+        "voice": "mystery_voice",
+        "emotion": "calm_final"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 10,
+        "text": "（神秘人）门已经打开了。选择权在你。"
+      }
+    },
+    {
+      "id": "frame_018",
+      "time": "7:10-7:30",
+      "background": "frame_018_最后警告.png",
+      "duration": 20,
+      "effect": "vignette",
+      "audio": ["ambient_silence"],
+      "dialogue": {
+        "speaker": "神秘人",
+        "speaker_type": "dialogue",
+        "text": "记住，无论你选择什么...每个选择都有代价。",
+        "voice": "mystery_voice",
+        "emotion": "calm_final"
+      },
+      "subtitles": {
+        "start": 0,
+        "end": 20,
+        "text": "（神秘人）记住，无论你选择什么...每个选择都有代价。"
+      }
+    },
+    {
+      "id": "frame_019",
+      "time": "7:30-7:50",
+      "background": "frame_019_选择界面.png",
+      "duration": 20,
+      "effect": "vignette",
+      "audio": ["ambient_tension"],
+      "dialogue": null,
+      "note": "选择界面：显示三个选项供玩家选择",
+      "choices": [
+        {
+          "id": "choice_001",
+          "text": "我相信你，请告诉我该怎么做",
+          "hover": "选择相信神秘人，接受他的指引"
+        },
+        {
+          "id": "choice_002",
+          "text": "我不相信你，我自己想办法",
+          "hover": "拒绝神秘人的帮助，独自寻找出路"
+        },
+        {
+          "id": "choice_003",
+          "text": "在帮你之前，我想知道我是谁",
+          "hover": "追问自己的身份，可能获得重要信息"
+        }
+      ]
+    },
+    {
+      "id": "frame_020",
+      "time": "7:50-8:00",
+      "background": "frame_020_门打开.png",
+      "duration": 10,
+      "effect": "fade_out",
+      "audio": ["door_open_slow", "footsteps"],
+      "dialogue": null,
+      "note": "过渡到下一场景"
+    }
+  ],
+
+  "audio_files": {
+    "ambient_room": "环境音-微弱电流空调声.mp3",
+    "heartbeat_slow": "效果音-缓慢心跳.mp3",
+    "breath_heavy": "效果音-喘息声.mp3",
+    "clothes_rustle": "效果音-衣物摩擦.mp3",
+    "ambient_mystery": "环境音-神秘氛围.mp3",
+    "breath_calm": "效果音-平稳呼吸.mp3",
+    "drawer_open": "效果音-抽屉打开.mp3",
+    "paper_rustle": "效果音-纸张翻动.mp3",
+    "wallet_open": "效果音-钱包打开.mp3",
+    "footsteps_soft": "效果音-轻柔脚步.mp3",
+    "electronic_deny": "效果音-电子锁拒绝.mp3",
+    "speaker_static": "效果音-扬声器沙沙.mp3",
+    "speaker_on": "效果音-扬声器接通.mp3",
+    "ambient_tension": "环境音-紧张氛围.mp3",
+    "electronic_unlock": "效果音-电子锁解锁.mp3",
+    "ambient_silence": "环境音-安静.mp3",
+    "door_open_slow": "效果音-门缓缓打开.mp3"
+  }
+}

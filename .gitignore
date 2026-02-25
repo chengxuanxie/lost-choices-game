@@ -2,3 +2,6 @@ lost-choices/.godot/
 .claude/skills/img_gen/config.json
 .claude/skills/img_upload/config.json
 .claude/skills/video_gen/config.json
+.claude/settings.local.json
+.claude/skills/img_gen_seedream5.0/config.json
+nul

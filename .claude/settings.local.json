@@ -14,7 +14,10 @@
       "Bash(powershell:*)",
       "WebSearch",
       "Bash(curl:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(grep:*)"
     ]
   }
 }

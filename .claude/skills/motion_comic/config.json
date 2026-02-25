@@ -1,0 +1,8 @@
+{
+    "output_dir": "./output",
+    "models_dir": "./models",
+    "wav2lip_model": "wav2lip.pth",
+    "default_voice": "zh-CN-XiaoxiaoNeural",
+    "fps": 30,
+    "resolution": "1080p"
+}

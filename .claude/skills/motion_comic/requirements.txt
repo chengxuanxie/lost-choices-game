@@ -1,0 +1,7 @@
+# 动态漫生成器依赖
+
+# TTS 语音合成
+edge-tts>=6.1.0
+
+# FFmpeg (用于视频处理)
+imageio-ffmpeg>=0.4.0

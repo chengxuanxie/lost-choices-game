@@ -1,6 +1,6 @@
 ## 场景过渡管理器
 ## 管理场景切换的过渡效果
-class_name TransitionManager
+## 注意：此脚本作为 Autoload 单例，不需要 class_name
 extends CanvasLayer
 
 ## 信号

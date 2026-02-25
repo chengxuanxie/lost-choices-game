@@ -64,7 +64,15 @@ docs/
 
 1. [03_art/03_AI视频制作指南.md](03_art/03_AI视频制作指南.md) - **必读** - 制作规范
 2. [03_art/scenes/ch1/](03_art/scenes/ch1/) - 各场景的关键帧/视频需求
+   - **SC-001 已完成详细剧情**: [sc_001_神秘房间.md](03_art/scenes/ch1/sc_001_神秘房间.md)
 3. [03_art/video_production/hybrid_visual_solution.md](03_art/video_production/hybrid_visual_solution.md) - 混合视觉方案说明
+
+### 想了解剧情和角色
+
+1. [02_design/03_首章剧情大纲.md](02_design/03_首章剧情大纲.md) - 第一章剧情（含SC-001详细剧情）
+2. [03_art/scripts/ch1/ch1_sc_001.md](03_art/scripts/ch1/ch1_sc_001.md) - SC-001完整对话脚本
+3. [03_art/scenes/ch1/sc_001_物品与线索.md](03_art/scenes/ch1/sc_001_物品与线索.md) - SC-001物品设计
+4. [03_art/characters/ch1_神秘人.md](03_art/characters/ch1_神秘人.md) - 神秘人角色设计
 
 ### 想了解代码结构
 

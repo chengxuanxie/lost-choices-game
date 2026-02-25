@@ -1,0 +1,25 @@
+{
+  "title": "family_story",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/skill_demo/asset/background/home.png",
+      "text": "亲爱的，今天工作怎么样？",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/skill_demo/asset/background/home.png",
+      "text": "挺好的！今天我做了你最爱吃的红烧肉，快去洗手吧。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/skill_demo/asset/background/home.png",
+      "text": "爸爸妈妈，你们看！我在学校画了一幅全家福。",
+      "voice": "zh-CN-XiaoyiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/skill_demo/asset/image/hero.png",
+      "text": "这幅画真棒！我们一家人永远在一起。",
+      "voice": "zh-CN-YunjianNeural"
+    }
+  ]
+}
