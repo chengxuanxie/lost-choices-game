@@ -1,0 +1,176 @@
+{
+  "chapter_id": "chapter_01",
+  "title": "第一章：觉醒",
+  "scenes": [
+    {
+      "id": "ch1_sc_001",
+      "name": "SC-001 神秘房间",
+      "thumbnail": "res://assets/thumbnails/ch1_sc_001.png",
+      "nodes": [
+        {
+          "id": "ch1_sc_001_start",
+          "name": "ch1_sc_001_醒来",
+          "type": "choice",
+          "video": {
+            "path": "res://assets/videos/ch1/sc_001/key_001.mp4",
+            "duration": 90,
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_002a",
+            "name": "ch1_sc_002 信任",
+            "type": "choice",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_002a.mp4",
+              "duration": 60
+            " "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_002b",
+            "name": "ch1_sc_002b 独自",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_002b.mp4",
+              "duration": 65
+            " "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_002c",
+            "name": "ch1_sc_002c 询问",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_002c.mp4",
+              "duration": 60
+            " "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_003",
+            "name": "ch1_sc_003 发现线索",
+            "type": "auto",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_003a.mp4",
+              "duration": 60
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_004",
+            "name": "ch1_sc_004 离开房间",
+            "type": "choice",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_004a.mp4",
+              "duration": 420
+            " "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_005",
+            "name": "ch1_sc_005 书店",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_005a.mp4",
+              "duration": 480
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_005b",
+            "name": "ch1_sc_005b 白芷瑶",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_005b.mp4",
+              "duration": 300
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_006",
+            "name": "ch1_sc_006 艺术画廊",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_006a.mp4",
+              "duration": 360
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_006b",
+            "name": "ch1_sc_006 沈墨染解读",
+            "type": "choice",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_006b.mp4",
+              "duration": 300
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_007",
+            "name": "ch1_sc_007 安全屋",
+            "type": "choice",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_007a.mp4",
+              "duration": 480
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_007b",
+            "name": "ch1_sc_007b 叶清寒透露",
+            "type": "choice"
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_007b.mp4",
+              "duration": 240
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_sc_008",
+            "name": "ch1_sc_008 天台",
+            "type": "choice",
+            "video": {
+              "path": "res://assets/videos/ch1/sc_001/key_008a.mp4",
+              "duration": 420
+            "subtitles": [...]
+          },
+          {
+            "id": "ch1_ending_01",
+            "name": "ch1_ending_01 信任的开始",
+            "type": "ending",
+            "video": {
+              "path": "res://assets/videos/ch1/endings/ending_01.mp4",
+              "duration": 300
+            }
+          },
+          {
+            "id": "ch1_ending_02",
+            "name": "ch1_ending_02 独自前行",
+            "type": "ending",
+            "video": {
+              "path": "res://assets/videos/ch1/endings/ending_02.mp4",
+              "duration": 300
+            }
+          },
+          {
+            "id": "ch1_ending_03",
+            "name": "ch1_ending_03 治愈之路",
+            "type": "ending",
+            "video": {
+              "path": "res://assets/videos/ch1/endings/ending_03.mp4",
+              "duration": 300
+            }
+          },
+          {
+            "id": "ch1_ending_04",
+            "name": "ch1_ending_04 艺术共鸣",
+            "type": "ending",
+            "video": {
+              "path": "res://assets/videos/ch1/endings/ending_04.mp4",
+              "duration": 300
+            }
+          },
+          {
+            "id": "ch1_ending_05",
+            "name": "ch1_ending_05 危险联盟",
+            "type": "ending",
+            "video": {
+              "path": "res://assets/videos/ch1/endings/ending_05.mp4",
+              "duration": 300
+            }
+          }
+        ]
+      }
+    ]
+  ]
+}

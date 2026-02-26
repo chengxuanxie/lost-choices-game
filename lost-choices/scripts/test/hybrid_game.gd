@@ -356,7 +356,7 @@ func _on_scene_completed() -> void:
 
 func _on_segment_changed(segment_index: int, segment_type: String) -> void:
 	"""片段变更"""
-	var segments = hybrid_player._segments
+	var segments = hybrid_player.get_segments()
 	if segment_index >= 0 and segment_index < segments.size():
 		var seg = segments[segment_index]
 		print("[HybridGame] 片段 %d/%d: %s (%s)" % [
@@ -367,7 +367,7 @@ func _on_segment_changed(segment_index: int, segment_type: String) -> void:
 		])
 
 func _on_pause_pressed() -> void:
-	if hybrid_player._is_playing:
+	if hybrid_player.is_playing():
 		hybrid_player.pause()
 	else:
 		hybrid_player.resume()
