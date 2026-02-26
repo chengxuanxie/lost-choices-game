@@ -233,3 +233,29 @@ static func create_from_config(config: Dictionary) -> HybridScenePlayer:
 	var player = HybridScenePlayer.new()
 	player.load_scene(config)
 	return player
+
+#region 公共访问方法
+
+## 获取片段列表
+func get_segments() -> Array:
+	return _segments.duplicate()
+
+## 获取当前片段索引
+func get_current_segment_index() -> int:
+	return _current_segment
+
+## 获取片段总数
+func get_segment_count() -> int:
+	return _segments.size()
+
+## 是否正在播放
+func is_playing() -> bool:
+	return _is_playing
+
+## 获取当前片段数据
+func get_current_segment() -> Dictionary:
+	if _current_segment >= 0 and _current_segment < _segments.size():
+		return _segments[_current_segment]
+	return {}
+
+#endregion
