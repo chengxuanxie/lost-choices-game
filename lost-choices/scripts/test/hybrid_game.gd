@@ -19,6 +19,8 @@ const BTN_PLAY := "res://assets/ui/buttons/btn_play.png"
 @onready var progress_bar: ProgressBar = $HUD/ProgressBar
 @onready var chapter_label: Label = $HUD/ChapterLabel
 @onready var pause_button: TextureButton = $PauseButton
+@onready var rollback_button: Button = $RollbackButton
+@onready var history_button: Button = $HistoryButton
 
 ## 当前节点数据
 var _current_node_data: Dictionary = {}
@@ -73,6 +75,17 @@ func _setup_signals() -> void:
 
 	# 连接暂停按钮
 	pause_button.pressed.connect(_on_pause_pressed)
+
+	# 连接回溯按钮
+	if rollback_button:
+		rollback_button.pressed.connect(_on_rollback_pressed)
+		rollback_button.tooltip_text = "回溯到上一个选择点"
+		_update_rollback_button_state()
+
+	# 连接历史按钮
+	if history_button:
+		history_button.pressed.connect(_on_history_pressed)
+		history_button.tooltip_text = "查看选择历史"
 
 func _setup_hybrid_player() -> void:
 	"""初始化混合播放器"""
@@ -531,3 +544,61 @@ func _get_demo_node_003() -> Dictionary:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		_on_pause_pressed()
+
+	# 快捷键：R 回溯
+	if event.is_action_pressed("ui_accept") and event.is_echo():
+		pass
+
+	# Ctrl+R: 回溯到上一个选择点
+	if event.is_action_pressed("ui_redo") or (event is InputEventKey and event.pressed and event.ctrl_pressed and event.keycode == KEY_R):
+		_on_rollback_pressed()
+
+	# Ctrl+H: 查看历史
+	if event is InputEventKey and event.pressed and event.ctrl_pressed and event.keycode == KEY_H:
+		_on_history_pressed()
+
+#endregion
+
+#region 回溯功能
+
+func _on_rollback_pressed() -> void:
+	"""回溯到上一个选择点"""
+	if not StoryEngine.has_rollback_options():
+		_show_subtitle("没有可回溯的选择点")
+		return
+
+	var node_id = StoryEngine.rollback_to_last_choice()
+	if not node_id.is_empty():
+		_show_subtitle("已回溯到: %s" % _get_node_name(node_id))
+		_update_rollback_button_state()
+
+func _on_history_pressed() -> void:
+	"""显示选择历史菜单"""
+	if not StoryEngine.has_rollback_options():
+		_show_subtitle("暂无选择历史")
+		return
+
+	# 显示历史选项列表（简化版：用消息显示）
+	var options = StoryEngine.get_rollback_options()
+	var message = "选择历史:\n"
+	for i in range(min(options.size(), 5)):
+		var opt = options[options.size() - 1 - i]
+		message += "%d. %s\n" % [i + 1, _get_node_name(opt.get("node_id", ""))]
+
+	_show_subtitle(message)
+	print("[HybridGame] 历史记录: %s" % message)
+
+func _update_rollback_button_state() -> void:
+	"""更新回溯按钮状态"""
+	if rollback_button:
+		rollback_button.disabled = not StoryEngine.has_rollback_options()
+
+func _get_node_name(node_id: String) -> String:
+	"""获取节点显示名称"""
+	# 尝试从节点数据获取
+	var node_data = StoryEngine.get_node_data(node_id)
+	if not node_data.is_empty():
+		return node_data.get("scene", node_id)
+	return node_id
+
+#endregion

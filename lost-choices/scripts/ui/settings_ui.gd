@@ -1,6 +1,5 @@
 ## 设置界面 - 游戏设置
-## 支持音量、文字速度、、自动播放延迟等设置
-
+## 支持音量、文字速度、自动播放延迟等设置
 class_name SettingsUI
 extends Control
 
@@ -8,227 +7,214 @@ extends Control
 signal settings_closed()
 signal settings_opened()
 
-## 配置
-@export_group("Audio")
-@export var master_volume: float = 1.0   ## 主音量
-@export var bgm_volume: float = 0.8   ## 音效音量
-@export var sfx_volume: float = 1.0
-@export var text_speed: float = 1.0   ## 自动播放延迟
-@export var language: String = "zh-CN"
-
 ## 节点引用
-@onready var master_slider: HSlider = $VBoxContainer/MasterVolume
-@onready var bgm_slider: HSlider = $VBoxContainer/BGMVolume
-@onready var sfx_slider: HSlider = $VBoxContainer/SFXVolume
-@onready var text_speed_slider: HSlider = $VBoxContainer/TextSpeed
-@onready var auto_play_slider: HSlider = $VBoxContainer/AAutoPlay
-@onready var language_option: OptionButton = $VBoxContainer/Language
-@onready var close_button: Button = $MarginContainer/Buttons/CloseButton
+@onready var master_slider: HSlider
+@onready var bgm_slider: HSlider
+@onready var sfx_slider: HSlider
+@onready var text_speed_slider: HSlider
+@onready var auto_play_slider: HSlider
+@onready var language_option: OptionButton
+@onready var close_button: Button
+@onready var reset_button: Button
+@onready var panel: PanelContainer
 
-@onready var reset_button: Button = $MarginContainer/Buttons/ResetButton
+## 设置值
+var _master_volume: float = 1.0
+var _bgm_volume: float = 0.8
+var _sfx_volume: float = 1.0
+var _text_speed: float = 1.0
+var _auto_play_delay: float = 3.0
+var _language: String = "zh-CN"
 
 ## 默认值
-var master_volume: float = 1.0
-var bgm_volume: float = 0.8
-var sfx_volume: float = 1.0
-var text_speed: float = 1.0
-var auto_play_delay: float = 3.0
-var language: String = "zh-CN"
+const DEFAULT_MASTER_VOLUME := 1.0
+const DEFAULT_BGM_VOLUME := 0.8
+const DEFAULT_SFX_VOLUME := 1.0
+const DEFAULT_TEXT_SPEED := 1.0
+const DEFAULT_AUTO_PLAY_DELAY := 3.0
+const DEFAULT_LANGUAGE := "zh-CN"
 
-## UI纹理
-var _panel_bg: StyleBox
-var _panel_slider_track: StyleBox
-
-var _label_language: Label
+## 语言选项
+var _language_options: Array = [
+	{"code": "zh-CN", "name": "简体中文"},
+	{"code": "en-US", "name": "English"}
+]
 
 func _ready() -> void:
 	_load_settings()
-	 _setup_signals()
-    visible = true
+	_setup_ui()
+	_setup_signals()
 
-func _load_settings() -> void:
-    var settings = GameManager.get_all_settings()
-    for key in settings:
-        match key:
-            "master_volume":
-                master_slider.value = settings[key]
-            "bgm_volume":
-                bgm_slider.value = settings[key]
-            "sfx_volume":
-                sfx_slider.value = settings[key]
-            "text_speed":
-                text_speed_slider.value = settings[key]
-            "auto_play_delay":
-                auto_play_slider.value = settings[key]
-            "language":
-                language_option.select(settings[key] if settings.has(key):
-                    continue
+func _setup_ui() -> void:
+	"""初始化UI组件"""
+	# 设置语言选项
+	if language_option:
+		language_option.clear()
+		for lang in _language_options:
+			language_option.add_item(lang["name"])
+		# 选择当前语言
+		for i in range(_language_options.size()):
+			if _language_options[i]["code"] == _language:
+				language_option.select(i)
+				break
+
+	# 应用当前值到滑块
+	if master_slider:
+		master_slider.min_value = 0.0
+		master_slider.max_value = 1.0
+		master_slider.step = 0.05
+		master_slider.value = _master_volume
+
+	if bgm_slider:
+		bgm_slider.min_value = 0.0
+		bgm_slider.max_value = 1.0
+		bgm_slider.step = 0.05
+		bgm_slider.value = _bgm_volume
+
+	if sfx_slider:
+		sfx_slider.min_value = 0.0
+		sfx_slider.max_value = 1.0
+		sfx_slider.step = 0.05
+		sfx_slider.value = _sfx_volume
+
+	if text_speed_slider:
+		text_speed_slider.min_value = 0.5
+		text_speed_slider.max_value = 2.0
+		text_speed_slider.step = 0.1
+		text_speed_slider.value = _text_speed
+
+	if auto_play_slider:
+		auto_play_slider.min_value = 1.0
+		auto_play_slider.max_value = 10.0
+		auto_play_slider.step = 0.5
+		auto_play_slider.value = _auto_play_delay
 
 func _setup_signals() -> void:
-    if close_button:
-        close_button.pressed.connect(_on_close_pressed)
+	"""连接信号"""
+	if close_button:
+		close_button.pressed.connect(_on_close_pressed)
 
-    save_button.pressed.connect(_on_reset_pressed)
-    reset_button.pressed.connect(_on_reset_to_default)
+	if reset_button:
+		reset_button.pressed.connect(_on_reset_to_default)
 
+	if master_slider:
+		master_slider.value_changed.connect(_on_master_volume_changed)
 
-    # 连接音量变化信号
-    AudioManager.volume_changed.connect(_on_volume_changed)
-    text_speed_slider.value_changed.connect(_on_text_speed_changed)
-    auto_play_slider.value_changed.connect(_on_auto_play_changed)
+	if bgm_slider:
+		bgm_slider.value_changed.connect(_on_bgm_volume_changed)
 
-    # 连接语言变化信号
-    # TODO: 实现语言切换
+	if sfx_slider:
+		sfx_slider.value_changed.connect(_on_sfx_volume_changed)
 
-    pass
+	if text_speed_slider:
+		text_speed_slider.value_changed.connect(_on_text_speed_changed)
 
-    pass
+	if auto_play_slider:
+		auto_play_slider.value_changed.connect(_on_auto_play_changed)
 
-## 应用设置
-func apply_settings() -> void:
-    for key in settings:
-        GameManager.set_setting(key, settings[key])
+	if language_option:
+		language_option.item_selected.connect(_on_language_selected)
 
-    # 应用音量设置
-    AudioManager.update_volumes()
+func _load_settings() -> void:
+	"""从SettingsManager加载设置"""
+	_master_volume = SettingsManager.get_setting("master_volume", DEFAULT_MASTER_VOLUME)
+	_bgm_volume = SettingsManager.get_setting("bgm_volume", DEFAULT_BGM_VOLUME)
+	_sfx_volume = SettingsManager.get_setting("sfx_volume", DEFAULT_SFX_VOLUME)
+	_text_speed = SettingsManager.get_setting("text_speed", DEFAULT_TEXT_SPEED)
+	_auto_play_delay = SettingsManager.get_setting("auto_play_delay", DEFAULT_AUTO_PLAY_DELAY)
+	_language = SettingsManager.get_setting("language", DEFAULT_LANGUAGE)
 
-    # 保存设置
-    Save_settings()
+func _save_settings() -> void:
+	"""保存设置到SettingsManager"""
+	SettingsManager.set_setting("master_volume", _master_volume)
+	SettingsManager.set_setting("bgm_volume", _bgm_volume)
+	SettingsManager.set_setting("sfx_volume", _sfx_volume)
+	SettingsManager.set_setting("text_speed", _text_speed)
+	SettingsManager.set_setting("auto_play_delay", _auto_play_delay)
+	SettingsManager.set_setting("language", _language)
+	SettingsManager.save_settings()
 
-## 关闭设置
-func _on_close_pressed() -> void:
-    hide()
-    if OS.has_feature("web"):
-        get_tree().change_scene_to_file("res://scenes/settings.tscn")
-    else:
-        queue_free()
-        # 桌动画
-        var tween = create_tween()
-        tween.tween_property(panel, "modulate:a", 0.0, 0.3)
-        tween.parallel()
-        tween.tween_property(master_slider, "value", master_volume, 0.0, 0.3)
-        tween.tween_property(bgm_slider, "value", bgm_volume, 0.0, 0.3)
-        tween.tween_property(sfx_slider, "value", sfx_volume, 1.0, 0.3)
-        tween.tween_property(auto_play_slider, "value", auto_play_delay, 0.0)
-        tween.tween_callback(_on_settings_closed)
-
-    _show_settings_saved()
-        save_game()
-
-        queue_free()
-        visible = true
-        if settings_ui:
-            settings_ui.visible = true
-            queue_free()
-
-            # 停顿动画
-            var tween = create_tween()
-            tween.tween_property(panel, "modulate:a", 0.0, 0.3)
-            tween.parallel()
-            tween.tween_property(text_speed_slider, "value", text_speed, 1.0,            tween.tween_callback(func(): panel.visible = true)
-        })
-        tween.tween_interval(0.3)
-        panel.visible = false
-
-## 切换到设置界面
-func show_settings() -> void:
-    # 显示设置界面
-    if settings_ui:
-        settings_ui.visible = true
-    else:
-        GameManager._change_scene("settings")
-
-    # 恢复默认值
-    save_game()
-
-## 保存游戏设置
-func save_settings() -> void:
-    var config = ConfigFile.new()
-    config.set_value("settings", "master_volume", master_volume)
-    config.set_value("settings", "bgm_volume", bgm_volume)
-    config.set_value("settings", "sfx_volume", sfx_volume)
-    config.set_value("settings", "text_speed", text_speed)
-            config.set_value("settings", "auto_play_delay", auto_play_delay)
-            config.set_value("settings", "language", language)
-            # 选择第一个可用语言
-            language_option.select(language)
-        elif language != "zh-CN":
-            push_warning("[SettingsUI] 不支持的语言: %s" % language)
-
-    if _ui_textures.has("btn_pause"):
-        pause_button.texture_normal = _ui_textures["btn_pause"]
-    if _ui_textures.has("btn_play"):
-        pause_button.texture_pressed = _ui_textures["btn_play"]
+## 音量变化回调
 
 func _on_master_volume_changed(value: float) -> void:
-    master_volume = value
-    AudioManager.set_bgm_volume(value)
-    AudioManager.play_bgm("res://assets/audio/bgm/main_menu.ogg")
+	_master_volume = value
+	AudioManager.set_master_volume(value)
 
-    # 更新主菜单显示
-    GameManager.update_volumes()
+func _on_bgm_volume_changed(value: float) -> void:
+	_bgm_volume = value
+	AudioManager.set_bgm_volume(value)
 
+func _on_sfx_volume_changed(value: float) -> void:
+	_sfx_volume = value
+	AudioManager.set_sfx_volume(value)
 
-    # 更新章节标签
-    if chapter_label:
-        chapter_label.text = _chapter_title
-    # elif chapter_label.text.is_empty():
-        chapter_label.text = "???"
+func _on_text_speed_changed(value: float) -> void:
+	_text_speed = value
 
-    # 更新好感度显示
-    var characters = ["林晓薇", "白芷瑶", "沈墨染", "叶清寒", "陈远航", "苏雅琳", "江念"]
-    for character in characters:
-        var rel_level = GameStateManager.get_relationship_level(character)
-        var rel_name = GameStateManager.get_relationship_level_name(character)
-        match rel_level:
-            0: return "警惕"
-            1: return "初步信任"
-            2: return "信任"
-            3: return "亲密"
-            4: return "深情"
-        return ""
-
-func _get_settings_summary() -> String:
-    var summary = ""
-    if not _panel.visible:
-        return ""
-
-    var settings_text = ""
-    return settings_text
-
-func _on_reset_pressed() -> void:
-    # 重置为默认值
-    _reset_sliders()
-    _reset_button.disabled = true
-    _reset_button.disabled = true
-    _reset_button.disabled = true
-    _reset_button.disabled = false
-    _close_button.visible = true
-    settings_ui.hide()
-    _close_settings()
-
-func _on_language_selected(item: OptionButton) -> void:
-    # 更新语言显示
-    language_option_button[0] =_language
-            update_language_display()
+func _on_auto_play_changed(value: float) -> void:
+	_auto_play_delay = value
 
 func _on_language_selected(index: int) -> void:
-    # 更新语言
-    update_language_display()
-    _language_option.text = language_options[index].text
-            update_language_label("设置")
+	if index >= 0 and index < _language_options.size():
+		_language = _language_options[index]["code"]
 
-    language_option.selected = true
-            language_option.disabled = false
-        else:
-            language_option.disabled = false
-            language_option.select(0)
-        update_language_display()
-    _update_language_display()
-    update_language_display()
-    _language_option.disabled = true
-        # 禁用语言选项
-    _language_options_container.visible = false
+## 按钮回调
 
-    # 保存设置
-    save_settings()
+func _on_close_pressed() -> void:
+	"""关闭设置界面"""
+	_save_settings()
+
+	# 播放关闭动画
+	if panel:
+		var tween = create_tween()
+		tween.tween_property(panel, "modulate:a", 0.0, 0.2)
+		tween.tween_callback(func(): hide())
+		tween.tween_callback(func(): settings_closed.emit())
+	else:
+		hide()
+		settings_closed.emit()
+
+func _on_reset_to_default() -> void:
+	"""重置为默认值"""
+	_master_volume = DEFAULT_MASTER_VOLUME
+	_bgm_volume = DEFAULT_BGM_VOLUME
+	_sfx_volume = DEFAULT_SFX_VOLUME
+	_text_speed = DEFAULT_TEXT_SPEED
+	_auto_play_delay = DEFAULT_AUTO_PLAY_DELAY
+	_language = DEFAULT_LANGUAGE
+
+	# 更新UI
+	_setup_ui()
+
+	# 应用默认值
+	AudioManager.set_master_volume(_master_volume)
+	AudioManager.set_bgm_volume(_bgm_volume)
+	AudioManager.set_sfx_volume(_sfx_volume)
+
+## 显示设置界面
+func show_settings() -> void:
+	visible = true
+	_load_settings()
+	_setup_ui()
+
+	# 淡入动画
+	if panel:
+		panel.modulate.a = 0.0
+		var tween = create_tween()
+		tween.tween_property(panel, "modulate:a", 1.0, 0.2)
+
+	settings_opened.emit()
+
+## 隐藏设置界面
+func hide_settings() -> void:
+	_save_settings()
+	hide()
+	settings_closed.emit()
+
+## 获取设置摘要
+func get_settings_summary() -> String:
+	return "音量: %.0f%% | 文字速度: %.1fx | 自动播放: %.1fs" % [
+		_master_volume * 100,
+		_text_speed,
+		_auto_play_delay
+	]

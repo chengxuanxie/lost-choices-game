@@ -69,18 +69,30 @@ func start_chapter(chapter_id: String) -> void:
 
 ## 加载章节数据
 func _load_chapter_data(chapter_id: String) -> void:
-	var path = STORY_DATA_PATH + chapter_id + ".json"
-	if not ResourceLoader.exists(path):
-		push_error("[StoryEngine] 章节数据不存在: %s" % path)
+	# 首先尝试加载混合视觉章节
+	var hybrid_path = STORY_DATA_PATH + chapter_id + "_hybrid.json"
+	if ResourceLoader.exists(hybrid_path):
+		_load_chapter_from_file(hybrid_path, true)
 		return
 
+	# 然后尝试普通章节
+	var normal_path = STORY_DATA_PATH + chapter_id + ".json"
+	if ResourceLoader.exists(normal_path):
+		_load_chapter_from_file(normal_path, false)
+		return
+
+	push_error("[StoryEngine] 章节数据不存在: %s" % chapter_id)
+
+## 从文件加载章节数据
+func _load_chapter_from_file(path: String, is_hybrid: bool) -> void:
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		var json_string = file.get_as_text()
 		var json = JSON.new()
 		if json.parse(json_string) == OK:
 			_story_data = json.data
-			print("[StoryEngine] 章节数据加载成功: %s" % chapter_id)
+			var type_str = "混合视觉" if is_hybrid else "普通"
+			print("[StoryEngine] %s章节数据加载成功: %s" % [type_str, _current_chapter])
 
 ## 结束当前故事
 func end_current_story() -> void:
@@ -250,6 +262,19 @@ func make_choice(choice_index: int) -> void:
 
 	var choice = available_choices[choice_index]
 	var choice_id = choice.get("id", "unknown")
+	var next_node = choice.get("next_node", "")
+
+	# 记录选择历史（在应用效果之前，记录当前状态）
+	if ChoiceHistoryManager:
+		ChoiceHistoryManager.record_choice(
+			_current_node,
+			choice_id,
+			choice_index,
+			next_node,
+			choice.get("effects", [])
+		)
+		# 为当前节点创建检查点
+		ChoiceHistoryManager.create_checkpoint(_current_node)
 
 	# 应用效果
 	_apply_effects(choice.get("effects", []))
@@ -263,7 +288,6 @@ func make_choice(choice_index: int) -> void:
 	print("[StoryEngine] 做出选择: %s" % choice_id)
 
 	# 跳转到下一节点
-	var next_node = choice.get("next_node", "")
 	if not next_node.is_empty():
 		jump_to_node(next_node)
 
@@ -424,5 +448,47 @@ func get_chapter_progress() -> Dictionary:
 		"total": total_nodes,
 		"percentage": float(_visited_nodes.size()) / float(max(total_nodes, 1)) * 100.0
 	}
+
+#endregion
+
+#region 回溯功能
+
+## 回溯到上一个选择点
+func rollback_to_last_choice() -> String:
+	if not ChoiceHistoryManager:
+		return ""
+
+	var node_id = ChoiceHistoryManager.go_back_to_last_choice()
+	if not node_id.is_empty():
+		jump_to_node(node_id)
+	return node_id
+
+## 获取可回溯的选项
+func get_rollback_options() -> Array:
+	if not ChoiceHistoryManager:
+		return []
+	return ChoiceHistoryManager.get_rollback_options()
+
+## 从指定节点重玩
+func replay_from_node(node_id: String) -> void:
+	if ChoiceHistoryManager:
+		ChoiceHistoryManager.replay_from_node(node_id)
+	jump_to_node(node_id)
+
+## 获取可重玩的节点列表
+func get_replayable_nodes() -> Array:
+	if not ChoiceHistoryManager:
+		return []
+	return ChoiceHistoryManager.get_replayable_nodes()
+
+## 获取选择历史摘要
+func get_history_summary() -> String:
+	if not ChoiceHistoryManager:
+		return ""
+	return ChoiceHistoryManager.get_history_summary()
+
+## 是否有回溯选项
+func has_rollback_options() -> bool:
+	return get_rollback_options().size() > 0
 
 #endregion
