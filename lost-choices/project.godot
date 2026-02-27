@@ -30,6 +30,7 @@ ResourceManager="*res://scripts/autoload/resource_manager.gd"
 StatsManager="*res://scripts/autoload/stats_manager.gd"
 SettingsManager="*res://scripts/autoload/settings_manager.gd"
 TransitionManager="*res://scripts/autoload/transition_manager.gd"
+ChoiceHistoryManager="*res://scripts/autoload/choice_history_manager.gd"
 
 [display]
 
