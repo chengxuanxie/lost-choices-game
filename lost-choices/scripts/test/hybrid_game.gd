@@ -134,7 +134,28 @@ func _build_hybrid_config(node_data: Dictionary) -> Dictionary:
 	"""根据节点数据构建混合场景配置"""
 	var segments: Array = []
 
-	# 添加关键帧片段
+	# 优先处理视频：如果有视频配置，优先播放视频
+	var video = node_data.get("video", {})
+	if not video.is_empty():
+		var video_path = video.get("path", "")
+		var video_duration = video.get("duration", 10.0)
+
+		if not video_path.is_empty() and ResourceLoader.exists(video_path):
+			segments.append({
+				"id": "video_main",
+				"type": "video",
+				"duration": video_duration,
+				"path": video_path
+			})
+			# 有视频时，跳过关键帧（视频已包含动态内容）
+			return {
+				"scene_id": node_data.get("node_id", "unknown"),
+				"name": node_data.get("scene", "未知场景"),
+				"segments": segments,
+				"total_duration": video_duration
+			}
+
+	# 没有视频时，添加关键帧片段
 	var keyframes = node_data.get("keyframes", {})
 	if not keyframes.is_empty():
 		var frames = keyframes.get("frames", [])
@@ -152,20 +173,6 @@ func _build_hybrid_config(node_data: Dictionary) -> Dictionary:
 				"frames": [frame_path],
 				"durations": [duration],
 				"effects": effects
-			})
-
-	# 添加视频片段
-	var video = node_data.get("video", {})
-	if not video.is_empty():
-		var video_path = video.get("path", "")
-		var video_duration = video.get("duration", 10.0)
-
-		if not video_path.is_empty():
-			segments.append({
-				"id": "video_main",
-				"type": "video",
-				"duration": video_duration,
-				"path": video_path
 			})
 
 	return {
