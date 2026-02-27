@@ -34,6 +34,7 @@ func _setup_players() -> void:
 	_video_player.name = "VideoPlayer"
 	_video_player.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_video_player.visible = false
+	_video_player.bus = "Master"  # 使用 Master 总线以便控制音量
 	add_child(_video_player)
 
 	# 连接信号
