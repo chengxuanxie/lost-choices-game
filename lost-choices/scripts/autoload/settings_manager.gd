@@ -97,6 +97,7 @@ func reset_to_defaults() -> void:
 			"auto_save": true,
 			"auto_save_interval": 300,
 			"text_speed": 1.0,
+			"auto_play_delay": 3.0,
 			"skip_seen": true,
 			"choice_timer": true
 		},

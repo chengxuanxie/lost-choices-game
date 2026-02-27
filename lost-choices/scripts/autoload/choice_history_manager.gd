@@ -1,6 +1,6 @@
 ## 选择历史管理器 - 记录玩家选择并支持回溯
 ## 管理选择历史、分支导航、快速重玩功能
-class_name ChoiceHistoryManager
+## 注意: 作为Autoload单例使用，不要使用class_name
 extends Node
 
 ## 信号

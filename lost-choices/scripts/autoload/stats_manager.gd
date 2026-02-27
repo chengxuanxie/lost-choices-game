@@ -265,7 +265,7 @@ func check_achievements() -> void:
 					achievement_progress_updated.emit(achievement_id, float(value) / float(threshold))
 			"relationship":
 				var threshold = achievement.get("threshold", 1)
-				var value = GameStateManager.get_relationship(target, 0)
+				var value = GameStateManager.get_relationship(target)
 				if value >= threshold:
 					unlock_achievement(achievement_id)
 				else:

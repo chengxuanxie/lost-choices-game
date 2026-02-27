@@ -117,21 +117,21 @@ func _setup_signals() -> void:
 
 func _load_settings() -> void:
 	"""从SettingsManager加载设置"""
-	_master_volume = SettingsManager.get_setting("master_volume", DEFAULT_MASTER_VOLUME)
-	_bgm_volume = SettingsManager.get_setting("bgm_volume", DEFAULT_BGM_VOLUME)
-	_sfx_volume = SettingsManager.get_setting("sfx_volume", DEFAULT_SFX_VOLUME)
-	_text_speed = SettingsManager.get_setting("text_speed", DEFAULT_TEXT_SPEED)
-	_auto_play_delay = SettingsManager.get_setting("auto_play_delay", DEFAULT_AUTO_PLAY_DELAY)
-	_language = SettingsManager.get_setting("language", DEFAULT_LANGUAGE)
+	_master_volume = SettingsManager.get_setting("audio", "master_volume", DEFAULT_MASTER_VOLUME)
+	_bgm_volume = SettingsManager.get_setting("audio", "music_volume", DEFAULT_BGM_VOLUME)
+	_sfx_volume = SettingsManager.get_setting("audio", "sfx_volume", DEFAULT_SFX_VOLUME)
+	_text_speed = SettingsManager.get_setting("gameplay", "text_speed", DEFAULT_TEXT_SPEED)
+	_auto_play_delay = SettingsManager.get_setting("gameplay", "auto_play_delay", DEFAULT_AUTO_PLAY_DELAY)
+	_language = SettingsManager.get_setting("language", "current", DEFAULT_LANGUAGE)
 
 func _save_settings() -> void:
 	"""保存设置到SettingsManager"""
-	SettingsManager.set_setting("master_volume", _master_volume)
-	SettingsManager.set_setting("bgm_volume", _bgm_volume)
-	SettingsManager.set_setting("sfx_volume", _sfx_volume)
-	SettingsManager.set_setting("text_speed", _text_speed)
-	SettingsManager.set_setting("auto_play_delay", _auto_play_delay)
-	SettingsManager.set_setting("language", _language)
+	SettingsManager.set_setting("audio", "master_volume", _master_volume)
+	SettingsManager.set_setting("audio", "music_volume", _bgm_volume)
+	SettingsManager.set_setting("audio", "sfx_volume", _sfx_volume)
+	SettingsManager.set_setting("gameplay", "text_speed", _text_speed)
+	SettingsManager.set_setting("gameplay", "auto_play_delay", _auto_play_delay)
+	SettingsManager.set_setting("language", "current", _language)
 	SettingsManager.save_settings()
 
 ## 音量变化回调

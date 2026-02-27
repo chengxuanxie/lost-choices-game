@@ -244,7 +244,7 @@ func _save_game(slot: int) -> void:
 
 func _load_game(slot: int) -> void:
 	"""从指定槽位加载游戏"""
-	var success = SaveManager.load_game(slot)
+	var success = await SaveManager.load_game(slot)
 
 	if success:
 		_show_message("载入成功！")
