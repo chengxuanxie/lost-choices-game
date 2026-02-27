@@ -5,6 +5,8 @@ extends Node
 
 ## 信号定义
 signal state_changed(key: String, value: Variant)
+signal flag_changed(key: String, value: bool)
+signal variable_changed(key: String, value: float)
 signal relationship_changed(character: String, value: int)
 signal item_added(item_id: String)
 signal item_removed(item_id: String)
@@ -28,6 +30,7 @@ func set_flag(key: String, value: Variant) -> void:
 
 	if old_value != value:
 		state_changed.emit(key, value)
+		flag_changed.emit(key, bool(value))
 		print("[GameStateManager] 标记变更: %s = %s" % [key, value])
 
 ## 获取标记
@@ -53,6 +56,7 @@ func set_variable(key: String, value: Variant) -> void:
 
 	if old_value != value:
 		state_changed.emit(key, value)
+		variable_changed.emit(key, float(value))
 		print("[GameStateManager] 变量变更: %s = %s" % [key, value])
 
 ## 获取变量
