@@ -146,6 +146,8 @@ func _play_video_segment(seg: Dictionary) -> void:
 	_video_player.visible = true
 	_keyframe_scene.visible = false
 
+	print("[HybridScenePlayer] 视频播放器 visible=%s, size=%s" % [_video_player.visible, _video_player.size])
+
 	var video_path = seg.get("path", "")
 	if video_path.is_empty() or not ResourceLoader.exists(video_path):
 		push_warning("[HybridScenePlayer] 视频不存在: %s" % video_path)
@@ -161,6 +163,7 @@ func _play_video_segment(seg: Dictionary) -> void:
 	_video_player.stream = video_stream
 	_video_player.play()
 	_play_start_time = Time.get_ticks_msec() / 1000.0
+	print("[HybridScenePlayer] 视频播放中: %s" % video_path)
 
 ## 播放关键帧片段
 func _play_keyframe_segment(seg: Dictionary) -> void:
