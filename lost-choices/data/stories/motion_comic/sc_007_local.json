@@ -1,0 +1,8 @@
+{
+  "title": "SC-007 出口区域",
+  "scenes": [
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png", "text": "这就是出口了吗？", "voice": "zh-CN-YunxiNeural"},
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png", "text": "门外面...是城市？", "voice": "zh-CN-YunxiNeural"},
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png", "text": "现在你必须做出选择。", "voice": "zh-CN-XiaoxiaoNeural"}
+  ]
+}
