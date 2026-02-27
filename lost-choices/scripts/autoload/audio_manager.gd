@@ -21,6 +21,8 @@ func _ready() -> void:
 	_bgm_player = AudioStreamPlayer.new()
 	_bgm_player.bus = BUS_BGM
 	add_child(_bgm_player)
+	# 初始化音量设置
+	update_volumes()
 	print("[AudioManager] 音频管理器初始化完成")
 
 #endregion
