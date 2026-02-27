@@ -1,0 +1,20 @@
+{
+  "title": "结局1_信任的开始",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "我做出了选择。林晓薇...她是我要一起走这条路的人。她让我相信，追寻真相是值得的。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "在这座充满谜团的城市里，你找到了第一个可以信任的人。这只是开始，真相还在等待被发现。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "第一章觉醒完。未完待续。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    }
+  ]
+}

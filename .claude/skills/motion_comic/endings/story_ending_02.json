@@ -1,0 +1,20 @@
+{
+  "title": "结局2_独自前行",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "我选择了独自前行。这座城市...比想象中更危险。但我必须找出真相。为了我自己。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "清晨的阳光照亮了街道。我知道这只是开始。属于我的战斗，才刚刚打响。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "第一章觉醒完。未完待续。",
+      "voice": "zh-CN-YunxiNeural"
+    }
+  ]
+}

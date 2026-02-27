@@ -1,0 +1,20 @@
+{
+  "title": "结局3_治愈之路",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "我做出了选择。白芷瑶...她让我看到了内心的创伤。也许...治愈比复仇更重要。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "在这座城市里，我找到了新的方向。也许真相不重要...重要的是，我终于可以放下过去，向前看了。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "第一章觉醒完。未完待续。",
+      "voice": "zh-CN-YunxiNeural"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "结局5_危险联盟",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "我做出了选择...叶清寒。她不是普通人...和她在一起，意味着进入一个危险的世界。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "你做出了正确的选择。在这个城市里，真相往往藏在黑暗中。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "黄昏组织...他们以为清除一个人的记忆，就能抹去所有痕迹。但他们错了。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "从现在起，你就是我们的盟友。第一步...是找到零号档案。那是组织的核心机密。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_007/frame_001.png",
+      "text": "第一章：觉醒 - 完。你选择了与叶清寒结盟，踏入危险的游戏。在这座城市里，真正的战争才刚刚开始。未完待续...",
+      "voice": "zh-CN-YunxiNeural"
+    }
+  ]
+}

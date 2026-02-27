@@ -19,7 +19,9 @@
       "Bash(cp:*)",
       "Bash(grep:*)",
       "Bash(tail:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(git fetch:*)",
+      "Bash(git:*)"
     ]
   }
 }

@@ -1,0 +1,30 @@
+{
+  "title": "结局4_艺术共鸣",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "我做出了选择...沈墨染的画...触动了什么。在那些线条和色彩中...我看到了自己。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "你还在看着那幅画。它对你说了什么？艺术...有时候比记忆更诚实。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "画中的人...在迷雾中前行...和我一样...迷失但不停步。这幅画...好像在诉说我的故事。",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "闭上眼睛。让画面留在心里。然后...告诉我你看到了什么。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/demo/lost-choices/assets/keyframes/ch1/sc_006/frame_001.png",
+      "text": "第一章：觉醒 - 完。你选择了与沈墨染一起追寻艺术的真理。在这座城市里，你找到了灵魂的共鸣。未完待续...",
+      "voice": "zh-CN-YunxiNeural"
+    }
+  ]
+}
