@@ -165,7 +165,7 @@
       },
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_002/key_001.mp4",
+        "path": "res://assets/videos/ch1/sc_002/key_001a.mp4",
         "duration": 60
       },
 
@@ -220,7 +220,7 @@
       },
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_002/key_002.mp4",
+        "path": "res://assets/videos/ch1/sc_002/key_001b.mp4",
         "duration": 65
       },
 
@@ -262,7 +262,7 @@
       },
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_002/key_003.mp4",
+        "path": "res://assets/videos/ch1/sc_002/key_001c.mp4",
         "duration": 60
       },
 
@@ -425,7 +425,7 @@
       "description": "白芷瑶提出可以帮助主角",
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_005/key_002.mp4",
+        "path": "res://assets/videos/ch1/sc_005/key_001.mp4",
         "duration": 300
       },
 
@@ -491,7 +491,7 @@
       "description": "沈墨染解读画作含义",
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_006/key_002.mp4",
+        "path": "res://assets/videos/ch1/sc_006/key_001.mp4",
         "duration": 300
       },
 
@@ -560,7 +560,7 @@
       "description": "叶清寒透露更多关于组织的信息",
 
       "video": {
-        "path": "res://assets/videos/ch1/sc_007/key_002.mp4",
+        "path": "res://assets/videos/ch1/sc_007/key_001.mp4",
         "duration": 240
       },
 
@@ -639,7 +639,7 @@
       "ending_name": "信任的开始",
       "description": "与林晓薇建立信任，一起调查真相",
       "video": {
-        "path": "res://assets/videos/ch1/endings/ending_01.mp4",
+        "path": "res://assets/videos/ch1/endings/key_001.mp4",
         "duration": 300
       }
     },
@@ -651,7 +651,7 @@
       "ending_name": "独自前行",
       "description": "主角决定独自寻找真相",
       "video": {
-        "path": "res://assets/videos/ch1/endings/ending_02.mp4",
+        "path": "res://assets/videos/ch1/endings/key_002.mp4",
         "duration": 300
       }
     },
@@ -663,7 +663,7 @@
       "ending_name": "治愈之路",
       "description": "在白芷瑶的帮助下开始恢复记忆",
       "video": {
-        "path": "res://assets/videos/ch1/endings/ending_03.mp4",
+        "path": "res://assets/videos/ch1/endings/key_003.mp4",
         "duration": 300
       }
     },
@@ -675,7 +675,7 @@
       "ending_name": "艺术共鸣",
       "description": "沈墨染的画作唤醒了深处的记忆",
       "video": {
-        "path": "res://assets/videos/ch1/endings/ending_04.mp4",
+        "path": "res://assets/videos/ch1/endings/key_004.mp4",
         "duration": 300
       }
     },
@@ -687,7 +687,7 @@
       "ending_name": "危险联盟",
       "description": "与叶清寒合作，踏上危险的道路",
       "video": {
-        "path": "res://assets/videos/ch1/endings/ending_05.mp4",
+        "path": "res://assets/videos/ch1/endings/key_005.mp4",
         "duration": 300
       }
     }
