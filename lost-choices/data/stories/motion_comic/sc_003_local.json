@@ -1,0 +1,35 @@
+{
+  "title": "SC-003 通讯室",
+  "scenes": [
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_001.png",
+      "text": "这里就是通讯室...高科技的感觉...",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_002.png",
+      "text": "你来了。我们时间不多，让我直接开始。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_003.png",
+      "text": "听着，你失去的记忆很重要。那些人正在追你。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_001.png",
+      "text": "我...我什么都不记得了...",
+      "voice": "zh-CN-YunxiNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_002.png",
+      "text": "没关系。我会帮你。我们必须先离开这里。",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    },
+    {
+      "frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_003_temp/frame_001.png",
+      "text": "你准备好做出选择了吗？",
+      "voice": "zh-CN-XiaoxiaoNeural"
+    }
+  ]
+}

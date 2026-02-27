@@ -1,0 +1,8 @@
+{
+  "title": "SC-008 天台",
+  "scenes": [
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_008/frame_001.png", "text": "天台...我怎么会在这里？", "voice": "zh-CN-YunxiNeural"},
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_008/frame_001.png", "text": "下面的城市...好陌生...", "voice": "zh-CN-YunxiNeural"},
+    {"frame": "E:/workSpace/ai/task-art/lost-choices/assets/keyframes/ch1/sc_008/frame_001.png", "text": "所有的线索都指向这里。这是最后的选择了。", "voice": "zh-CN-YunxiNeural"}
+  ]
+}
