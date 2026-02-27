@@ -149,12 +149,8 @@ func _play_video_segment(seg: Dictionary) -> void:
 	print("[HybridScenePlayer] 视频播放器 visible=%s, size=%s" % [_video_player.visible, _video_player.size])
 
 	var video_path = seg.get("path", "")
-	if video_path.is_empty() or not ResourceLoader.exists(video_path):
-		push_warning("[HybridScenePlayer] 视频不存在: %s" % video_path)
-		_advance_segment()
-		return
+	var video_stream = _load_video_stream(video_path)
 
-	var video_stream = load(video_path)
 	if video_stream == null:
 		push_warning("[HybridScenePlayer] 无法加载视频: %s" % video_path)
 		_advance_segment()
@@ -164,6 +160,33 @@ func _play_video_segment(seg: Dictionary) -> void:
 	_video_player.play()
 	_play_start_time = Time.get_ticks_msec() / 1000.0
 	print("[HybridScenePlayer] 视频播放中: %s" % video_path)
+
+## 尝试加载视频流，支持多种格式
+func _load_video_stream(path: String) -> VideoStream:
+	if path.is_empty():
+		return null
+
+	# 尝试原始路径
+	if ResourceLoader.exists(path):
+		var stream = load(path)
+		if stream != null:
+			return stream
+
+	# 尝试替换扩展名为 .webm
+	var webm_path = path.get_basename() + ".webm"
+	if ResourceLoader.exists(webm_path):
+		var stream = load(webm_path)
+		if stream != null:
+			return stream
+
+	# 尝试替换扩展名为 .ogv
+	var ogv_path = path.get_basename() + ".ogv"
+	if ResourceLoader.exists(ogv_path):
+		var stream = load(ogv_path)
+		if stream != null:
+			return stream
+
+	return null
 
 ## 播放关键帧片段
 func _play_keyframe_segment(seg: Dictionary) -> void:
