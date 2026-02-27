@@ -193,7 +193,11 @@ func _load_stats() -> void:
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		if file:
 			var data = JSON.parse_string(file.get_as_text())
-			if data != null:
+			if data != null and data is Dictionary:
+				# 合并数据，确保所有必需的键都存在
+				for key in _stats.keys():
+					if not key in data:
+						data[key] = _stats[key]
 				_stats = data
 			file.close()
 
