@@ -119,6 +119,11 @@ func _play_hybrid_node(node_id: String, node_data: Dictionary) -> void:
 
 	print("[HybridGame] 播放混合节点: %s" % node_id)
 
+	# 调试：检查节点数据
+	var video = node_data.get("video", {})
+	var keyframes = node_data.get("keyframes", {})
+	print("[HybridGame] 节点数据 - video: %s, keyframes: %s" % [video.size(), keyframes.size()])
+
 	# 更新字幕
 	var subtitle = node_data.get("subtitle", "")
 	_show_subtitle(subtitle)
@@ -140,7 +145,8 @@ func _build_hybrid_config(node_data: Dictionary) -> Dictionary:
 		var video_path = video.get("path", "")
 		var video_duration = video.get("duration", 10.0)
 
-		if not video_path.is_empty() and ResourceLoader.exists(video_path):
+		if not video_path.is_empty():
+			print("[HybridGame] 检测到视频: %s" % video_path)
 			segments.append({
 				"id": "video_main",
 				"type": "video",
@@ -148,6 +154,7 @@ func _build_hybrid_config(node_data: Dictionary) -> Dictionary:
 				"path": video_path
 			})
 			# 有视频时，跳过关键帧（视频已包含动态内容）
+			print("[HybridGame] 使用视频片段模式，共1个片段")
 			return {
 				"scene_id": node_data.get("node_id", "unknown"),
 				"name": node_data.get("scene", "未知场景"),
