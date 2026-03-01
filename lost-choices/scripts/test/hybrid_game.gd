@@ -65,11 +65,11 @@ func _load_texture(path: String) -> Texture2D:
 func _setup_signals() -> void:
 	# 连接故事引擎信号
 	StoryEngine.node_changed.connect(_on_node_changed)
-	StoryEngine.choices_available.connect(_on_choices_available)
+	# 注意：不直接连接 choices_available，选择在视频播放完成后再显示
 	StoryEngine.choice_made.connect(_on_choice_made)
 	StoryEngine.story_ended.connect(_on_story_ended)
 
-	# 连接混合播放器信号
+	# 连接混合播放器信号 - 视频播放完成时显示选择
 	hybrid_player.scene_completed.connect(_on_scene_completed)
 	hybrid_player.segment_changed.connect(_on_segment_changed)
 
@@ -354,9 +354,6 @@ func _show_subtitle(text: String) -> void:
 func _on_node_changed(node_id: String, node_data: Dictionary) -> void:
 	print("[HybridGame] 节点变更: %s" % node_id)
 	_play_hybrid_node(node_id, node_data)
-
-func _on_choices_available(choices: Array) -> void:
-	_show_choices(choices)
 
 func _on_choice_made(choice_id: String, choice_data: Dictionary) -> void:
 	print("[HybridGame] 做出选择: %s" % choice_id)
