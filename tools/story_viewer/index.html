@@ -507,7 +507,7 @@
 
         // Canvas 状态
         let canvas, ctx;
-        let zoom = 1;
+        let zoom = 0.8;
         let panX = 0, panY = 0;
         let showLabels = true;
         let nodePositions = {};
@@ -936,25 +936,23 @@
                 levels[level].push(id);
             });
 
-            // 计算位置
-            const levelWidth = 180;
-            const nodeHeight = 70;
-            const startY = 80;
-            const startX = 100;
+            // 计算位置 - 从左到右布局
+            const nodeWidth = 180;  // 水平间距
+            const nodeHeight = 70;    // 垂直间距
+            const startX = 80;
+            const startY = 100;
 
             Object.entries(levels).forEach(([level, nodeIds]) => {
                 // 按子节点数量排序，让有更多连接的节点居中
                 nodeIds.sort((a, b) => outEdges[b].length - outEdges[a].length);
 
-                const y = startY + parseInt(level) * nodeHeight;
-                const totalWidth = nodeIds.length * levelWidth;
-                let x = startX;
+                const x = startX + parseInt(level) * nodeWidth;
+                const totalHeight = nodeIds.length * nodeHeight;
+                let y = startY;
 
                 nodeIds.forEach((id, i) => {
-                    // 添加一些偏移让图形更自然
-                    const offset = (i % 2) * 20;
-                    nodePositions[id] = {x, y: y + offset};
-                    x += levelWidth;
+                    nodePositions[id] = {x, y};
+                    y += nodeHeight;
                 });
             });
         }
@@ -1000,16 +998,16 @@
                         ctx.setLineDash([]);
                     }
 
-                    // 绘制带弧度的连线
+                    // 绘制带弧度的连线 - 从左到右布局
                     ctx.beginPath();
                     ctx.moveTo(from.x + 70, from.y);
 
-                    // 中点控制
+                    // 中点控制 - 水平弯曲
                     const midX = (from.x + to.x) / 2;
                     const midY = (from.y + to.y) / 2;
-                    const ctrlY = from.y + 15;  // 向下弯曲
+                    const ctrlX = from.x + 30;  // 向右弯曲
 
-                    ctx.quadraticCurveTo(midX, ctrlY, to.x - 70, to.y);
+                    ctx.quadraticCurveTo(ctrlX, midY, to.x - 70, to.y);
                     ctx.stroke();
 
                     colorIndex++;
@@ -1026,20 +1024,20 @@
                 const isSelected = id === selectedNodeId;
                 const isEnding = node.node_type === 'ending';
 
-                // 节点矩形
+                // 节点矩形 - 横向
                 ctx.fillStyle = isEnding ? '#f39c12' : (isSelected ? '#e94560' : '#0f3460');
                 ctx.strokeStyle = isSelected ? '#4ecca3' : '#16213e';
                 ctx.lineWidth = 2;
 
-                const w = 140, h = 30;
+                const w = 120, h = 35;
                 roundRect(ctx, pos.x - w/2, pos.y - h/2, w, h, 5);
                 ctx.fill();
                 ctx.stroke();
 
-                // 节点文字
+                // 节点文字 - 横向布局
                 if (showLabels) {
                     ctx.fillStyle = '#eee';
-                    ctx.font = '11px Microsoft YaHei';
+                    ctx.font = '10px Microsoft YaHei';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(id, pos.x, pos.y);
@@ -1116,7 +1114,7 @@
 
         // 重置视图
         function resetZoom() {
-            zoom = 1;
+            zoom = 0.8;
             panX = 0;
             panY = 0;
             drawConnectionGraph();
