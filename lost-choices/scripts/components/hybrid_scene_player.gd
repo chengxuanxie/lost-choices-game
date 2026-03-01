@@ -164,28 +164,40 @@ func _play_video_segment(seg: Dictionary) -> void:
 ## 尝试加载视频流，支持多种格式
 func _load_video_stream(path: String) -> VideoStream:
 	if path.is_empty():
+		print("[HybridScenePlayer] 视频路径为空")
 		return null
+
+	print("[HybridScenePlayer] 尝试加载视频: %s" % path)
 
 	# 尝试原始路径
 	if ResourceLoader.exists(path):
+		print("[HybridScenePlayer] 原始路径文件存在: %s" % path)
 		var stream = load(path)
 		if stream != null:
+			print("[HybridScenePlayer] 原始路径加载成功")
 			return stream
+		else:
+			print("[HybridScenePlayer] 原始路径加载失败")
 
 	# 尝试替换扩展名为 .webm
 	var webm_path = path.get_basename() + ".webm"
+	print("[HybridScenePlayer] 检查 webm: %s, 存在=%s" % [webm_path, ResourceLoader.exists(webm_path)])
 	if ResourceLoader.exists(webm_path):
 		var stream = load(webm_path)
 		if stream != null:
+			print("[HybridScenePlayer] webm加载成功")
 			return stream
 
 	# 尝试替换扩展名为 .ogv
 	var ogv_path = path.get_basename() + ".ogv"
+	print("[HybridScenePlayer] 检查 ogv: %s, 存在=%s" % [ogv_path, ResourceLoader.exists(ogv_path)])
 	if ResourceLoader.exists(ogv_path):
 		var stream = load(ogv_path)
 		if stream != null:
+			print("[HybridScenePlayer] ogv加载成功")
 			return stream
 
+	print("[HybridScenePlayer] 所有格式加载失败")
 	return null
 
 ## 播放关键帧片段
