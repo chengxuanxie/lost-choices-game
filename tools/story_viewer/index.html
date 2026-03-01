@@ -875,48 +875,85 @@
         function calculateNodePositions() {
             const allNodeIds = Object.keys(nodes);
             const startNode = chapterData.start_node;
-            const levelMap = {};
-            const queue = [{id: startNode, level: 0}];
-            const visited = new Set();
 
-            // BFS 计算层级
+            // 构建节点关系图
+            const inDegree = {};  // 入度
+            const outEdges = {};  // 出边
+            const inEdges = {};    // 入边（反向）
+
+            allNodeIds.forEach(id => {
+                inDegree[id] = 0;
+                outEdges[id] = [];
+                inEdges[id] = [];
+            });
+
+            allNodeIds.forEach(id => {
+                const node = nodes[id];
+                if (node && node.choices) {
+                    node.choices.forEach(c => {
+                        if (c.next_node && nodes[c.next_node]) {
+                            outEdges[id].push(c.next_node);
+                            inEdges[c.next_node].push(id);
+                            inDegree[c.next_node]++;
+                        }
+                    });
+                }
+            });
+
+            // 计算层级（从起点开始BFS）
+            const levelMap = {};
+            const visited = new Set();
+            const queue = [{id: startNode, level: 0}];
+            visited.add(startNode);
+
             while (queue.length > 0) {
                 const {id, level} = queue.shift();
-                if (visited.has(id)) continue;
-                visited.add(id);
-
                 levelMap[id] = level;
 
                 const node = nodes[id];
                 if (node && node.choices) {
                     node.choices.forEach(c => {
                         if (c.next_node && !visited.has(c.next_node)) {
+                            visited.add(c.next_node);
                             queue.push({id: c.next_node, level: level + 1});
                         }
                     });
                 }
             }
 
-            // 按层级分组
+            // 未访问的节点放在最后
+            allNodeIds.forEach(id => {
+                if (levelMap[id] === undefined) {
+                    levelMap[id] = 10;  // 默认层级
+                }
+            });
+
+            // 按层级和子节点数量排序
             const levels = {};
             allNodeIds.forEach(id => {
-                const level = levelMap[id] !== undefined ? levelMap[id] : 0;
+                const level = levelMap[id];
                 if (!levels[level]) levels[level] = [];
                 levels[level].push(id);
             });
 
             // 计算位置
-            const levelWidth = 200;
-            const nodeHeight = 60;
-            const startY = 100;
+            const levelWidth = 180;
+            const nodeHeight = 70;
+            const startY = 80;
+            const startX = 100;
 
             Object.entries(levels).forEach(([level, nodeIds]) => {
+                // 按子节点数量排序，让有更多连接的节点居中
+                nodeIds.sort((a, b) => outEdges[b].length - outEdges[a].length);
+
                 const y = startY + parseInt(level) * nodeHeight;
                 const totalWidth = nodeIds.length * levelWidth;
-                let x = (canvas.width - totalWidth) / 2 + levelWidth / 2;
+                let x = startX;
 
-                nodeIds.forEach(id => {
-                    nodePositions[id] = {x, y};
+                nodeIds.forEach((id, i) => {
+                    // 添加一些偏移让图形更自然
+                    const offset = (i % 2) * 20;
+                    nodePositions[id] = {x, y: y + offset};
                     x += levelWidth;
                 });
             });
@@ -924,25 +961,62 @@
 
         // 绘制连接线
         function drawConnections() {
-            ctx.strokeStyle = '#0f3460';
-            ctx.lineWidth = 1;
+            const colors = ['#3498db', '#e94560', '#4ecca3', '#f39c12', '#9b59b6'];
 
+            // 统计每个节点的入边数量
+            const edgeCount = {};
+            Object.entries(nodes).forEach(([id, node]) => {
+                edgeCount[id] = 0;
+            });
+            Object.entries(nodes).forEach(([id, node]) => {
+                if (node.choices) {
+                    node.choices.forEach(c => {
+                        if (c.next_node && edgeCount[c.next_node] !== undefined) {
+                            edgeCount[c.next_node]++;
+                        }
+                    });
+                }
+            });
+
+            let colorIndex = 0;
             Object.entries(nodes).forEach(([id, node]) => {
                 if (!node.choices) return;
 
                 const from = nodePositions[id];
                 if (!from) return;
 
-                node.choices.forEach(choice => {
+                node.choices.forEach((choice, i) => {
                     const to = nodePositions[choice.next_node];
                     if (!to) return;
 
+                    // 使用不同颜色区分分支
+                    ctx.strokeStyle = colors[colorIndex % colors.length];
+                    ctx.lineWidth = 1.5;
+
+                    // 如果是汇聚节点（有多个入边），使用虚线
+                    if (edgeCount[choice.next_node] > 1) {
+                        ctx.setLineDash([4, 4]);
+                    } else {
+                        ctx.setLineDash([]);
+                    }
+
+                    // 绘制带弧度的连线
                     ctx.beginPath();
-                    ctx.moveTo(from.x, from.y);
-                    ctx.lineTo(to.x, to.y);
+                    ctx.moveTo(from.x + 70, from.y);
+
+                    // 中点控制
+                    const midX = (from.x + to.x) / 2;
+                    const midY = (from.y + to.y) / 2;
+                    const ctrlY = from.y + 15;  // 向下弯曲
+
+                    ctx.quadraticCurveTo(midX, ctrlY, to.x - 70, to.y);
                     ctx.stroke();
+
+                    colorIndex++;
                 });
             });
+
+            ctx.setLineDash([]);  // 重置虚线
         }
 
         // 绘制节点
