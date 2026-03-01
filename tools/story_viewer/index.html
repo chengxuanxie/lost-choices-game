@@ -469,9 +469,13 @@
 
         // 初始化
         async function init() {
-            await loadData();
-            renderNodeList();
+            const success = await loadData();
+            if (!success) {
+                console.error('数据加载失败');
+                return;
+            }
             setupEventListeners();
+            renderNodeList();
             initCanvas();
             drawConnectionGraph();
             updateStats();
@@ -479,9 +483,10 @@
 
         // 加载数据
         async function loadData() {
+            // 从项目根目录加载数据
+            const dataPath = '../../../lost-choices/data/stories/chapter_01_hybrid.json';
             try {
-                // 通过 HTTP 服务器加载，使用正确的相对路径
-                const response = await fetch('../../lost-choices/data/stories/chapter_01_hybrid.json');
+                const response = await fetch(dataPath);
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 chapterData = await response.json();
                 nodes = chapterData.nodes || {};
@@ -492,14 +497,16 @@
                     <div style="padding: 20px; color: #e94560;">
                         <p>加载数据失败!</p>
                         <p style="font-size: 12px; color: #666; margin-top: 10px;">
-                            请确保已启动 HTTP 服务器：<br>
-                            在 tools/story_viewer 目录运行:<br>
-                            <code>python -m http.server 8080</code><br>
+                            路径: ${dataPath}<br>
+                            请确保在项目根目录运行 HTTP 服务器：<br>
+                            <code>cd E:\\workSpace\\ai\\task-game<br>python -m http.server 8080</code><br>
                             然后访问 <a href="http://localhost:8080" style="color: #4ecca3;">http://localhost:8080</a>
                         </p>
                     </div>
                 `;
+                return false;
             }
+            return true;
         }
 
         // 设置事件监听
