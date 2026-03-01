@@ -101,7 +101,7 @@ func _capture_game_state() -> Dictionary:
 		"flags": GameStateManager.get_all_flags().duplicate(),
 		"variables": GameStateManager.get_all_variables().duplicate(),
 		"relationships": GameStateManager.get_all_relationships().duplicate(),
-		"items": GameStateManager.get_inventory().duplicate()
+		"items": GameStateManager.get_all_items().duplicate()
 	}
 
 ## 恢复检查点
