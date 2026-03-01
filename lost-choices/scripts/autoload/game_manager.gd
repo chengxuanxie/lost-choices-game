@@ -138,7 +138,7 @@ func start_new_game() -> void:
 	_play_time = 0.0
 	set_state(GameState.PLAYING)
 	game_started.emit()
-	_change_scene("game")
+	_change_scene("hybrid_game")
 	print("[GameManager] 开始新游戏")
 
 ## 从存档继续
@@ -146,7 +146,7 @@ func continue_game(slot: int) -> bool:
 	var success = await SaveManager.load_game(slot)
 	if success:
 		set_state(GameState.PLAYING)
-		_change_scene("game")
+		_change_scene("hybrid_game")
 		return true
 	return false
 
