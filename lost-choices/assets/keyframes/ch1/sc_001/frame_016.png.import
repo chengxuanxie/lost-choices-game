@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dndl7hp2klwmc"
-path="res://.godot/imported/frame_016.png-da17a131c1ad4fee03358811e655890b.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/keyframes/ch1/sc_001/frame_016.png"
-dest_files=["res://.godot/imported/frame_016.png-da17a131c1ad4fee03358811e655890b.ctex"]
 
 [params]
 

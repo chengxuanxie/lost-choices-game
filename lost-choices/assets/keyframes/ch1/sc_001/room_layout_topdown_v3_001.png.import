@@ -3,15 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnfwmbygtto3r"
-path="res://.godot/imported/room_layout_topdown_v3_001.png-0b2508e04665bc4a47ef28034321d60e.ctex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://assets/keyframes/ch1/sc_001/room_layout_topdown_v3_001.png"
-dest_files=["res://.godot/imported/room_layout_topdown_v3_001.png-0b2508e04665bc4a47ef28034321d60e.ctex"]
 
 [params]
 
