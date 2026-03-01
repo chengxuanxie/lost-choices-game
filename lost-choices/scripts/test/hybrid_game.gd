@@ -18,7 +18,7 @@ const BTN_PLAY := "res://assets/ui/buttons/btn_play.png"
 @onready var choice_container: VBoxContainer = $ChoiceContainer
 @onready var progress_bar: ProgressBar = $HUD/ProgressBar
 @onready var chapter_label: Label = $HUD/ChapterLabel
-@onready var pause_button: TextureButton = $PauseButton
+@onready var pause_button: Button = $PauseButton
 @onready var rollback_button: Button = $RollbackButton
 @onready var history_button: Button = $HistoryButton
 
@@ -48,12 +48,6 @@ func _load_ui_resources() -> void:
 	_tex_choice_selected = _load_texture(CHOICE_CARD_SELECTED)
 	_tex_pause = _load_texture(BTN_PAUSE)
 	_tex_play = _load_texture(BTN_PLAY)
-
-	# 设置暂停按钮纹理
-	if _tex_pause:
-		pause_button.texture_normal = _tex_pause
-		if _tex_play:
-			pause_button.texture_pressed = _tex_play
 
 func _load_texture(path: String) -> Texture2D:
 	"""安全加载纹理"""
