@@ -71,7 +71,8 @@ size_flags_horizontal = 3
 value = 25.0
 show_percentage = false
 
-[node name="PauseButton" type="TextureButton" parent="."]
+[node name="PauseButton" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -81,7 +82,7 @@ offset_top = 20.0
 offset_right = -20.0
 offset_bottom = 60.0
 grow_horizontal = 0
-stretch_mode = 5
+text = "II"
 
 [node name="DebugPanel" type="PanelContainer" parent="."]
 visible = false
