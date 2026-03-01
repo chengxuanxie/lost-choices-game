@@ -333,8 +333,8 @@ func _handle_node_transition(next_node_id: String) -> void:
 		"demo_ending":
 			_show_ending("demo_ending", "演示结束")
 		_:
-			push_warning("[HybridGame] 未知节点: %s" % next_node_id)
-			_show_ending("unknown", "未知结局")
+			# 真实节点：通过 StoryEngine 跳转
+			StoryEngine.jump_to_node(next_node_id)
 
 #endregion
 
