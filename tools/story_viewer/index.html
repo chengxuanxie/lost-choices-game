@@ -355,6 +355,51 @@
             font-weight: bold;
         }
 
+        /* 对话脚本 */
+        .script-content {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #0f3460;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            color: #ccc;
+        }
+
+        /* 字幕列表 */
+        .subtitles-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #0f3460;
+            border-radius: 4px;
+        }
+
+        .subtitle-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #1a1a2e;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .subtitle-item:last-child {
+            border-bottom: none;
+        }
+
+        .sub-time {
+            color: #4ecca3;
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        .subtitle-more {
+            padding: 8px 12px;
+            color: #666;
+            font-size: 11px;
+            text-align: center;
+        }
+
         /* 滚动条 */
         ::-webkit-scrollbar {
             width: 8px;
@@ -466,6 +511,10 @@
         let panX = 0, panY = 0;
         let showLabels = true;
         let nodePositions = {};
+        let scriptContents = {};  // 对话脚本内容
+        let isDragging = false;
+        let lastX = 0, lastY = 0;
+        let dragStartX = 0, dragStartY = 0;
 
         // 初始化
         async function init() {
@@ -474,11 +523,47 @@
                 console.error('数据加载失败');
                 return;
             }
+            await loadScriptContents();
             initCanvas();
             setupEventListeners();
             renderNodeList();
             drawConnectionGraph();
             updateStats();
+        }
+
+        // 加载对话脚本
+        async function loadScriptContents() {
+            const scriptMap = {
+                'ch1_sc_001': 'ch1_sc_001.md',
+                'ch1_sc_002a': 'ch1_sc_002a.md',
+                'ch1_sc_002b': 'ch1_sc_002b.md',
+                'ch1_sc_002c': 'ch1_sc_002c.md',
+                'ch1_sc_003': 'ch1_sc_003.md',
+                'ch1_sc_004': 'ch1_sc_004.md',
+                'ch1_sc_005': 'ch1_sc_005.md',
+                'ch1_sc_005b': 'ch1_sc_005b.md',
+                'ch1_sc_006': 'ch1_sc_006.md',
+                'ch1_sc_006b': 'ch1_sc_006b.md',
+                'ch1_sc_007': 'ch1_sc_007.md',
+                'ch1_sc_007b': 'ch1_sc_007b.md',
+                'ch1_sc_008': 'ch1_sc_008.md',
+                'ch1_ending_01': 'ch1_ending_01.md',
+                'ch1_ending_02': 'ch1_ending_02.md',
+                'ch1_ending_03': 'ch1_ending_03.md',
+                'ch1_ending_04': 'ch1_ending_04.md',
+                'ch1_ending_05': 'ch1_ending_05.md'
+            };
+
+            for (const [nodeId, filename] of Object.entries(scriptMap)) {
+                try {
+                    const response = await fetch(`../../../docs/03_art/scripts/ch1/${filename}`);
+                    if (response.ok) {
+                        scriptContents[nodeId] = await response.text();
+                    }
+                } catch (e) {
+                    // 忽略加载失败
+                }
+            }
         }
 
         // 加载数据
@@ -693,6 +778,42 @@
                 `;
             }
 
+            // 对话脚本
+            const scriptContent = scriptContents[nodeId];
+            if (scriptContent) {
+                // 处理Markdown为HTML
+                let scriptHtml = scriptContent
+                    .replace(/^# .+$/gm, '')  // 移除标题
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')  // 加粗
+                    .replace(/\*(.+?)\*/g, '<em>$1</em>')  // 斜体
+                    .replace(/\[(.+?)\]/g, '<span style="color:#4ecca3">$1</span>')  // 角色名
+                    .replace(/\n/g, '<br>');  // 换行
+
+                html += `
+                    <div class="detail-section">
+                        <h3>对话脚本</h3>
+                        <div class="script-content">${scriptHtml}</div>
+                    </div>
+                `;
+            } else {
+                // 显示字幕数据
+                const subtitles = data.subtitles;
+                if (subtitles && subtitles.length > 0) {
+                    html += `
+                        <div class="detail-section">
+                            <h3>字幕 (${subtitles.length}条)</h3>
+                            <div class="subtitles-list">
+                    `;
+                    subtitles.slice(0, 10).forEach(sub => {
+                        html += `<div class="subtitle-item"><span class="sub-time">[${sub.time}s]</span> ${sub.text}</div>`;
+                    });
+                    if (subtitles.length > 10) {
+                        html += `<div class="subtitle-more">...还有 ${subtitles.length - 10} 条</div>`;
+                    }
+                    html += `</div></div>`;
+                }
+            }
+
             content.innerHTML = html;
         }
 
@@ -868,10 +989,11 @@
         }
 
         // Canvas 鼠标事件
-        let isDragging = false;
-        let lastX, lastY;
 
         function handleCanvasMouseDown(e) {
+            const rect = canvas.getBoundingClientRect();
+            dragStartX = (e.clientX - rect.left - panX) / zoom;
+            dragStartY = (e.clientY - rect.top - panY) / zoom;
             isDragging = true;
             lastX = e.clientX;
             lastY = e.clientY;
@@ -886,7 +1008,30 @@
             drawConnectionGraph();
         }
 
-        function handleCanvasMouseUp() {
+        function handleCanvasMouseUp(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = (e.clientX - rect.left - panX) / zoom;
+            const clickY = (e.clientY - rect.top - panY) / zoom;
+
+            // 检查是否点击了节点
+            const dx = e.clientX - lastX;
+            const dy = e.clientY - lastY;
+            const moved = Math.sqrt(dx*dx + dy*dy);
+
+            // 如果移动距离很小，认为是点击
+            if (moved < 5) {
+                // 检测点击的节点
+                for (const [id, pos] of Object.entries(nodePositions)) {
+                    const w = 140, h = 30;
+                    if (clickX >= pos.x - w/2 && clickX <= pos.x + w/2 &&
+                        clickY >= pos.y - h/2 && clickY <= pos.y + h/2) {
+                        selectNode(id);
+                        break;
+                    }
+                }
+            }
+            isDragging = false;
+        }
             isDragging = false;
         }
 
