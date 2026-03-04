@@ -21,7 +21,10 @@
       "Bash(tail:*)",
       "Bash(mkdir:*)",
       "Bash(git fetch:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(where godot:*)",
+      "Bash(ls:*)",
+      "Bash(pip install:*)"
     ]
   }
 }
