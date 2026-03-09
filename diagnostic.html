@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网络诊断 - 迷途抉择</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+    h1 { color: #333; }
+    .test { margin: 15px 0; padding: 15px; border-radius: 8px; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+    .pending { background: #fff3cd; color: #856404; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    #server-url { font-size: 24px; font-weight: bold; color: #1a1a2e; }
+  </style>
+</head>
+<body>
+  <h1>网络诊断</h1>
+  <p>服务器地址: <span id="server-url"></span></p>
+
+  <div id="tests">
+    <div class="test pending" id="test1">⏳ 测试1: 尝试连接服务器...</div>
+    <div class="test pending" id="test2">⏳ 测试2: 获取章节数据...</div>
+  </div>
+
+  <h2>如果测试失败:</h2>
+  <ol>
+    <li>确保电脑和手机在同一WiFi网络</li>
+    <li>确保电脑防火墙允许5174端口</li>
+    <li>确保开发服务器正在运行</li>
+  </ol>
+
+  <button onclick="runTests()">重新测试</button>
+  <button onclick="window.location.href='/'">进入游戏</button>
+
+  <script>
+    const serverUrl = window.location.origin;
+    document.getElementById('server-url').textContent = serverUrl;
+
+    async function runTests() {
+      // 测试1: 服务器连接
+      const test1 = document.getElementById('test1');
+      test1.className = 'test pending';
+      test1.textContent = '⏳ 测试1: 尝试连接服务器...';
+
+      try {
+        const r = await fetch(serverUrl + '/', { method: 'HEAD' });
+        test1.className = 'test success';
+        test1.textContent = '✅ 测试1: 服务器连接成功';
+      } catch (e) {
+        test1.className = 'test error';
+        test1.textContent = '❌ 测试1: 服务器连接失败 - ' + e.message;
+      }
+
+      // 测试2: 获取章节数据
+      const test2 = document.getElementById('test2');
+      test2.className = 'test pending';
+      test2.textContent = '⏳ 测试2: 获取章节数据...';
+
+      try {
+        const res = await fetch(serverUrl + '/stories/chapter_01_hybrid.json');
+        if (!res.ok) {
+          test2.className = 'test error';
+          test2.textContent = '❌ 测试2: HTTP错误 ' + res.status;
+        } else {
+          const data = await res.json();
+          test2.className = 'test success';
+          test2.textContent = '✅ 测试2: 章节数据加载成功 - ' + (data.title || '未知');
+        }
+      } catch (e) {
+        test2.className = 'test error';
+        test2.textContent = '❌ 测试2: 获取失败 - ' + e.message;
+      }
+    }
+
+    runTests();
+  </script>
+</body>
+</html>
