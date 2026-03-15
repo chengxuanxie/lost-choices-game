@@ -1,0 +1,13 @@
+{
+  "chapters": [
+    {
+      "id": "chapter_01",
+      "title": "觉醒",
+      "description": "在陌生的房间中醒来，一切才刚刚开始...",
+      "thumbnail": "/lost-choices-game/lost-choices/assets/keyframes/ch1/sc_001/frame_001.png",
+      "locked": false,
+      "file": "chapter_01_hybrid.json",
+      "progress": 0
+    }
+  ]
+}
