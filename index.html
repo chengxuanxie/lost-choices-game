@@ -13,10 +13,122 @@
   <link rel="icon" type="image/svg+xml" href="/lost-choices-game/favicon.svg">
   <link rel="manifest" href="/lost-choices-game/manifest.json">
   <link rel="apple-touch-icon" href="/lost-choices-game/favicon.svg">
-  <script type="module" crossorigin src="/lost-choices-game/assets/index-Bp7RvqXn.js"></script>
-  <link rel="stylesheet" crossorigin href="/lost-choices-game/assets/index-BFbwcHoX.css">
+  <script type="module" crossorigin src="/lost-choices-game/assets/index-PPZUDOHQ.js"></script>
+  <link rel="stylesheet" crossorigin href="/lost-choices-game/assets/index-C0cyhQVt.css">
 <link rel="manifest" href="/lost-choices-game/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/lost-choices-game/registerSW.js"></script></head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <!-- 启动画面 -->
+    <div id="boot-screen" class="screen">
+      <div class="boot-logo">
+        <h1 class="boot-title">迷途抉择</h1>
+        <p class="boot-subtitle">Lost Choices</p>
+      </div>
+      <div class="boot-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="boot-progress-fill"></div>
+        </div>
+        <p class="progress-text" id="boot-progress-text">Loading...</p>
+      </div>
+    </div>
+
+    <!-- 主菜单 -->
+    <div id="menu-screen" class="screen hidden">
+      <div class="menu-container">
+        <div class="menu-logo">
+          <h1>迷途抉择</h1>
+          <p>Lost Choices</p>
+        </div>
+        <div class="menu-buttons">
+          <button class="menu-btn" data-action="start">开始游戏</button>
+          <button class="menu-btn" data-action="continue">继续游戏</button>
+          <button class="menu-btn" data-action="save">存档/读档</button>
+          <button class="menu-btn" data-action="settings">设置</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 章节选择 -->
+    <div id="chapter-select" class="screen hidden">
+      <div class="chapter-select-container">
+        <button id="btn-chapter-back" class="chapter-back-btn">← 返回</button>
+        <h2>选择章节</h2>
+        <div id="chapter-list" class="chapter-list"></div>
+      </div>
+    </div>
+
+    <!-- 游戏画面 -->
+    <div id="game-screen" class="screen hidden">
+      <video id="game-video" class="game-video" playsinline></video>
+      <canvas id="keyframe-canvas" class="keyframe-canvas hidden"></canvas>
+
+      <!-- 字幕容器 -->
+      <div id="subtitle-container" class="subtitle-container hidden">
+        <div id="subtitle-text" class="subtitle-text"></div>
+      </div>
+
+      <!-- 选项容器 -->
+      <div id="choice-container" class="choice-container"></div>
+
+      <!-- 游戏HUD -->
+      <div id="game-hud" class="game-hud hidden">
+        <button id="btn-back" class="hud-btn">←</button>
+        <button id="btn-menu" class="hud-btn">☰</button>
+        <button id="btn-save" class="hud-btn">💾</button>
+      </div>
+    </div>
+
+    <!-- 存档/读档画面 -->
+    <div id="save-screen" class="screen hidden">
+      <div class="save-container">
+        <button id="save-close" class="save-close">×</button>
+        <h2>存档/读档</h2>
+        <div class="save-tabs">
+          <button class="save-tab active" data-mode="save">存档</button>
+          <button class="save-tab" data-mode="load">读档</button>
+        </div>
+        <div id="save-slots" class="save-slots"></div>
+      </div>
+    </div>
+
+    <!-- 设置画面 -->
+    <div id="settings-screen" class="screen hidden">
+      <div class="settings-container">
+        <button id="settings-close" class="settings-close">×</button>
+        <h2>设置</h2>
+        <div class="settings-list">
+          <div class="settings-item">
+            <span>音量</span>
+            <input type="range" id="setting-volume" min="0" max="100" value="80">
+          </div>
+          <div class="settings-item">
+            <span>文字速度</span>
+            <select id="setting-text-speed">
+              <option value="slow">慢</option>
+              <option value="normal" selected>正常</option>
+              <option value="fast">快</option>
+            </select>
+          </div>
+          <div class="settings-item">
+            <span>自动播放</span>
+            <input type="checkbox" id="setting-auto-play" checked>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 结局画面 -->
+    <div id="ending-screen" class="screen hidden">
+      <div class="ending-container">
+        <h1 id="ending-title" class="ending-title"></h1>
+        <p id="ending-desc" class="ending-desc"></p>
+        <button id="btn-replay" class="ending-btn">重新开始</button>
+        <button id="btn-chapters" class="ending-btn">返回主菜单</button>
+      </div>
+    </div>
+
+    <!-- Toast 消息 -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
 </body>
 </html>
